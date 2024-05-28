@@ -1,9 +1,17 @@
 .chatList {
   flex: 1;
-  overflow: scroll;
+  overflow-x: scroll;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
+
+.fullChat{
+  display: flex;
+  overflow-x: scroll;
+
+}
+
+
 /* .main{
   display: flex;
 } */
