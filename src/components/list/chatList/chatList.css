@@ -89,3 +89,13 @@
     font-weight: 300;
   }
 }
+
+
+.emptyChat{
+  width: 40vw;
+  display: flex;
+  height: 100%;
+  background-color: rgba(17, 25, 40, 0.5);
+  align-items: center;
+  justify-content: center;
+}

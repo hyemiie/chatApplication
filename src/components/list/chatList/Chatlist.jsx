@@ -13,9 +13,11 @@ const Chatlist = ({ teamId }) => {
   const [selectedTeamId, setSelectedTeamId] = useState(null);
   const [open, setOpen] = useState(false);
   const [text, setText] = useState('');
+  const [userName, setUsername] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
   const endRef = useRef(null);
   const [isConnected, setIsConnected] = useState(socket.connected);
+
 
   // Initialize socket connection and event listeners
   useEffect(() => {
@@ -47,7 +49,7 @@ const Chatlist = ({ teamId }) => {
   // Function to send a message
   const sendMessage = async () => {
     const userInput = text;
-    const room = teamId;
+    const room = selectedTeamId;
     const sender = "Yemi";
     const data = { message: userInput, room, sender };
     socket.emit("sendMessage", data);
@@ -89,7 +91,14 @@ const Chatlist = ({ teamId }) => {
       }
     };
 
+    const checkSignedUser  =() =>{
+      const Username = localStorage.getItem('userName')
+      setUsername(Username)
+      
+    }
+
     getTeams();
+    checkSignedUser();
   }, []);
 
   // Handle emoji selection
@@ -101,6 +110,7 @@ const Chatlist = ({ teamId }) => {
   // Handle team selection
   const handleClick = (teamId) => {
     getMessage(teamId);
+    console.log(teamId)
   };
 
   return (
@@ -151,15 +161,17 @@ const Chatlist = ({ teamId }) => {
               </div>
             </div>
             <div className="center">
-              {chatHistory.map((chat) => (
-                <div key={chat._id} className="message">
-                  <img src="./avatar.png" alt="" />
-                  <div className="texts">
-                    <p>{chat.chatHistory}</p>
-                    <span>{chat.createdAt}</span>
-                  </div>
+            {chatHistory.map((chat) => (
+                <div key={chat._id} className={`message ${chat.sender === userName ? 'own' : ''}`}>
+                    <img src="./avatar.png" alt="avatar" />
+                    <div className="texts">
+                        <p className={chat.sender === userName ? 'message own' : 'message'}>
+                            {chat.chatHistory}
+                        </p>
+                        <span>{chat.createdAt}</span>
+                    </div>
                 </div>
-              ))}
+            ))}
               <div ref={endRef}></div>
             </div>
             <div className="bottom">
@@ -191,7 +203,9 @@ const Chatlist = ({ teamId }) => {
             </div>
           </div>
         ) : (
-          ""
+          <div className="emptyChat">
+            Empty chat
+          </div>
         )}
       </div>
     </div>

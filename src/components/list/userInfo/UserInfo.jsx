@@ -18,6 +18,7 @@ const UserInfo = () => {
       });
 
       const username = response.data.username;
+      const userName = localStorage.setItem('userName', username)
       setUsername(username);
     } catch (error) {
       console.error("Error fetching username:", error);
