@@ -1,21 +1,31 @@
 .chatList {
-  flex: 1;
-  overflow-x: scroll;
+  /* flex: 1; */
+  overflow-y: scroll;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  /* grid-template-columns: repeat(2, 1fr); */
 }
 
 .fullChat{
   display: flex;
-  overflow-x: scroll;
+  overflow: auto;
 
+  width: fit-content;
 }
 
-
+.FirstDiv{
+}
 /* .main{
   display: flex;
 } */
 
+.userTxt{
+}
+
+
+.emptyChat{
+  background-color: yellow;
+  width: 100vw;
+}
 .search {
   display: flex;
   align-items: center;
@@ -63,11 +73,14 @@
 
 .item {
   display: flex;
-  align-items: center;
+  align-items: top;
   gap: 20px;
   padding: 20px;
   cursor: pointer;
   border-bottom: 1px solid grey;
+  height: 400px;
+  /* overflow-y:scroll;
+  overflow-x: hidden; */
 
   img {
     width: 50px;

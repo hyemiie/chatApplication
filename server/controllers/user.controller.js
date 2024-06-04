@@ -56,12 +56,12 @@ const getCurrentUser = async (req, res) => {
     console.log("userId", userId);
 
     const signedInUser = await UserSchema.findOne({
-      email: "yemiojedapo1@gmail.com",
+      email: decodedToken.email,
     });
     console.log("signedInUser", signedInUser);
 
     if (!signedInUser) {
-      return res.status(404).json({ message: "User not foyund" });
+      return res.status(404).json({ message: "User not found" });
     }
 
     const username = signedInUser.username;

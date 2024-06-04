@@ -2,7 +2,7 @@ import React from "react";
 import "./userInfo.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import { jwtDecode } from "jwt-decode";
 const UserInfo = () => {
 
   const [username, setUsername] = useState("");
@@ -16,9 +16,16 @@ const UserInfo = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-
+console.log('token', token)
       const username = response.data.username;
-      const userName = localStorage.setItem('userName', username)
+      // const decoded = jwtDecode(token)
+
+      // const userId = decoded.userId
+
+      localStorage.setItem('userName', response.data.username)
+      // console.log(userId)
+      // console.log(decoded)
+      
       setUsername(username);
     } catch (error) {
       console.error("Error fetching username:", error);

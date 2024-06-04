@@ -6,6 +6,7 @@ import { io } from "socket.io-client";
 import { socket } from '../../../socket';
 import EmojiPicker from "emoji-picker-react";
 import '../../chat/chat.css';
+import UserInfo from "../userInfo/UserInfo";
 
 const Chatlist = ({ teamId }) => {
   const [addMode, setAddMode] = useState(false);
@@ -50,7 +51,7 @@ const Chatlist = ({ teamId }) => {
   const sendMessage = async () => {
     const userInput = text;
     const room = selectedTeamId;
-    const sender = "Yemi";
+    const sender = localStorage.getItem('userName');
     const data = { message: userInput, room, sender };
     socket.emit("sendMessage", data);
     setText(''); // Clear the input field after sending
@@ -84,8 +85,10 @@ const Chatlist = ({ teamId }) => {
             Authorization: `Bearer ${token}`,
           },
         });
-
-        setTeams(response.data.user);
+      const responseData = response.data.teams
+        setTeams(responseData);
+        console.log(response.data)
+        console.log('teams',teams)
       } catch (error) {
         console.error("Error fetching teams:", error);
       }
@@ -94,6 +97,7 @@ const Chatlist = ({ teamId }) => {
     const checkSignedUser  =() =>{
       const Username = localStorage.getItem('userName')
       setUsername(Username)
+      console.log('userNames', Username)
       
     }
 
@@ -101,7 +105,10 @@ const Chatlist = ({ teamId }) => {
     checkSignedUser();
   }, []);
 
-  // Handle emoji selection
+
+
+
+
   const handleEmoji = (e) => {
     setText((prev) => prev + e.emoji);
     setOpen(false);
@@ -113,10 +120,38 @@ const Chatlist = ({ teamId }) => {
     console.log(teamId)
   };
 
+
+  const getTeamErrors = async()=>{
+    console.log(teamId)
+    const token = localStorage.getItem('token')
+   try{
+    const response = await axios.get("http://localhost:5000/teamErrors", {headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    params: { teamId }},)
+    console.log(response)
+   }
+   catch(error){
+    console.log('error', error)
+   }
+  }
+
+
+  const addTeamError = async()=>{
+    try{
+     const response = await axios.get("http://localhost:5000/addTeamError")
+     console.log(response)
+    }
+    catch(error){
+     console.log('error', error)
+    }
+   }
+
   return (
     <div className="fullChat">
     <div className="chatList">
-      <div>
+    <UserInfo/>
+      <div className="FirstDiv">
         <div className="search">
           <div className="searchBar">
             <img src="/search.png" alt="search icon" />
@@ -134,11 +169,13 @@ const Chatlist = ({ teamId }) => {
           <div key={team._id} className="item" onClick={() => handleClick(team._id)}>
             <img src="./avatar.png" alt="avatar" />
             <div className="texts">
-              <span>{team.teamName}</span>
+              <span onClick={getTeamErrors}>{team.teamName}</span>
               <p>recent messages</p>
             </div>
           </div>
         ))}
+
+        <button onClick={addTeamError}>addTeamError</button>
       </div>
       </div>
 
@@ -162,13 +199,18 @@ const Chatlist = ({ teamId }) => {
             </div>
             <div className="center">
             {chatHistory.map((chat) => (
-                <div key={chat._id} className={`message ${chat.sender === userName ? 'own' : ''}`}>
+                <div key={chat._id} className={`message ${chat.sender != userName ? 'message' : "own"}`}>
                     <img src="./avatar.png" alt="avatar" />
-                    <div className="texts">
-                        <p className={chat.sender === userName ? 'message own' : 'message'}>
-                            {chat.chatHistory}
-                        </p>
-                        <span>{chat.createdAt}</span>
+                    <div className="texts userTxt">
+                    {chat.chatHistory > 1 ? (
+        <p className="emptyChat">Empty Chat
+</p>
+      ) : (
+        <>
+          <p>{chat.chatHistory}</p>
+          <span>{new Date(chat.createdAt).toLocaleString()}</span>
+        </>
+      )}
                     </div>
                 </div>
             ))}

@@ -48,6 +48,9 @@ const Login = () => {
 
       const { token } = response.data;
       localStorage.setItem("token", token);
+      localStorage.setItem("userName", token);
+      // const decoded = jwt_decode(token);
+      // console.log(decoded)
       alert("Login Successful");
     } catch (error) {
       console.error("Login failed:", error.response.data.error);
@@ -144,13 +147,7 @@ const Login = () => {
           <button type="submit">Send</button>
         </form> */}
 
-        <form action="http://localhost:5000/register" method="post">
-          <h1>Input here</h1>
-          <input type="text" name="username" id="username" />
-          <input type="text" name="password" id="password" />
-          <input type="email" name="email" id="email" />
-          <button type="submit">Send</button>
-        </form>
+        
       </div>
     </div>
   );

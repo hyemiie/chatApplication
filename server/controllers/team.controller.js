@@ -5,9 +5,10 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 
 // eslint-disable-next-line no-undef
-const TeamSchema =  require('../models/team.model')
+const TeamError =  require('../models/team.model')
 // eslint-disable-next-line no-undef
 const jwt = require("jsonwebtoken");
+const TeamNames = require("../models/teamNames.model");
 const secretKey = "thisisthesecretkey";
 
 const GetAllTeams = async (req, res) => {
@@ -16,30 +17,33 @@ const GetAllTeams = async (req, res) => {
 
   try {
     // Find user by email
-    const user = await TeamSchema.find({})
-    if (!user) {
-      console.log("No user");
+    const teams = await TeamNames.find({})
+    if (!teams) {
+      console.log("No team found");
 
-      return res.status(401).json({ error: "User not found" });
+      return res.status(401).json({ error: "Empty Teams" });
     }
     else{
-        console.log('user', user)
+        console.log('user', teams)
     }
     
 
-    res.status(200).json({ user });
+    res.status(200).json({ teams });
   } catch (error) {
     console.error("Team error:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 };
 
+
+
+
 const AddTeam = async (req, res) => {
     const newTeam = req.body.teamName;
     console.log("newTeam", newTeam)
   try {
 
-   const Teams = await TeamSchema.create({
+   const Teams = await TeamNames.create({
         teamName: newTeam,
     });
 //    console.log("signedInUser", Teams);
@@ -76,6 +80,8 @@ const Register = async (req, res) => {
     });
   }
 };
+
+
 
 // eslint-disable-next-line no-undef
 module.exports = {

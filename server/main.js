@@ -13,6 +13,7 @@ const { GetAllTeams, AddTeam } = require("./controllers/team.controller");
 const { getTeamChat, addtoChat } = require("./controllers/chat.controller");
 const Chat = require("./models/chat.model");
 const Team = require("./models/team.model");
+const { GetTeamErrors, AddTeamError } = require("./controllers/teamErrors.controller");
 
 app.use(cors({ origin: "http://localhost:5173" })); // Allow requests from React app origin
 
@@ -87,21 +88,7 @@ io.on("connection", (socket) => {
 
 io.listen(4000);
 
-// app.get("/", (req, res) => {
-//   res.send("Hello world");
-//   try {
-//     io.on("connection", (socket) => {
-//       console.log("A user connected:", socket.id);
 
-//       socket.on("disconnect", () => {
-//         console.log("User disconnected:", socket.id);
-//       });
-//     });
-//     console.log("Socket connnected");
-//   } catch (error) {
-//     console.log(erro);
-//   }
-// });
 
 app.post("/register", Register);
 app.post("/login", Login);
@@ -110,6 +97,8 @@ app.get("/getCurrentUser", getCurrentUser);
 app.get("/getAllTeams", GetAllTeams);
 app.post("/addTeam", AddTeam);
 app.post("/addChat", addtoChat);
+app.get('/teamErrors', GetTeamErrors)
+app.get('/addTeamError',AddTeamError)
 
 const PORT = 5000;
 server.listen(PORT, () => {

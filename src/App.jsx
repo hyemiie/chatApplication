@@ -25,10 +25,9 @@ const App = () => {
     <div className="container">
       {user ? (
         <>
-          {" "}
           <List />
           {/* <Chat /> */}
-          <Detail />
+          {/* <Detail /> */}
         </>
       ) : (
         <Login />
