@@ -38,23 +38,29 @@ io.on("connection", (socket) => {
     // console.log(`User ${username} joined room ${room}`);
   });
 
-    socket.on("sendMessage", async (data) => {
+  socket.on("sendMessage", async (data) => {
     console.log('data', data);
-
+  
     const { message, room, sender } = data;
     const issuename = 'Developer error';
     const chatHistory = message;
     const errorId = room;
-
-    const emitData = {
+  
+    io.to(errorId).emit("receiveMessage", {
       issuename,
       message,
       sender,
       errorId,
-    };
+    });
+  
+    // This is the event your client is listening to
+    io.to(errorId).emit("receive_message", {
+      message: message,
+      user: sender,
+    });
+    console.log('receive_message event emitted');
 
-    io.to(errorId).emit("receiveMessage", emitData);
-
+  
     try {
       const newChat = new Chat({
         issuename,
@@ -62,13 +68,13 @@ io.on("connection", (socket) => {
         sender,
         errorId,
       });
-
+  
       // Save the new chat document to the database
       await newChat.save();
-
+  
       // Find the TeamError document by errorId
-      let teamError = await TeamError.findOne({ _id: errorId });
-
+      let teamError = await TeamError.findOne({ errorId: errorId });
+  
       if (!teamError) {
         // Create a new TeamError document if it doesn't exist
         teamError = new TeamError({
@@ -77,21 +83,21 @@ io.on("connection", (socket) => {
           teamId: '665ed6e56e99f5c7d4dfbfd7',
           chatHistory: [],
         });
-        await teamError.save(); // Save the new TeamError document
       }
-
+  
       // Push the new chat to the chatHistory array
       teamError.chatHistory.push(newChat);
-
+  
       // Save the updated TeamError document
       await teamError.save();
-
-      io.to(errorId).emit("receiveMessage", newChat);
+  
+      io.to(errorId).emit("message", newChat);
       console.log("Message added successfully", newChat);
     } catch (error) {
       console.log("Error occurred:", error);
     }
   });
+  
 });
 
 io.listen(4000);

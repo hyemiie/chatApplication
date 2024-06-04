@@ -3,7 +3,6 @@ import "./chatList.css";
 import Adduser from "./addUser/Adduser";
 import axios from "axios";
 import { io } from "socket.io-client";
-import { socket } from '../../../socket';
 import EmojiPicker from "emoji-picker-react";
 import '../../chat/chat.css';
 import UserInfo from "../userInfo/UserInfo";
@@ -18,27 +17,27 @@ const Chatlist = ({ teamId }) => {
   const [chatHistory, setChatHistory] = useState([]);
   const [teamErrors, setTeamErrors] = useState([]);
   const endRef = useRef(null);
-  const [isConnected, setIsConnected] = useState(socket.connected);
-
+  const socket = useRef(null);
+  const [isConnected, setIsConnected] = useState(false);
 
   // Initialize socket connection and event listeners
   useEffect(() => {
-    const newSocket = io("http://localhost:5000");
+    socket.current = io("http://localhost:5000");
 
-    newSocket.on("connect", () => {
+    socket.current.on("connect", () => {
       setIsConnected(true);
       joinRoom(teamId);
     });
 
-    newSocket.on("receiveMessage", (data) => {
+    socket.current.on("receive_message", (data) => {
+      console.log('Message received:', data);
       setChatHistory((prevChatHistory) => [...prevChatHistory, data]);
-      console.log('doneeeee!!!' )
-      // endRef.current?.scrollIntoView({ behavior: "smooth" });
+      endRef.current?.scrollIntoView({ behavior: "smooth" });
     });
 
     return () => {
-      newSocket.off("connect");
-      newSocket.off("receiveMessage");
+      socket.current.off("connect");
+      socket.current.off("receive_message");
     };
   }, [teamId]);
 
@@ -46,7 +45,7 @@ const Chatlist = ({ teamId }) => {
   const joinRoom = (teamId) => {
     const username = "Yemi";
     const room = teamId;
-    socket.emit("join_room", { username, room });
+    socket.current.emit("join_room", { username, room });
   };
 
   // Function to send a message
@@ -55,8 +54,20 @@ const Chatlist = ({ teamId }) => {
     const room = selectedTeamId;
     const sender = localStorage.getItem('userName');
     const data = { message: userInput, room, sender };
-    socket.emit("sendMessage", data);
+    socket.current.emit("sendMessage", data);
+
+    setChatHistory((prevChatHistory) => [...prevChatHistory, { chatHistory: userInput, sender, createdAt: new Date().toISOString() }]);
     setText(''); // Clear the input field after sending
+
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // Handle key press in input field
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent the default behavior of form submission
+      sendMessage();
+    }
   };
 
   // Fetch messages for the selected team
@@ -87,100 +98,91 @@ const Chatlist = ({ teamId }) => {
             Authorization: `Bearer ${token}`,
           },
         });
-      const responseData = response.data.teams
-        setTeams(responseData);
-        console.log(response.data)
-        console.log('teams',teams)
+        setTeams(response.data.teams);
+        console.log(response.data);
+        console.log('teams', teams);
       } catch (error) {
         console.error("Error fetching teams:", error);
       }
     };
 
-    const checkSignedUser  =() =>{
-      const Username = localStorage.getItem('userName')
-      setUsername(Username)
-      console.log('userNames', Username)
-      
+    const checkSignedUser = () => {
+      const Username = localStorage.getItem('userName');
+      setUsername(Username);
+      console.log('userNames', Username);
     }
 
     getTeams();
     checkSignedUser();
   }, []);
 
-
-
-
-
   const handleEmoji = (e) => {
     setText((prev) => prev + e.emoji);
     setOpen(false);
   };
 
-  // Handle team selection
   const handleClick = (teamId) => {
     getMessage(teamId);
-    console.log(teamId)
+    console.log(teamId);
   };
 
-
-  const getTeamErrors = async()=>{
-    console.log(teamId)
-    const token = localStorage.getItem('token')
-   try{
-    const response = await axios.get("http://localhost:5000/teamErrors", {headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    params: { teamId }},)
-    console.log(response)
-    setTeamErrors(response.data.teamErrors)
-    console.log('errors', teamErrors)
-   }
-   catch(error){
-    console.log('error', error)
-   }
+  const getTeamErrors = async () => {
+    console.log(teamId);
+    const token = localStorage.getItem('token');
+    try {
+      const response = await axios.get("http://localhost:5000/teamErrors", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: { teamId }
+      });
+      console.log(response);
+      setTeamErrors(response.data.teamErrors);
+      console.log('errors', teamErrors);
+    } catch (error) {
+      console.log('error', error);
+    }
   }
 
-
-  const addTeamError = async()=>{
-    try{
-     const response = await axios.get("http://localhost:5000/addTeamError")
-     console.log(response)
+  const addTeamError = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/addTeamError");
+      console.log(response);
+    } catch (error) {
+      console.log('error', error);
     }
-    catch(error){
-     console.log('error', error)
-    }
-   }
+  }
 
   return (
     <div className="fullChat">
-    <div className="chatList">
-    <UserInfo/>
-      <div className="FirstDiv">
-        <div className="search">
-          <div className="searchBar">
-            <img src="/search.png" alt="search icon" />
-            <input type="text" placeholder="Search" />
-          </div>
-          <img
-            src={addMode ? "./minus.png" : "./plus.png"}
-            alt="toggle add mode"
-            className="add"
-            onClick={() => setAddMode((prev) => !prev)}
-          />
-        </div>
-
-        {teams.map((team) => (
-          <div key={team._id} className="item" >
-            <img src="./avatar.png" alt="avatar" />
-            <div className="texts">
-              <span onClick={getTeamErrors}>{team.teamName}</span>
-              <p>recent messages</p>
+      <div className="chatList">
+        <UserInfo />
+        <div className="FirstDiv">
+          <div className="search">
+            <div className="searchBar">
+              <img src="/search.png" alt="search icon" />
+              <input type="text" placeholder="Search" />
             </div>
+            <img
+              src={addMode ? "./minus.png" : "./plus.png"}
+              alt="toggle add mode"
+              className="add"
+              onClick={() => setAddMode((prev) => !prev)}
+            />
           </div>
-        ))}
 
-        <button onClick={addTeamError}>addTeamError</button>
-      </div>
+          {teams.map((team) => (
+            <div key={team._id} className="item">
+              <img src="./avatar.png" alt="avatar" />
+              <div className="texts">
+                <span onClick={getTeamErrors}>{team.teamName}</span>
+                <p>recent messages</p>
+              </div>
+            </div>
+          ))}
+
+          <button onClick={addTeamError}>addTeamError</button>
+        </div>
       </div>
 
       {addMode && <Adduser />}
@@ -202,22 +204,21 @@ const Chatlist = ({ teamId }) => {
               </div>
             </div>
             <div className="center">
-            {chatHistory.map((chat) => (
-                <div key={chat._id} className={`message ${chat.sender != userName ? 'message' : "own"}`}>
-                    <img src="./avatar.png" alt="avatar" />
-                    <div className="texts userTxt">
+              {chatHistory.map((chat) => (
+                <div key={chat._id} className={`message ${chat.sender !== userName ? 'message' : "own"}`}>
+                  <img src="./avatar.png" alt="avatar" />
+                  <div className="texts userTxt">
                     {chat.chatHistory > 1 ? (
-        <p className="emptyChat">Empty Chat
-</p>
-      ) : (
-        <>
-          <p>{chat.chatHistory}</p>
-          <span>{new Date(chat.createdAt).toLocaleString()}</span>
-        </>
-      )}
-                    </div>
+                      <p className="emptyChat">Empty Chat</p>
+                    ) : (
+                      <>
+                        <p>{chat.chatHistory}</p>
+                        <span>{new Date(chat.createdAt).toLocaleString()}</span>
+                      </>
+                    )}
+                  </div>
                 </div>
-            ))}
+              ))}
               <div ref={endRef}></div>
             </div>
             <div className="bottom">
@@ -230,6 +231,7 @@ const Chatlist = ({ teamId }) => {
                 type="text"
                 placeholder="Type a message..."
                 onChange={(e) => setText(e.target.value)}
+                onKeyDown={handleKeyPress} // Handle key press event
                 value={text}
                 id="userInput"
               />
@@ -255,16 +257,12 @@ const Chatlist = ({ teamId }) => {
         )}
       </div>
 
-  {teamErrors.map((errors) => (
-
-<div key={errors.id} className="teamErrors" onClick={() => handleClick(errors._id)}>
-  <ul className="teamLists"><li>{errors.teamError}</li></ul>
-  <p>{}</p>
-</div>
-  ))}
-
- 
-
+      {teamErrors.map((errors) => (
+        <div key={errors.id} className="teamErrors" onClick={() => handleClick(errors._id)}>
+          <ul className="teamLists"><li>{errors.teamError}</li></ul>
+          <p>{}</p>
+        </div>
+      ))}
 
     </div>
   );
