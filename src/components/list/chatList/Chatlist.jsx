@@ -16,6 +16,7 @@ const Chatlist = ({ teamId }) => {
   const [text, setText] = useState('');
   const [userName, setUsername] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
+  const [teamErrors, setTeamErrors] = useState([]);
   const endRef = useRef(null);
   const [isConnected, setIsConnected] = useState(socket.connected);
 
@@ -29,14 +30,15 @@ const Chatlist = ({ teamId }) => {
       joinRoom(teamId);
     });
 
-    newSocket.on("receive_message", (data) => {
+    newSocket.on("receiveMessage", (data) => {
       setChatHistory((prevChatHistory) => [...prevChatHistory, data]);
-      endRef.current?.scrollIntoView({ behavior: "smooth" });
+      console.log('doneeeee!!!' )
+      // endRef.current?.scrollIntoView({ behavior: "smooth" });
     });
 
     return () => {
       newSocket.off("connect");
-      newSocket.off("receive_message");
+      newSocket.off("receiveMessage");
     };
   }, [teamId]);
 
@@ -130,6 +132,8 @@ const Chatlist = ({ teamId }) => {
     },
     params: { teamId }},)
     console.log(response)
+    setTeamErrors(response.data.teamErrors)
+    console.log('errors', teamErrors)
    }
    catch(error){
     console.log('error', error)
@@ -166,7 +170,7 @@ const Chatlist = ({ teamId }) => {
         </div>
 
         {teams.map((team) => (
-          <div key={team._id} className="item" onClick={() => handleClick(team._id)}>
+          <div key={team._id} className="item" >
             <img src="./avatar.png" alt="avatar" />
             <div className="texts">
               <span onClick={getTeamErrors}>{team.teamName}</span>
@@ -250,6 +254,18 @@ const Chatlist = ({ teamId }) => {
           </div>
         )}
       </div>
+
+  {teamErrors.map((errors) => (
+
+<div key={errors.id} className="teamErrors" onClick={() => handleClick(errors._id)}>
+  <ul className="teamLists"><li>{errors.teamError}</li></ul>
+  <p>{}</p>
+</div>
+  ))}
+
+ 
+
+
     </div>
   );
 };

@@ -14,6 +14,7 @@ const { getTeamChat, addtoChat } = require("./controllers/chat.controller");
 const Chat = require("./models/chat.model");
 const Team = require("./models/team.model");
 const { GetTeamErrors, AddTeamError } = require("./controllers/teamErrors.controller");
+const TeamError = require("./models/team.model");
 
 app.use(cors({ origin: "http://localhost:5173" })); // Allow requests from React app origin
 
@@ -37,52 +38,59 @@ io.on("connection", (socket) => {
     // console.log(`User ${username} joined room ${room}`);
   });
 
-  socket.on("sendMessage", async (data) => {
-    console.log('data', data)
+    socket.on("sendMessage", async (data) => {
+    console.log('data', data);
 
-    const {message, room, sender} = data;
+    const { message, room, sender } = data;
     const issuename = 'Developer error';
     const chatHistory = message;
-    const teamId = room;
+    const errorId = room;
 
-    io.to(teamId).emit("receiveMessage", {
+    const emitData = {
       issuename,
       message,
       sender,
-      teamId,
-    });
-    io.to(teamId).emit("receive_message", {
-      message: message,
-      user: sender,
-    });
+      errorId,
+    };
+
+    io.to(errorId).emit("receiveMessage", emitData);
 
     try {
       const newChat = new Chat({
         issuename,
         chatHistory,
         sender,
-        teamId,
+        errorId,
       });
 
       // Save the new chat document to the database
       await newChat.save();
-      let team = await Team.findById(teamId);
-      if (!team) {
-        team = new Team({
-          _id: teamId,
-          teamName: `Team ${teamId}`,
+
+      // Find the TeamError document by errorId
+      let teamError = await TeamError.findOne({ _id: errorId });
+
+      if (!teamError) {
+        // Create a new TeamError document if it doesn't exist
+        teamError = new TeamError({
+          _id: errorId,
+          teamError: `Team ${errorId}`,
+          teamId: '665ed6e56e99f5c7d4dfbfd7',
           chatHistory: [],
         });
+        await teamError.save(); // Save the new TeamError document
       }
-      team.chatHistory.push(newChat);
-      await team.save();
 
-      io.to(teamId).emit("message", newChat);
+      // Push the new chat to the chatHistory array
+      teamError.chatHistory.push(newChat);
+
+      // Save the updated TeamError document
+      await teamError.save();
+
+      io.to(errorId).emit("receiveMessage", newChat);
       console.log("Message added successfully", newChat);
     } catch (error) {
       console.log("Error occurred:", error);
     }
-
   });
 });
 

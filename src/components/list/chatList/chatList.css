@@ -112,3 +112,25 @@
   align-items: center;
   justify-content: center;
 }
+
+/* .teamErrors{
+  background-color: purple;
+  display: flex;
+  overflow: auto;
+} */
+
+/* .teamLists{
+  background-color: aliceblue;
+  flex-direction: row !important;
+  display: flex;
+
+  
+  li{
+    background-color: yellow;
+    /* flex-direction: row; */
+    /* margin-left: 20px;
+    display: flex;
+    width: 100%; */
+
+  /* }
+} */ 

@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const ChatSchema = new Schema({
   issuename: {
     type: String,
-    required: true,
+    // required: true,
   },
   chatHistory: {
     type: String,
@@ -16,7 +16,7 @@ const ChatSchema = new Schema({
     type: String,
     required: true,
   },
-  teamId: {
+  errorId: {
     type: String,
     required: true,
   }
