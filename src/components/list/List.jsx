@@ -7,7 +7,6 @@ const List = () => {
   return (
     <div className="list">
     
-      {/* <UserInfo /> */}
       <Chatlist />
     </div>
   );

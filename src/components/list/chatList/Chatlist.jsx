@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./chatList.css";
+import "./chatlist2.css";
 import Adduser from "./addUser/Adduser";
 import axios from "axios";
 import { io } from "socket.io-client";
@@ -19,6 +19,7 @@ const Chatlist = ({ teamId }) => {
   const endRef = useRef(null);
   const socket = useRef(null);
   const [isConnected, setIsConnected] = useState(false);
+  const [selectedToggle, setSelectedToggle] = useState(false);
 
   // Initialize socket connection and event listeners
   useEffect(() => {
@@ -138,6 +139,7 @@ const Chatlist = ({ teamId }) => {
       });
       console.log(response);
       setTeamErrors(response.data.teamErrors);
+      setSelectedToggle(true)
       console.log('errors', teamErrors);
     } catch (error) {
       console.log('error', error);
@@ -155,9 +157,23 @@ const Chatlist = ({ teamId }) => {
 
   return (
     <div className="fullChat">
+      <div className={`show ${selectedToggle ? 'slide-in' : 'hide'}`}>
+  <button onClick={() => setSelectedToggle(false)} className="lastDivBtn">Go back</button>
+  {teamErrors.map((error) => (
+    <div key={error.id} className="teamErrDiv" onClick={() => handleClick(error._id)}>
+      <ul className="teamLists">
+        <li>{error.teamError}</li>
+      </ul>
+    </div>
+  ))}
+</div>
+
+
       <div className="chatList">
-        <UserInfo />
+        {/* <UserInfo /> */}
         <div className="FirstDiv">
+                <UserInfo />
+
           <div className="search">
             <div className="searchBar">
               <img src="/search.png" alt="search icon" />
@@ -181,7 +197,7 @@ const Chatlist = ({ teamId }) => {
             </div>
           ))}
 
-          <button onClick={addTeamError}>addTeamError</button>
+          {/* <button onClick={addTeamError}>addTeamError</button> */}
         </div>
       </div>
 
@@ -257,12 +273,7 @@ const Chatlist = ({ teamId }) => {
         )}
       </div>
 
-      {teamErrors.map((errors) => (
-        <div key={errors.id} className="teamErrors" onClick={() => handleClick(errors._id)}>
-          <ul className="teamLists"><li>{errors.teamError}</li></ul>
-          <p>{}</p>
-        </div>
-      ))}
+
 
     </div>
   );

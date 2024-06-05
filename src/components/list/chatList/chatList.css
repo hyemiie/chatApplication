@@ -1,6 +1,6 @@
 .chatList {
-  /* flex: 1; */
-  overflow-y: scroll;
+  flex: 1;
+  overflow-x: scroll;
   display: grid;
   /* grid-template-columns: repeat(2, 1fr); */
 }
@@ -24,7 +24,7 @@
 
 .emptyChat{
   background-color: yellow;
-  width: 100vw;
+  /* width: 100vw; */
 }
 .search {
   display: flex;
@@ -134,3 +134,39 @@
 
   /* }
 } */ 
+
+@media only screen and (max-width:600px){
+
+  .fullChat{
+    /* width: 30vw; */
+    display: flex;
+    width: 100%;
+    /* overflow-x: hidden; */
+    height: 100vh !important;
+    padding: 5px;
+    padding-right: 30px;
+  }
+
+  .chatList{
+    width: 10% !important;
+    height: 90vh !important;
+
+  }
+  .FirstDiv{
+  }
+
+  .teamErrors{
+    display: hidden;
+  }
+
+  .chatHistory{
+    width: 60%;
+  }
+
+  .emptyChat{
+    width: 100%;
+    height: 85vh;
+
+  }
+  
+}

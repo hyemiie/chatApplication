@@ -1,5 +1,5 @@
 .chat {
-  flex: 2;
+  /* flex: 2; */
   border-left: 1px solid grey;
   border-right: 1px solid grey;
 
@@ -110,22 +110,25 @@
     }
   }
   .bottom {
-    padding: 20px;
+    padding: 2px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     border-top: 1px solid grey;
-    gap: 20;
+    gap: 1;
     margin-bottom: auto;
+    background-color: rgba(208, 208, 208, 0.5);
+    height: 60px;
+    position: sticky;
   }
 
   input {
     flex: 1;
-    background-color: rgba(17, 25, 40, 0.5);
+    background-color: rgba(208, 208, 208, 0.5);
     outline: none;
     border: none;
     color: white;
-    padding: 20px;
+    padding: 18px;
     border-radius: 10px;
     font-size: 16px;
   }
@@ -133,7 +136,7 @@
   .sendButton {
     background-color: #5183fe;
     color: white;
-    padding: 10px 10px;
+    padding: 10px 8px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -159,5 +162,16 @@
       bottom: 0;
       left: 40px;
     }
+  }
+}
+
+
+@media only screen and (max-width:900px){
+  .chat{
+    height: 100%;
+  }
+  .bottom{
+    position: static;
+    bottom: auto;
   }
 }
