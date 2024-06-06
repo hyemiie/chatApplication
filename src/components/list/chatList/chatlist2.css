@@ -9,13 +9,37 @@
 }
 
 .chatList{
-    height: 51%;
-    width: 35vw;
+  height: 41vw;
+  width: 35vw;
+  border-right: 1px solid black;
+
 
 }
 
+.emptyChat{
+  background-color: rgba(111, 127, 154, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  margin-top: 2%;
+  width: 40%;
+  text-align: center;
+  border-radius: 10px;
+
+}
+
+.emptyDiv{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height: 100%;
+}
+
+
+
 .chatHistory{
-    height: 51%;
+    height: 41vw;
     width: 55vw;
 }
 
@@ -89,6 +113,7 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+      
     }
     span {
       font-weight: 500;
@@ -106,6 +131,7 @@
     height: 51%;
     margin-top: 1px;
     width: 20%;
+    cursor: pointer;
   }
   
   .teamErrDiv {
@@ -155,6 +181,7 @@
     list-style: none;
     padding-top: 20px;
     border-bottom: 1px solid black;
+    cursor: pointer
   }
   
   .lastDivBtn {
@@ -163,6 +190,7 @@
     height: 40px;
     width: 80px;
     margin-top: 20px;
+    cursor:pointer
   }
   
   @media only screen and (max-width:1100px){

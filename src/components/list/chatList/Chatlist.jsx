@@ -190,7 +190,7 @@ const Chatlist = ({ teamId }) => {
           {teams.map((team) => (
             <div key={team._id} className="item">
               <img src="./avatar.png" alt="avatar" />
-              <div className="texts">
+              <div className="texts"  onClick={getTeamErrors}>
                 <span onClick={getTeamErrors}>{team.teamName}</span>
                 <p>recent messages</p>
               </div>
@@ -225,7 +225,10 @@ const Chatlist = ({ teamId }) => {
                   <img src="./avatar.png" alt="avatar" />
                   <div className="texts userTxt">
                     {chat.chatHistory > 1 ? (
-                      <p className="emptyChat">Empty Chat</p>
+                      <div className="emptyDiv">
+                      <p className="emptyChat"> <h3>This chat is currently empty</h3>
+                    </p>
+                    </div> 
                     ) : (
                       <>
                         <p>{chat.chatHistory}</p>
@@ -267,9 +270,10 @@ const Chatlist = ({ teamId }) => {
             </div>
           </div>
         ) : (
+          <div className="emptyDiv">
+
           <div className="emptyChat">
-            Empty chat
-          </div>
+          <h3>This chat is currently empty</h3>          </div></div>
         )}
       </div>
 
