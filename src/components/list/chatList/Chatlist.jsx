@@ -270,10 +270,10 @@ const Chatlist = ({ teamId }) => {
             </div>
           </div>
         ) : (
-          {/* <div className="emptyDiv">
+          <div className="emptyDiv">
 
           <div className="emptyChat">
-          <h3>This chat is currently empty</h3>          </div></div> */}
+          <h3>This chat is currently empty</h3>          </div></div>
         )}
       </div>
 
