@@ -13,9 +13,10 @@ body {
   justify-content: center;
   height: 100vh;
   color: white;
-  background-color: rgba(146, 172, 218, 0.75);
+  background-color: rgba(54, 96, 167, 0.75);
   padding: 90px;
-  overflow-x: hidden;
+  padding: 90px;
+  overflow: hidden;
 
 
 }

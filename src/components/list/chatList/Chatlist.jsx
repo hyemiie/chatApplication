@@ -4,7 +4,7 @@ import Adduser from "./addUser/Adduser";
 import axios from "axios";
 import { io } from "socket.io-client";
 import EmojiPicker from "emoji-picker-react";
-import '../../chat/chat.css';
+import "../../chat/chat.css";
 import UserInfo from "../userInfo/UserInfo";
 
 const Chatlist = ({ teamId }) => {
@@ -12,8 +12,8 @@ const Chatlist = ({ teamId }) => {
   const [teams, setTeams] = useState([]);
   const [selectedTeamId, setSelectedTeamId] = useState(null);
   const [open, setOpen] = useState(false);
-  const [text, setText] = useState('');
-  const [userName, setUsername] = useState('');
+  const [text, setText] = useState("");
+  const [userName, setUsername] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
   const [teamErrors, setTeamErrors] = useState([]);
   const endRef = useRef(null);
@@ -31,7 +31,7 @@ const Chatlist = ({ teamId }) => {
     });
 
     socket.current.on("receive_message", (data) => {
-      console.log('Message received:', data);
+      console.log("Message received:", data);
       setChatHistory((prevChatHistory) => [...prevChatHistory, data]);
       endRef.current?.scrollIntoView({ behavior: "smooth" });
     });
@@ -53,19 +53,22 @@ const Chatlist = ({ teamId }) => {
   const sendMessage = async () => {
     const userInput = text;
     const room = selectedTeamId;
-    const sender = localStorage.getItem('userName');
+    const sender = localStorage.getItem("userName");
     const data = { message: userInput, room, sender };
     socket.current.emit("sendMessage", data);
 
-    setChatHistory((prevChatHistory) => [...prevChatHistory, { chatHistory: userInput, sender, createdAt: new Date().toISOString() }]);
-    setText(''); // Clear the input field after sending
+    setChatHistory((prevChatHistory) => [
+      ...prevChatHistory,
+      { chatHistory: userInput, sender, createdAt: new Date().toISOString() },
+    ]);
+    setText(""); // Clear the input field after sending
 
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   // Handle key press in input field
   const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       event.preventDefault(); // Prevent the default behavior of form submission
       sendMessage();
     }
@@ -101,17 +104,17 @@ const Chatlist = ({ teamId }) => {
         });
         setTeams(response.data.teams);
         console.log(response.data);
-        console.log('teams', teams);
+        console.log("teams", teams);
       } catch (error) {
         console.error("Error fetching teams:", error);
       }
     };
 
     const checkSignedUser = () => {
-      const Username = localStorage.getItem('userName');
+      const Username = localStorage.getItem("userName");
       setUsername(Username);
-      console.log('userNames', Username);
-    }
+      console.log("userNames", Username);
+    };
 
     getTeams();
     checkSignedUser();
@@ -129,50 +132,55 @@ const Chatlist = ({ teamId }) => {
 
   const getTeamErrors = async () => {
     console.log(teamId);
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     try {
       const response = await axios.get("http://localhost:5000/teamErrors", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        params: { teamId }
+        params: { teamId },
       });
       console.log(response);
       setTeamErrors(response.data.teamErrors);
-      setSelectedToggle(true)
-      console.log('errors', teamErrors);
+      setSelectedToggle(true);
+      console.log("errors", teamErrors);
     } catch (error) {
-      console.log('error', error);
+      console.log("error", error);
     }
-  }
+  };
 
   const addTeamError = async () => {
     try {
       const response = await axios.get("http://localhost:5000/addTeamError");
       console.log(response);
     } catch (error) {
-      console.log('error', error);
+      console.log("error", error);
     }
-  }
+  };
 
   return (
     <div className="fullChat">
-      <div className={`show ${selectedToggle ? 'slide-in' : 'hide'}`}>
-  <button onClick={() => setSelectedToggle(false)} className="lastDivBtn">Go back</button>
-  {teamErrors.map((error) => (
-    <div key={error.id} className="teamErrDiv" onClick={() => handleClick(error._id)}>
-      <ul className="teamLists">
-        <li>{error.teamError}</li>
-      </ul>
-    </div>
-  ))}
-</div>
-
+      <div className={`show ${selectedToggle ? "slide-in" : "hide"}`}>
+        <button onClick={() => setSelectedToggle(false)} className="lastDivBtn">
+          Go back
+        </button>
+        {teamErrors.map((error) => (
+          <div
+            key={error.id}
+            className="teamErrDiv"
+            onClick={() => handleClick(error._id)}
+          >
+            <ul className="teamLists">
+              <li>{error.teamError}</li>
+            </ul>
+          </div>
+        ))}
+      </div>
 
       <div className="chatList">
         {/* <UserInfo /> */}
         <div className="FirstDiv">
-                <UserInfo />
+          <UserInfo />
 
           <div className="search">
             <div className="searchBar">
@@ -190,7 +198,7 @@ const Chatlist = ({ teamId }) => {
           {teams.map((team) => (
             <div key={team._id} className="item">
               <img src="./avatar.png" alt="avatar" />
-              <div className="texts"  onClick={getTeamErrors}>
+              <div className="texts" onClick={getTeamErrors}>
                 <span onClick={getTeamErrors}>{team.teamName}</span>
                 <p>recent messages</p>
               </div>
@@ -221,14 +229,21 @@ const Chatlist = ({ teamId }) => {
             </div>
             <div className="center">
               {chatHistory.map((chat) => (
-                <div key={chat._id} className={`message ${chat.sender !== userName ? 'message' : "own"}`}>
+                <div
+                  key={chat._id}
+                  className={`message ${
+                    chat.sender !== userName ? "message" : "own"
+                  }`}
+                >
                   <img src="./avatar.png" alt="avatar" />
                   <div className="texts userTxt">
                     {chat.chatHistory > 1 ? (
                       <div className="emptyDiv">
-                      <p className="emptyChat"> <h3>This chat is currently empty</h3>
-                    </p>
-                    </div> 
+                        <p className="emptyChat">
+                          {" "}
+                          <h3>This chat is currently empty</h3>
+                        </p>
+                      </div>
                     ) : (
                       <>
                         <p>{chat.chatHistory}</p>
@@ -271,14 +286,12 @@ const Chatlist = ({ teamId }) => {
           </div>
         ) : (
           <div className="emptyDiv">
-
-          <div className="emptyChat">
-          <h3>This chat is currently empty</h3>          </div></div>
+            <div className="emptyChat">
+              <h3>This chat is currently empty</h3>{" "}
+            </div>
+          </div>
         )}
       </div>
-
-
-
     </div>
   );
 };

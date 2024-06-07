@@ -1,16 +1,13 @@
 .fullChat{
-    /* background-color: plum; */
     width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    /* padding-left: 70px;
-    padding-right: 70px; */
+    height: 9%;
+    display: flex;
+   
 }
 
 .chatList{
-  height: 41vw;
-  width: 35vw;
+  /* height: 41vw; */
+  width: fit-content;
   border-right: 1px solid black;
 
 
@@ -164,7 +161,7 @@
     position: absolute;
     width: 25%;
     z-index: 1;
-    transform: translateX(-130%); /* Start off-screen */
+    transform: translateX(-200%); /* Start off-screen */
     transition: transform 0.5s ease-in-out; /* Smooth transition */
   }
   
@@ -193,12 +190,14 @@
     cursor:pointer
   }
   
-  @media only screen and (max-width:1100px){
+  /* @media only screen and (min-width:1100px){
     .fullChat{
-        height: 100vh;
+        height: 100%;
+        width: fit-content;
+        
+        padding: 20px;
     }
     .teamErrors {
-        /* display: none; */
         position: absolute;
         background-color: rgb(142, 61, 61);
         width: 30%;
@@ -208,5 +207,92 @@
     }
     .chatList{
         width: fit-content;
+    }
+  } */
+
+  @media only screen and (max-width:1100px){
+    
+   .fullChat{
+        height: 100%;
+        width: fit-content;
+
+
+        
+    }
+
+    .chatList{
+      width: fit-content;
+
+    }
+    .teamErrors {
+        /* display: none; */
+        position: absolute;
+        width: 30%;
+        display: flex;
+        height: 90vh;
+        margin-left: auto;
+
+        
+    }
+
+    .FirstDiv{
+      overflow-y: scroll;
+      height: 85vh;
+    }
+
+  }
+
+
+  @media only screen and (max-width:768px){
+
+    .fullChat{
+      height: 100%;
+      width: fit-content;
+
+
+    }
+    .chatList{
+      width: fit-content;
+
+
+    }
+    .chatHistory{
+      height: 100%;
+      width: 60%;
+    }
+  }
+
+  @media only screen and (max-width:771px){
+  
+    .chatHistory{
+      height: 100%;
+      width: 60%;
+    }
+  }
+
+  @media only screen and (max-width:600px){
+    .chatHistory{
+      display: none;
+    }
+    .SmallSizechatHistory{
+      display: none;
+    }
+    .container{
+    }
+
+    .fullChat{
+      width: 100%;
+      display: flexbox;
+      padding: 0;
+    }
+
+    .FirstDiv{
+      height: 100%;
+      top: 0;
+      border-left: 1px solid black;
+    }
+
+    .show{
+      width: 60vw;
     }
   }
