@@ -39,21 +39,24 @@ const Chatlist = ({ teamId }) => {
     return () => {
       socket.current.off("connect");
       socket.current.off("receive_message");
+      socket.current.disconnect();
     };
   }, [teamId]);
 
   // Function to join a chat room
   const joinRoom = (teamId) => {
-    const username = "Yemi";
+    const username = localStorage.getItem("userName") || "Guest";
     const room = teamId;
     socket.current.emit("join_room", { username, room });
   };
 
   // Function to send a message
   const sendMessage = async () => {
+    if (!text.trim()) return;
+    
     const userInput = text;
     const room = selectedTeamId;
-    const sender = localStorage.getItem("userName");
+    const sender = localStorage.getItem("userName") || "Guest";
     const data = { message: userInput, room, sender };
     socket.current.emit("sendMessage", data);
 
@@ -104,7 +107,6 @@ const Chatlist = ({ teamId }) => {
         });
         setTeams(response.data.teams);
         console.log(response.data);
-        console.log("teams", teams);
       } catch (error) {
         console.error("Error fetching teams:", error);
       }
@@ -125,13 +127,13 @@ const Chatlist = ({ teamId }) => {
     setOpen(false);
   };
 
-  const handleClick = (teamId) => {
-    getMessage(teamId);
-    console.log(teamId);
+  const handleErrorClick = (errorId) => {
+    getMessage(errorId);
+    console.log(errorId);
   };
 
-  const getTeamErrors = async () => {
-    console.log(teamId);
+  const getTeamErrors = async (teamId) => {
+    console.log('teamId', teamId);
     const token = localStorage.getItem("token");
     try {
       const response = await axios.get("http://localhost:5000/teamErrors", {
@@ -147,6 +149,11 @@ const Chatlist = ({ teamId }) => {
     } catch (error) {
       console.log("error", error);
     }
+  };
+
+  const handleteamClick = (teamId) => {
+    getTeamErrors(teamId);
+    console.log(teamId);
   };
 
   const addTeamError = async () => {
@@ -165,20 +172,23 @@ const Chatlist = ({ teamId }) => {
           Go back
         </button>
         {teamErrors.map((error) => (
-          <div
-            key={error.id}
-            className="teamErrDiv"
-            onClick={() => handleClick(error._id)}
-          >
-            <ul className="teamLists">
-              <li>{error.teamError}</li>
-            </ul>
-          </div>
-        ))}
+  <div
+    key={error._id} // Ensure the key is correctly referencing a unique ID from error
+    className="teamErrDiv"
+    onClick={() => handleErrorClick(error._id)}
+  >
+    {error.teamError.length < 1 ? (
+      <p>Empty error</p>
+    ) : (
+      <ul className="teamLists">
+        <li>{error.teamError}</li>
+      </ul>
+    )}
+  </div>
+))}
       </div>
 
       <div className="chatList">
-        {/* <UserInfo /> */}
         <div className="FirstDiv">
           <UserInfo />
 
@@ -196,16 +206,14 @@ const Chatlist = ({ teamId }) => {
           </div>
 
           {teams.map((team) => (
-            <div key={team._id} className="item">
+            <div key={team._id} className="item" onClick={() => handleteamClick(team._id)}>
               <img src="./avatar.png" alt="avatar" />
-              <div className="texts" onClick={getTeamErrors}>
-                <span onClick={getTeamErrors}>{team.teamName}</span>
+              <div className="texts">
+                <span>{team.teamName}</span>
                 <p>recent messages</p>
               </div>
             </div>
           ))}
-
-          {/* <button onClick={addTeamError}>addTeamError</button> */}
         </div>
       </div>
 
@@ -228,31 +236,26 @@ const Chatlist = ({ teamId }) => {
               </div>
             </div>
             <div className="center">
-              {chatHistory.map((chat) => (
-                <div
-                  key={chat._id}
-                  className={`message ${
-                    chat.sender !== userName ? "message" : "own"
-                  }`}
-                >
-                  <img src="./avatar.png" alt="avatar" />
-                  <div className="texts userTxt">
-                    {chat.chatHistory > 1 ? (
-                      <div className="emptyDiv">
-                        <p className="emptyChat">
-                          {" "}
-                          <h3>This chat is currently empty</h3>
-                        </p>
-                      </div>
-                    ) : (
-                      <>
-                        <p>{chat.chatHistory}</p>
-                        <span>{new Date(chat.createdAt).toLocaleString()}</span>
-                      </>
-                    )}
-                  </div>
+              {chatHistory.length === 0 ? (
+                <div className="emptyDiv">
+                  <p className="emptyChat">
+                    <h3>This chat is currently empty</h3>
+                  </p>
                 </div>
-              ))}
+              ) : (
+                chatHistory.map((chat) => (
+                  <div
+                    key={chat._id}
+                    className={`message ${chat.sender !== userName ? "message" : "own"}`}
+                  >
+                    <img src="./avatar.png" alt="avatar" />
+                    <div className="texts userTxt">
+                      <p>{chat.chatHistory}</p>
+                      <span>{new Date(chat.createdAt).toLocaleString()}</span>
+                    </div>
+                  </div>
+                ))
+              )}
               <div ref={endRef}></div>
             </div>
             <div className="bottom">
@@ -275,9 +278,11 @@ const Chatlist = ({ teamId }) => {
                   alt=""
                   onClick={() => setOpen((prev) => !prev)}
                 />
-                <div className="picker">
-                  <EmojiPicker open={open} onEmojiClick={handleEmoji} />
-                </div>
+                {open && (
+                  <div className="picker">
+                    <EmojiPicker onEmojiClick={handleEmoji} />
+                  </div>
+                )}
               </div>
               <button className="sendButton" onClick={sendMessage}>
                 Send
@@ -287,7 +292,7 @@ const Chatlist = ({ teamId }) => {
         ) : (
           <div className="emptyDiv">
             <div className="emptyChat">
-              <h3>This chat is currently empty</h3>{" "}
+              <h3>This chat is currently empty</h3>
             </div>
           </div>
         )}

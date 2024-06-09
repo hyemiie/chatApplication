@@ -88,6 +88,10 @@
     border-radius: 10px;
     cursor: pointer;
   }
+
+  .texts{
+    height: fit-content;
+  }
   
   .item {
     display: flex;
@@ -96,7 +100,7 @@
     padding: 20px;
     cursor: pointer;
     border-bottom: 1px solid grey;
-    height: 400px;
+    height: 70px;
     /* overflow-y:scroll;
     overflow-x: hidden; */
   

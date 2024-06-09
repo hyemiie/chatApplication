@@ -12,7 +12,8 @@ const secretKey = "thisisthesecretkey";
 
 
 const GetTeamErrors = async (req, res) => {
-    const teamId = '665ed6e56e99f5c7d4dfbfd7'
+    const teamId = req.query.teamId;
+    console.log('teamId', teamId)
     try {
       const teamErrors = await TeamErrors.find({teamId: teamId})
       if (!teamErrors) {
