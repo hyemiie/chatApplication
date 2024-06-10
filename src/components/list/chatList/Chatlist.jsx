@@ -182,6 +182,7 @@ const Chatlist = ({ teamId }) => {
     ) : (
       <ul className="teamLists">
         <li>{error.teamError}</li>
+        <button onClick={addTeamError}>add team error</button>
       </ul>
     )}
   </div>
