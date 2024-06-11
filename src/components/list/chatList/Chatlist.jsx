@@ -20,8 +20,9 @@ const Chatlist = ({ teamId }) => {
   const socket = useRef(null);
   const [isConnected, setIsConnected] = useState(false);
   const [selectedToggle, setSelectedToggle] = useState(false);
+  const [newErrorTeamID, setNewErrorTeamID] = useState("");
+  const [inputVisibility, setInputVisibility] = useState({});
 
-  // Initialize socket connection and event listeners
   useEffect(() => {
     socket.current = io("http://localhost:5000");
 
@@ -43,17 +44,15 @@ const Chatlist = ({ teamId }) => {
     };
   }, [teamId]);
 
-  // Function to join a chat room
   const joinRoom = (teamId) => {
     const username = localStorage.getItem("userName") || "Guest";
     const room = teamId;
     socket.current.emit("join_room", { username, room });
   };
 
-  // Function to send a message
   const sendMessage = async () => {
     if (!text.trim()) return;
-    
+
     const userInput = text;
     const room = selectedTeamId;
     const sender = localStorage.getItem("userName") || "Guest";
@@ -64,20 +63,18 @@ const Chatlist = ({ teamId }) => {
       ...prevChatHistory,
       { chatHistory: userInput, sender, createdAt: new Date().toISOString() },
     ]);
-    setText(""); // Clear the input field after sending
+    setText("");
 
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Handle key press in input field
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
-      event.preventDefault(); // Prevent the default behavior of form submission
+      event.preventDefault();
       sendMessage();
     }
   };
 
-  // Fetch messages for the selected team
   const getMessage = async (teamId) => {
     setSelectedTeamId(teamId);
 
@@ -95,7 +92,6 @@ const Chatlist = ({ teamId }) => {
     }
   };
 
-  // Fetch teams on component mount
   useEffect(() => {
     const getTeams = async () => {
       try {
@@ -133,7 +129,7 @@ const Chatlist = ({ teamId }) => {
   };
 
   const getTeamErrors = async (teamId) => {
-    console.log('teamId', teamId);
+    console.log("teamId", teamId);
     const token = localStorage.getItem("token");
     try {
       const response = await axios.get("http://localhost:5000/teamErrors", {
@@ -157,12 +153,29 @@ const Chatlist = ({ teamId }) => {
   };
 
   const addTeamError = async () => {
+    const newChatError = document.getElementById("newErrorName").value;
+    const teamId = newErrorTeamID;
+    const data = { newChatError, teamId };
+
     try {
-      const response = await axios.get("http://localhost:5000/addTeamError");
+      const token = localStorage.getItem("token");
+      const response = await axios.post("http://localhost:5000/addTeamError", data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       console.log(response);
     } catch (error) {
       console.log("error", error);
     }
+  };
+
+  const toggleInputVisibility = (teamId) => {
+    setInputVisibility((prev) => ({
+      ...prev,
+      [teamId]: !prev[teamId],
+    }));
+    setNewErrorTeamID(teamId);
   };
 
   return (
@@ -172,21 +185,16 @@ const Chatlist = ({ teamId }) => {
           Go back
         </button>
         {teamErrors.map((error) => (
-  <div
-    key={error._id} // Ensure the key is correctly referencing a unique ID from error
-    className="teamErrDiv"
-    onClick={() => handleErrorClick(error._id)}
-  >
-    {error.teamError.length < 1 ? (
-      <p>Empty error</p>
-    ) : (
-      <ul className="teamLists">
-        <li>{error.teamError}</li>
-        <button onClick={addTeamError}>add team error</button>
-      </ul>
-    )}
-  </div>
-))}
+          <div key={error._id} className="teamErrDiv" onClick={() => handleErrorClick(error._id)}>
+            {error.teamError.length < 1 ? (
+              <p>Empty error</p>
+            ) : (
+              <ul className="teamLists">
+                <li>{error.teamError}</li>
+              </ul>
+            )}
+          </div>
+        ))}
       </div>
 
       <div className="chatList">
@@ -207,11 +215,22 @@ const Chatlist = ({ teamId }) => {
           </div>
 
           {teams.map((team) => (
-            <div key={team._id} className="item" onClick={() => handleteamClick(team._id)}>
+            <div key={team._id} className="item" >
               <img src="./avatar.png" alt="avatar" />
               <div className="texts">
-                <span>{team.teamName}</span>
-                <p>recent messages</p>
+                <span onClick={() => handleteamClick(team._id)}>{team.teamName}</span>
+                <p>
+                  recent messages
+                  <button onClick={() => toggleInputVisibility(team._id)}>
+                    {inputVisibility[team._id] ? "-" : "+"}
+                  </button>
+                </p>
+                {inputVisibility[team._id] && (
+                  <div className="newTeamError">
+                    <input id="newErrorName" />
+                    <button type="submit" onClick={addTeamError}>Add to List</button>
+                  </div>
+                )}
               </div>
             </div>
           ))}
@@ -269,7 +288,7 @@ const Chatlist = ({ teamId }) => {
                 type="text"
                 placeholder="Type a message..."
                 onChange={(e) => setText(e.target.value)}
-                onKeyDown={handleKeyPress} // Handle key press event
+                onKeyDown={handleKeyPress}
                 value={text}
                 id="userInput"
               />

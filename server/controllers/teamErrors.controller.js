@@ -34,20 +34,28 @@ const GetTeamErrors = async (req, res) => {
   };
 
   const AddTeamError = async (req, res) => {
-    const newTeam = req.body.teamName;
+    const newTeam = req.body;
     console.log("newTeam", newTeam)
   try {
+if(newTeam.newChatError <1  || newTeam.teamErrorId <1){
+  res.status(400).json({message:'Add the error name'});
+}
+else{
+
 
    const TeamError = await TeamErrors.create({
-    teamError: "Reduce wait Time",
-    teamId:"665ed6e56e99f5c7d4dfbfd7",
+    teamError: newTeam.newChatError,
+    teamId:newTeam.teamId,
     chatHistory:[]
     });
+
+
    console.log("TeamError", TeamError);
 
    
 
     res.status(200).json({ TeamError });
+  }
   } catch (error) { 
     console.error(error);
     res.status(500).json({ message: "Internal server error" });

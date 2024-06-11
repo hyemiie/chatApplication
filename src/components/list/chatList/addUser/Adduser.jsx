@@ -34,7 +34,6 @@ const addTeam = async () => {
       <div className="user">
         <div className="detail">
           <img src="./avatar.png" alt="" />
-          <span>Jane Doe</span>
         </div>
         <button onClick={addTeam}>Add Team</button>
       </div>

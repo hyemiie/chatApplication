@@ -112,7 +112,7 @@ app.get("/getAllTeams", GetAllTeams);
 app.post("/addTeam", AddTeam);
 app.post("/addChat", addtoChat);
 app.get('/teamErrors', GetTeamErrors)
-app.get('/addTeamError',AddTeamError)
+app.post('/addTeamError',AddTeamError)
 
 const PORT = 5000;
 server.listen(PORT, () => {

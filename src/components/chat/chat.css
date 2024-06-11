@@ -2,8 +2,9 @@
   /* flex: 2; */
   border-left: 1px solid grey;
   border-right: 1px solid grey;
+  /* background-color: #a5a5a5; */
 
-  height: 90vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 

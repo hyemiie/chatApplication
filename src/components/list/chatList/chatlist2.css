@@ -1,13 +1,13 @@
 .fullChat{
     width: 100%;
-    height: 9%;
+    height: 100%;
     display: flex;
    
 }
 
 .chatList{
-  /* height: 41vw; */
-  width: fit-content;
+  width: 40%;
+  height: 100vh;
   border-right: 1px solid black;
 
 
@@ -37,7 +37,7 @@
 
 .chatHistory{
     height: 41vw;
-    width: 55vw;
+    width: 60%;
 }
 
 .search {
@@ -243,6 +243,10 @@
       overflow-y: scroll;
       height: 85vh;
     }
+    .show{
+      width: 40vw;
+      height: 100%;
+    }
 
   }
 
@@ -264,6 +268,10 @@
       height: 100%;
       width: 60%;
     }
+    .show{
+      width: 40vw;
+      height: 100%;
+    }
   }
 
   @media only screen and (max-width:771px){
@@ -271,6 +279,11 @@
     .chatHistory{
       height: 100%;
       width: 60%;
+    }
+
+    .show{
+      width: 40vw;
+      height: 100%;
     }
   }
 
@@ -281,22 +294,24 @@
     .SmallSizechatHistory{
       display: none;
     }
-    .container{
-    }
+  
 
     .fullChat{
       width: 100%;
       display: flexbox;
       padding: 0;
+      overflow: hidden;
     }
 
     .FirstDiv{
       height: 100%;
+      width: 100vw;
       top: 0;
-      border-left: 1px solid black;
+      /* border-left: 1px solid black; */
     }
 
     .show{
       width: 60vw;
+      height: 100%;
     }
   }
