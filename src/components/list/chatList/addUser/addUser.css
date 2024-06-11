@@ -4,7 +4,7 @@
   height: max-content;
   background-color: rgba(17, 25, 40, 0.5);
   border-radius: 10px;
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
@@ -23,7 +23,7 @@
     button {
       padding: 20px;
       border-radius: 10px;
-      background-color: aquamarine;
+      background-color: rgb(113, 140, 241);
       color: white;
       border: none;
       cursor: pointer;
@@ -51,7 +51,7 @@
     button {
       padding: 10px;
       border-radius: 10px;
-      background-color: aquamarine;
+      background-color: rgb(114, 134, 207);
       color: white;
       border: none;
       cursor: pointer;

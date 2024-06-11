@@ -218,13 +218,13 @@ const Chatlist = ({ teamId }) => {
             <div key={team._id} className="item" >
               <img src="./avatar.png" alt="avatar" />
               <div className="texts">
-                <span onClick={() => handleteamClick(team._id)}>{team.teamName}</span>
-                <p>
+                <span onClick={() => handleteamClick(team._id)} className="teamName">{team.teamName}</span>
+                <div className="chatSnippet">
                   recent messages
-                  <button onClick={() => toggleInputVisibility(team._id)}>
+                  <button onClick={() => toggleInputVisibility(team._id)} className="addTeamBtn">
                     {inputVisibility[team._id] ? "-" : "+"}
                   </button>
-                </p>
+                </div>
                 {inputVisibility[team._id] && (
                   <div className="newTeamError">
                     <input id="newErrorName" />
@@ -310,7 +310,7 @@ const Chatlist = ({ teamId }) => {
             </div>
           </div>
         ) : (
-          <div className="emptyDiv">
+          <div className="emptyDiv2">
             <div className="emptyChat">
               <h3>This chat is currently empty</h3>
             </div>

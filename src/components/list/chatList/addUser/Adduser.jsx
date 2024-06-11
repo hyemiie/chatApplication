@@ -29,7 +29,7 @@ const addTeam = async () => {
   return (
     <div className="addUser">
       <form action="">
-        <input type="text" name="username" id="newTeam" placeholder="Username" />
+        <input type="text" name="username" id="newTeam" placeholder="Team name" />
       </form>
       <div className="user">
         <div className="detail">

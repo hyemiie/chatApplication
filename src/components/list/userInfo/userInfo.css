@@ -5,7 +5,7 @@
   justify-content: space-between;
   position: sticky;
   top: 0; 
-  background-color: rgba(151, 167, 195, 0.75);
+  background-color: #8fb5ed;
 
   .user {
     display: flex;
