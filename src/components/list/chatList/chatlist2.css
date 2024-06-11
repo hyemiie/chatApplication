@@ -3,6 +3,7 @@
     height: 100%;
     display: flex;
     background-color: #F7FFF7;
+    overflow: hidden;
 }
 .FirstDiv
 {
@@ -28,7 +29,7 @@
 }
 
 .chatSnippet{
-  width: 400px;
+  width: 300px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -38,18 +39,14 @@
 
 
 .emptyChat{
-  background-color: rgba(200, 206, 217, 0.75);
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 40px;
-  margin-top: 10%;
+  /* margin-top: 50%; */
   /* top:0; */
   /* width: fit-content; */
   text-align: center;
-  border-radius: 10px;
-
-
+  font-size: 17px;
 }
 
 .emptyDiv{
@@ -57,6 +54,7 @@
   justify-content: center;
   display: flex;
   width: 60%;
+  font-size: 17px;
 }
 
 
@@ -196,7 +194,7 @@
   .show {
     display: block;
     background-color: rgb(172, 192, 208);
-    height: 90vh;
+    height: 100%;
     position: absolute;
     width: 25%;
     z-index: 1;
@@ -216,17 +214,25 @@
   .teamLists li {
     list-style: none;
     padding-top: 20px;
-    border-bottom: 1px solid black;
-    cursor: pointer
+    border-bottom: 1px solid rgb(107, 107, 107);
+    cursor: pointer;
+    text-transform: capitalize;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 17px;
+    
   }
   
   .lastDivBtn {
-    background-color: purple;
+    background-color: rgb(95, 154, 202);
     margin-left: 70%;
     height: 40px;
     width: 80px;
     margin-top: 20px;
-    cursor:pointer
+    cursor:pointer;
+    border:none;
+    border-radius: 10px;
+    color: white;
   }
   
   /* @media only screen and (min-width:1100px){

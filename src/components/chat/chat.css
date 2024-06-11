@@ -109,6 +109,9 @@
           background-color: #6f7b93;
           border-radius: 10px;
           color: white;
+          width: fit-content;
+
+          
         }
 
         span {
@@ -142,7 +145,7 @@
   }
 
   .sendButton {
-    background-color: #4dbfbf;
+    background-color: #4d80bf;
     color: white;
     padding: 10px 8px;
     border: none;

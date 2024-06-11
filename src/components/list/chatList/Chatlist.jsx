@@ -245,7 +245,7 @@ const Chatlist = ({ teamId }) => {
               <div className="user">
                 <img src="./avatar.png" alt="" />
                 <div className="texts">
-                  <span>Jane Doe</span>
+                  <span>{userName}</span>
                   <p>Lorem ipsum dolor sit amet</p>
                 </div>
               </div>
