@@ -246,7 +246,7 @@ const Chatlist = ({ teamId }) => {
                 <img src="./avatar.png" alt="" />
                 <div className="texts">
                   <span>{userName}</span>
-                  <p>Lorem ipsum dolor sit amet</p>
+                  <p>Lorem ipsum dolor sit</p>
                 </div>
               </div>
               <div className="icons">
@@ -312,7 +312,7 @@ const Chatlist = ({ teamId }) => {
         ) : (
           <div className="emptyDiv2">
             <div className="emptyChat">
-              <h3>This chat is currently empty</h3>
+              {/* <h3>This chat is currently empty</h3> */}
             </div>
           </div>
         )}
