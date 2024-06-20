@@ -296,7 +296,7 @@ const Chatlist = ({ teamId }) => {
                 <img
                   src="./emoji.png"
                   alt=""
-                  // onClick={() => setOpen((prev) => !prev)}
+                  onClick={() => setOpen((prev) => !prev)}
                 />
                 {open && (
                   <div className="picker">
