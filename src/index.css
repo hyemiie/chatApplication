@@ -1,3 +1,12 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Afacad');
+
+
+
+*{
+  font-family: 'Afacad' !important;
+  /* font-size: 22px; */
+}
 /* * {
   margin: 0;
   padding: 0;

@@ -119,13 +119,13 @@ server.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-mongoose
-  .connect(
-    "mongodb+srv://yemiojedapo1:09030184479@cluster0.wx4gmqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-  )
-  .then(() => {
-    console.log("Connected to database!");
-  })
-  .catch((error) => {
-    console.log("Connection Failed:", error);
-  });
+// mongoose
+//   .connect(
+//     "mongodb+srv://yemiojedapo1:09030184479@cluster0.wx4gmqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+//   )
+//   .then(() => {
+//     console.log("Connected to database!");
+//   })
+//   .catch((error) => {
+//     console.log("Connection Failed:", error);
+//   });
