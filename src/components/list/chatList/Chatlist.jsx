@@ -6,6 +6,8 @@ import { io } from "socket.io-client";
 import EmojiPicker from "emoji-picker-react";
 import "../../chat/chat.css";
 import UserInfo from "../userInfo/UserInfo";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCoffee, faEllipsisH, faCamera, faVideoCamera } from '@fortawesome/free-solid-svg-icons';
 
 const Chatlist = ({ teamId }) => {
   const [addMode, setAddMode] = useState(false);
@@ -20,7 +22,8 @@ const Chatlist = ({ teamId }) => {
   const socket = useRef(null);
   const [isConnected, setIsConnected] = useState(false);
   const [selectedToggle, setSelectedToggle] = useState(false);
-  const [newErrorTeamID, setNewErrorTeamID] = useState("");
+  const [isMobileChatOpen, setIsMobileChatOpen] = useState(false);
+    const [newErrorTeamID, setNewErrorTeamID] = useState("");
   const [inputVisibility, setInputVisibility] = useState({});
 
   useEffect(() => {
@@ -147,6 +150,12 @@ const Chatlist = ({ teamId }) => {
     }
   };
 
+
+  const handleChatSelect = () => {
+    setIsMobileChatOpen(true);
+    console.log("mobilechat")
+  };
+
   const handleteamClick = (teamId) => {
     getTeamErrors(teamId);
     console.log(teamId);
@@ -189,8 +198,8 @@ const Chatlist = ({ teamId }) => {
             {error.teamError.length < 1 ? (
               <p>Empty error</p>
             ) : (
-              <ul className="teamLists">
-                <li>{error.teamError}</li>
+              <ul className="teamLists" >
+                <li onClick={() => setIsMobileChatOpen(true)}>{error.teamError}</li>
               </ul>
             )}
           </div>
@@ -198,6 +207,9 @@ const Chatlist = ({ teamId }) => {
       </div>
 
       <div className="chatList">
+      {/* <div className={`chatList ${isMobileChatOpen ? 'hideChatList' : 'chatList' }`}> */}
+ 
+
         <div className="FirstDiv">
           <UserInfo />
 
@@ -218,12 +230,14 @@ const Chatlist = ({ teamId }) => {
             <div key={team._id} className="item" >
               <img src="./avatar.png" alt="avatar" />
               <div className="texts">
-                <span onClick={() => handleteamClick(team._id)} className="teamName">{team.teamName}</span>
+              <div className="teamDiv">
+                <span onClick={() => handleteamClick(team._id)} className="teamName">{team.teamName} </span><button onClick={() => toggleInputVisibility(team._id)} className="addTeamBtn">
+                    {inputVisibility[team._id] ? <h2>-</h2> : <h2>+</h2>}
+                  </button>
+                  </div>
                 <div className="chatSnippet">
                   recent messages
-                  <button onClick={() => toggleInputVisibility(team._id)} className="addTeamBtn">
-                    {inputVisibility[team._id] ? "-" : "+"}
-                  </button>
+                 
                 </div>
                 {inputVisibility[team._id] && (
                   <div className="newTeamError">
@@ -238,8 +252,8 @@ const Chatlist = ({ teamId }) => {
       </div>
 
       {addMode && <Adduser />}
-      <div className="chatHistory">
-        {selectedTeamId ? (
+      <div className={`chatHistory ${isMobileChatOpen ? 'mobile-open' : ''}`}>
+      {selectedTeamId ? (
           <div className="chat">
             <div className="top">
               <div className="user">
@@ -250,9 +264,8 @@ const Chatlist = ({ teamId }) => {
                 </div>
               </div>
               <div className="icons">
-                <img src="./phone.png" alt="" />
-                <img src="./video.png" alt="" />
-                <img src="./info.png" alt="" />
+              <FontAwesomeIcon icon={faEllipsisH} />
+              <FontAwesomeIcon icon={faVideoCamera} />                
               </div>
             </div>
             <div className="center">

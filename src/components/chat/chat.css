@@ -1,8 +1,7 @@
 .chat {
   /* flex: 2; */
-  border-left: 1px solid grey;
   border-right: 1px solid grey;
-  background-color: #ebeef8;
+  background-color: #fefefe;
 
   height: 100vh;
   display: flex;
@@ -13,10 +12,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid grey;
-    height: 50px;
-    background-color: #8fb5ed;
-    color: whitesmoke;
+    border-bottom: 1px solid rgb(250, 238, 238);
+    height: 30px;
+    background-color: #fefefe;
+    color: #7e5eab;
+    
   }
 
   .user {
@@ -27,6 +27,9 @@
   .icons {
     display: flex;
     gap: 20px;
+    color: #7e5eab;
+    font-size: 1.5rem;
+    
 
     img {
       width: 20px;
@@ -54,7 +57,7 @@
     p {
       font-size: 14px;
       font-weight: 300;
-      color: whitesmoke;
+      color: #7e5eab;
     }
   }
 
@@ -78,8 +81,8 @@
 
         .texts {
           p {
-            background-color: #7aa0e7;
-            color: rgb(241, 240, 237);
+            background-color: #f6f0fc;
+            color: rgb(78, 77, 74);
           }
         }
       }
@@ -106,7 +109,7 @@
 
         p {
           padding: 20px;
-          background-color: #6f7b93;
+          background-color: #be99ee;
           border-radius: 10px;
           color: white;
           width: fit-content;
@@ -128,14 +131,14 @@
     border-top: 1px solid grey;
     gap: 1;
     margin-bottom: auto;
-    background-color: rgba(208, 208, 208, 0.5);
+    background-color: rgba(226, 222, 226, 0.5);
     height: 60px;
     position: sticky;
   }
 
   input {
     flex: 1;
-    background-color: rgba(208, 208, 208, 0.5);
+    background-color: rgba(234, 233, 234, 0.5);
     outline: none;
     border: none;
     color: white;
@@ -145,8 +148,9 @@
   }
 
   .sendButton {
-    background-color: #4d80bf;
+    background-color: rgb(184, 95, 231);
     color: white;
+
     padding: 10px 8px;
     border: none;
     border-radius: 5px;

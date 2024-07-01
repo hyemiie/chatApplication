@@ -2,7 +2,11 @@ import React from "react";
 import "./userInfo.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { jwtDecode } from "jwt-decode";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCoffee, faEllipsisH, faCamera, faVideoCamera } from '@fortawesome/free-solid-svg-icons';
+import { faCameraRetro } from "@fortawesome/free-solid-svg-icons/faCameraRetro";
+import { faNoteSticky } from "@fortawesome/free-solid-svg-icons/faNoteSticky";
+
 const UserInfo = () => {
 
   const [username, setUsername] = useState("");
@@ -42,9 +46,9 @@ console.log('token', token)
         <h2>{username}</h2>
       </div>
       <div className="icons">
-        <img src="./more.png" alt="" />
-        <img src="./video.png" alt="" />
-        <img src="./edit.png" alt="" />
+      <FontAwesomeIcon icon={faEllipsisH} />
+      <FontAwesomeIcon icon={faVideoCamera} />
+       
       </div>
     </div>
   );

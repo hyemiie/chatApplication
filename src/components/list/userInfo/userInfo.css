@@ -5,13 +5,16 @@
   justify-content: space-between;
   position: sticky;
   top: 0; 
-  background-color: #8fb5ed;
+  background-color: #fefefe;
+  height: 30px;
+  border-bottom: 1px solid rgb(222, 221, 219);
+
 
   .user {
     display: flex;
     align-items: center;
     gap: 20px;
-    color: white;
+    color: #7e5eab;
 
     img {
       width: 50px;
@@ -22,6 +25,8 @@
   .icons {
     display: flex;
     gap: 20px;
+    color: #7e5eab;
+    font-size: 1.5rem;
     img {
       width: 20px;
       height: 20px;

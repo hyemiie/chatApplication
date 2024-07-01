@@ -121,11 +121,14 @@ server.listen(PORT, () => {
 
 mongoose
   .connect(
-    "mongodb+srv://yemiojedapo1:09030184479@cluster0.wx4gmqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    "mongodb+srv://yemiojedapo1:09030184479@cluster0.wx4gmqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
   )
   .then(() => {
     console.log("Connected to database!");
   })
   .catch((error) => {
-    console.log("Connection Failed:", error);
+    console.log("Connection Failed:");
+    console.log("Error name:", error.name);
+    console.log("Error message:", error.message);
+    console.log("Full error:", error);
   });
