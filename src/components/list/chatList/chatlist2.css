@@ -77,21 +77,15 @@
 
 
 .emptyChat{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* margin-top: 50%; */
-  /* top:0; */
-  /* width: fit-content; */
+  width: 100%;
   text-align: center;
-  font-size: 17px;
 }
 
 .emptyDiv{
   align-items: center;
   justify-content: center;
   display: flex;
-  width: 60%;
+  width: 100%;
   font-size: 17px;
 }
 
@@ -275,6 +269,10 @@
     border-radius: 10px;
     color: white;
   }
+
+  .chatBackButton{
+    display: none;
+  }
   
   /* @media only screen and (min-width:1100px){
     .fullChat{
@@ -372,8 +370,8 @@
   @media only screen and (max-width:600px){
     .chatHistory{
       display: none;
-
-      .chatHistory.mobile-open {
+    }
+      .mobile-open {
         display: block;
         position: absolute;
         width: 100%;
@@ -383,9 +381,22 @@
         right: 0;
         bottom: 0;
         z-index: 1000;
-        background: rgb(182, 97, 97);
+        background: rgb(255, 255, 255);
 
       }
+    
+
+    .hello{
+      background-color: #ba95ee;
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
     }
     .SmallSizechatHistory{
       display: none;
@@ -409,5 +420,27 @@
     .show{
       width: 60vw;
       height: 100%;
+    }
+
+    .chatBackButton{
+      display: block;
+      border: 1px solid white;
+      margin-right: auto;
+
+    }
+
+
+    .angleLeft{
+      font-size: 20px;
+      padding: 5px;
+      border: 1px solid white;
+      cursor: pointer;
+      color: #7e5eab;
+      font-weight: bolder;
+      background-color: white;
+    }
+
+    .user{
+      right: 0;
     }
   }

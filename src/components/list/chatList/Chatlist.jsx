@@ -7,7 +7,9 @@ import EmojiPicker from "emoji-picker-react";
 import "../../chat/chat.css";
 import UserInfo from "../userInfo/UserInfo";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoffee, faEllipsisH, faCamera, faVideoCamera } from '@fortawesome/free-solid-svg-icons';
+import { faCoffee, faEllipsisH, faCamera, faVideoCamera, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons/faArrowLeft";
+
 
 const Chatlist = ({ teamId }) => {
   const [addMode, setAddMode] = useState(false);
@@ -199,7 +201,7 @@ const Chatlist = ({ teamId }) => {
               <p>Empty error</p>
             ) : (
               <ul className="teamLists" >
-                <li onClick={() => setIsMobileChatOpen(true)}>{error.teamError}</li>
+                <li onClick={() => handleChatSelect()}>{error.teamError}</li>
               </ul>
             )}
           </div>
@@ -207,7 +209,7 @@ const Chatlist = ({ teamId }) => {
       </div>
 
       <div className="chatList">
-      {/* <div className={`chatList ${isMobileChatOpen ? 'hideChatList' : 'chatList' }`}> */}
+      {/* <div className={` ${isMobileChatOpen ? 'hello' : 'chatList' }`}> */}
  
 
         <div className="FirstDiv">
@@ -252,11 +254,16 @@ const Chatlist = ({ teamId }) => {
       </div>
 
       {addMode && <Adduser />}
-      <div className={`chatHistory ${isMobileChatOpen ? 'mobile-open' : ''}`}>
+      <div className={`chatHistory ${isMobileChatOpen ? 'mobile-open' : 'mobilechatHistory'}`}>
+      
       {selectedTeamId ? (
           <div className="chat">
             <div className="top">
+           
               <div className="user">
+              <button onClick={() => setIsMobileChatOpen(false)} className="chatBackButton">
+      <FontAwesomeIcon icon={faAngleLeft}  className="angleLeft"/>
+      </button>
                 <img src="./avatar.png" alt="" />
                 <div className="texts">
                   <span>{userName}</span>
