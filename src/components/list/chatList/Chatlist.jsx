@@ -384,7 +384,7 @@ const deleteChat = async()=>{
                     :  <div>
                     <img src="./avatar.png" alt="avatar" />
                     <div className="texts userTxt">
-                      <img src={chat.chatHistory.data} alt="Image" />
+                      <img src={`http://localhost:5000${chat.chatHistory.data}`} alt="Image" />
                       <span>{new Date(chat.createdAt).toLocaleString()}</span>
                     </div>
                     </div>}
