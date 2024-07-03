@@ -9,7 +9,19 @@ const ChatSchema = new Schema({
     // required: true,
   },
   chatHistory: {
-    type: String,
+    type: new Schema({
+      type: {
+        type: String,
+        required: true,
+        enum: ['text', 'image', 'voice_note']  // Enums to specify the type of message
+      },
+      data: {
+        type: Schema.Types.Mixed,  // Can be a string (for text) or an object (for image/voice_note)
+        required: true
+      },
+      filename: String,  // Only used for image and voice_note
+      gridfs_id: Schema.Types.ObjectId  // Only used for image and voice_note
+    }),
     required: true,
   },
   sender: {

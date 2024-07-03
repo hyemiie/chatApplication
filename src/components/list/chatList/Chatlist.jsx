@@ -7,9 +7,7 @@ import EmojiPicker from "emoji-picker-react";
 import "../../chat/chat.css";
 import UserInfo from "../userInfo/UserInfo";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoffee, faEllipsisH, faCamera, faVideoCamera, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons/faArrowLeft";
-
+import { faEllipsisH, faVideoCamera, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
 const Chatlist = ({ teamId }) => {
   const [addMode, setAddMode] = useState(false);
@@ -25,8 +23,12 @@ const Chatlist = ({ teamId }) => {
   const [isConnected, setIsConnected] = useState(false);
   const [selectedToggle, setSelectedToggle] = useState(false);
   const [isMobileChatOpen, setIsMobileChatOpen] = useState(false);
-    const [newErrorTeamID, setNewErrorTeamID] = useState("");
+  const [newErrorTeamID, setNewErrorTeamID] = useState("");
   const [inputVisibility, setInputVisibility] = useState({});
+  const [images, setImages] = useState([]);
+  const fileInputRef = useRef(null);
+  const [file, setFile] = useState(null);
+
 
   useEffect(() => {
     socket.current = io("http://localhost:5000");
@@ -42,10 +44,15 @@ const Chatlist = ({ teamId }) => {
       endRef.current?.scrollIntoView({ behavior: "smooth" });
     });
 
+    socket.current.on('new image', (data) => {
+      setImages(prevImages => [...prevImages, data.url]);
+    });
+
     return () => {
       socket.current.off("connect");
       socket.current.off("receive_message");
       socket.current.disconnect();
+      socket.current.off('new image');
     };
   }, [teamId]);
 
@@ -56,23 +63,60 @@ const Chatlist = ({ teamId }) => {
   };
 
   const sendMessage = async () => {
-    if (!text.trim()) return;
-
-    const userInput = text;
-    const room = selectedTeamId;
-    const sender = localStorage.getItem("userName") || "Guest";
-    const data = { message: userInput, room, sender };
-    socket.current.emit("sendMessage", data);
-
-    setChatHistory((prevChatHistory) => [
-      ...prevChatHistory,
-      { chatHistory: userInput, sender, createdAt: new Date().toISOString() },
-    ]);
-    setText("");
-
-    endRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (!text.trim() && !file) return; // Exit early if both text and file are empty
+  
+    if (file) {
+      // Handle file upload
+      const formData = new FormData();
+      formData.append('image', file);
+  
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.post('http://localhost:5000/upload', formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+  
+        if (response.data.success) {
+          const imageUrl = response.data.url;
+  
+          const room = selectedTeamId;
+          const sender = localStorage.getItem('userName') || 'Guest';
+          const data = { url: imageUrl, room, sender, type: 'image' }; // Include type: 'image' for image messages
+  
+          socket.current.emit('sendMessage', data);
+  
+          // Update chat history with the sent message
+          setChatHistory((prevChatHistory) => [
+            ...prevChatHistory,
+            { chatHistory: { type: 'image', data: imageUrl }, sender, createdAt: new Date().toISOString() },
+          ]);
+        }
+      } catch (error) {
+        console.error('Error uploading image:', error);
+      }
+    } else {
+      // Handle text message
+      const userInput = text;
+      const room = selectedTeamId;
+      const sender = localStorage.getItem('userName') || 'Guest';
+      const data = { message: userInput, room, sender, type: 'text' };
+  
+      socket.current.emit('sendMessage', data);
+  
+      // Update chat history with the sent message
+      setChatHistory((prevChatHistory) => [
+        ...prevChatHistory,
+        { chatHistory: { type: 'text', data: userInput }, sender, createdAt: new Date().toISOString() },
+      ]);
+    }
+  
+    setText(''); // Clear input field after sending
+    endRef.current?.scrollIntoView({ behavior: 'smooth' }); // Scroll to bottom of chat
   };
-
+  
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
@@ -92,6 +136,7 @@ const Chatlist = ({ teamId }) => {
         params: { teamId },
       });
       setChatHistory(response.data);
+      console.log("res",chatHistory)
     } catch (error) {
       console.error("Error fetching team chat:", error);
     }
@@ -152,10 +197,9 @@ const Chatlist = ({ teamId }) => {
     }
   };
 
-
   const handleChatSelect = () => {
     setIsMobileChatOpen(true);
-    console.log("mobilechat")
+    console.log("mobilechat");
   };
 
   const handleteamClick = (teamId) => {
@@ -188,6 +232,48 @@ const Chatlist = ({ teamId }) => {
     }));
     setNewErrorTeamID(teamId);
   };
+  const handleFileChange = async (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('image', file);
+
+  
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.post("http://localhost:5000/upload", formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data'
+          },
+        });
+  
+        if (response.data.success) {
+          console.log("Image URL:", response.data.url);
+          // Handle further logic (e.g., sending the URL via socket.io)
+        }
+      } catch (error) {
+        console.log("Error uploading image:", error);
+      }
+    }
+  };
+
+  const handleFilesChange = (e) => {
+    setFile(e.target.files[0]);
+    console.log('file', file)
+  };
+  
+  
+const deleteChat = async()=>{
+  try{
+    const response =  await axios.delete('http://localhost:5000/delete')
+  }
+  catch(error){
+    console.log(error)
+  }
+}
+
+
 
   return (
     <div className="fullChat">
@@ -200,7 +286,7 @@ const Chatlist = ({ teamId }) => {
             {error.teamError.length < 1 ? (
               <p>Empty error</p>
             ) : (
-              <ul className="teamLists" >
+              <ul className="teamLists">
                 <li onClick={() => handleChatSelect()}>{error.teamError}</li>
               </ul>
             )}
@@ -209,9 +295,6 @@ const Chatlist = ({ teamId }) => {
       </div>
 
       <div className="chatList">
-      {/* <div className={` ${isMobileChatOpen ? 'hello' : 'chatList' }`}> */}
- 
-
         <div className="FirstDiv">
           <UserInfo />
 
@@ -229,17 +312,19 @@ const Chatlist = ({ teamId }) => {
           </div>
 
           {teams.map((team) => (
-            <div key={team._id} className="item" >
+            <div key={team._id} className="item">
               <img src="./avatar.png" alt="avatar" />
               <div className="texts">
-              <div className="teamDiv">
-                <span onClick={() => handleteamClick(team._id)} className="teamName">{team.teamName} </span><button onClick={() => toggleInputVisibility(team._id)} className="addTeamBtn">
+                <div className="teamDiv">
+                  <span onClick={() => handleteamClick(team._id)} className="teamName">
+                    {team.teamName}
+                  </span>
+                  <button onClick={() => toggleInputVisibility(team._id)} className="addTeamBtn">
                     {inputVisibility[team._id] ? <h2>-</h2> : <h2>+</h2>}
                   </button>
-                  </div>
+                </div>
                 <div className="chatSnippet">
                   recent messages
-                 
                 </div>
                 {inputVisibility[team._id] && (
                   <div className="newTeamError">
@@ -255,15 +340,13 @@ const Chatlist = ({ teamId }) => {
 
       {addMode && <Adduser />}
       <div className={`chatHistory ${isMobileChatOpen ? 'mobile-open' : 'mobilechatHistory'}`}>
-      
-      {selectedTeamId ? (
+        {selectedTeamId ? (
           <div className="chat">
             <div className="top">
-           
               <div className="user">
-              <button onClick={() => setIsMobileChatOpen(false)} className="chatBackButton">
-      <FontAwesomeIcon icon={faAngleLeft}  className="angleLeft"/>
-      </button>
+                <button onClick={() => setIsMobileChatOpen(false)} className="chatBackButton">
+                  <FontAwesomeIcon icon={faAngleLeft} className="angleLeft" />
+                </button>
                 <img src="./avatar.png" alt="" />
                 <div className="texts">
                   <span>{userName}</span>
@@ -271,8 +354,8 @@ const Chatlist = ({ teamId }) => {
                 </div>
               </div>
               <div className="icons">
-              <FontAwesomeIcon icon={faEllipsisH} />
-              <FontAwesomeIcon icon={faVideoCamera} />                
+                <FontAwesomeIcon icon={faEllipsisH} />
+                <FontAwesomeIcon icon={faVideoCamera} />
               </div>
             </div>
             <div className="center">
@@ -284,24 +367,44 @@ const Chatlist = ({ teamId }) => {
                 </div>
               ) : (
                 chatHistory.map((chat) => (
+                  
                   <div
                     key={chat._id}
                     className={`message ${chat.sender !== userName ? "message" : "own"}`}
                   >
+                  {
+                    chat.chatHistory.type == 'text'?
+                  <div>
                     <img src="./avatar.png" alt="avatar" />
                     <div className="texts userTxt">
-                      <p>{chat.chatHistory}</p>
+                      <p>{chat.chatHistory.data}</p>
                       <span>{new Date(chat.createdAt).toLocaleString()}</span>
                     </div>
+                    </div>
+                    :  <div>
+                    <img src="./avatar.png" alt="avatar" />
+                    <div className="texts userTxt">
+                      <img src={chat.chatHistory.data} alt="Image" />
+                      <span>{new Date(chat.createdAt).toLocaleString()}</span>
+                    </div>
+                    </div>}
                   </div>
                 ))
               )}
               <div ref={endRef}></div>
             </div>
             <div className="bottom">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                ref={fileInputRef}
+                style={{ display: 'none' }}
+              />
               <div className="icons">
                 <img src="./img.png" alt="" />
-                <img src="./camera.png" alt="" />
+                <input type="file" onChange={handleFilesChange} accept="image/*" />
+                {/* <img src="./camera.png" alt="" onClick={() => fileInputRef.current.click()} /> */}
                 <img src="./mic.png" alt="" />
               </div>
               <input
@@ -326,17 +429,25 @@ const Chatlist = ({ teamId }) => {
               </div>
               <button className="sendButton" onClick={sendMessage}>
                 Send
+              </button> <button className="sendButton" onClick={handleFileChange}>
+                Send Image
               </button>
             </div>
           </div>
         ) : (
           <div className="emptyDiv2">
-            <div className="emptyChat">
-              {/* <h3>This chat is currently empty</h3> */}
-            </div>
+            <div className="emptyChat"></div>
           </div>
         )}
       </div>
+
+      <div id="chat">
+        {images.map((url, index) => (
+          <img key={index} src={url} alt={`Uploaded ${index}`} />
+        ))}
+      </div>
+
+      <button onClick={deleteChat}>Delete</button>
     </div>
   );
 };

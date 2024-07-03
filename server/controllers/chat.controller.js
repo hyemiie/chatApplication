@@ -85,6 +85,16 @@ console.log(errorId)
 };
 
 
+const deleteChat = async(req, res)=>{
+  try{
+    await Chat.deleteMany({})
+    console.log("record deleted")
+  }
+  catch(error){
+    console.log('error', error)
+  }
+}
+
 module.exports = {  
-  getTeamChat, addtoChat
+  getTeamChat, addtoChat,deleteChat
 }
