@@ -394,19 +394,20 @@ const deleteChat = async()=>{
               <div ref={endRef}></div>
             </div>
             <div className="bottom">
-              <input
+              {/* <input
                 type="file"
                 accept="image/*"
                 onChange={handleFileChange}
                 ref={fileInputRef}
                 style={{ display: 'none' }}
-              />
-              <div className="icons">
+              /> */}
+              {/* <div className="icons"> */}
+                {/* <img src="./img.png" alt="" /> */}
+                {/* <label htmlFor="fileInput" className="custom-file-upload">
                 <img src="./img.png" alt="" />
-                <input type="file" onChange={handleFilesChange} accept="image/*" />
-                {/* <img src="./camera.png" alt="" onClick={() => fileInputRef.current.click()} /> */}
-                <img src="./mic.png" alt="" />
-              </div>
+</label> */}
+                <input type="file" onChange={handleFilesChange} accept="image/*"  className="imageInput"/>
+              {/* </div> */}
               <input
                 type="text"
                 placeholder="Type a message..."
@@ -414,6 +415,7 @@ const deleteChat = async()=>{
                 onKeyDown={handleKeyPress}
                 value={text}
                 id="userInput"
+                className="userMessage"
               />
               <div className="emoji">
                 <img
@@ -429,8 +431,6 @@ const deleteChat = async()=>{
               </div>
               <button className="sendButton" onClick={sendMessage}>
                 Send
-              </button> <button className="sendButton" onClick={handleFileChange}>
-                Send Image
               </button>
             </div>
           </div>
@@ -447,7 +447,7 @@ const deleteChat = async()=>{
         ))}
       </div>
 
-      <button onClick={deleteChat}>Delete</button>
+      {/* <button onClick={deleteChat}>Delete</button> */}
     </div>
   );
 };

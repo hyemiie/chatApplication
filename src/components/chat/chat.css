@@ -127,26 +127,29 @@
     padding: 2px;
     display: flex;
     align-items: center;
-    /* justify-content: space-between; */
     border-top: 1px solid grey;
-    gap: 1;
     margin-bottom: auto;
     background-color: rgba(226, 222, 226, 0.5);
     height: 60px;
     position: sticky;
   }
 
-  input {
+  .userMessage {
     flex: 1;
-    background-color: rgba(234, 233, 234, 0.5);
+    background-color: rgba(212, 211, 212, 0.5);
     outline: none;
     border: none;
     color: white;
-    padding: 18px;
+    padding: 10px;
     border-radius: 10px;
     font-size: 16px;
   }
 
+
+  .imageInput{
+    background-color: rgb(243, 243, 238) ;
+  }
+  
   .sendButton {
     background-color: rgb(184, 95, 231);
     color: white;
@@ -180,4 +183,17 @@
   }
 }
 
+/* 
+.custom-file-upload {
+  display: inline-block;
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.custom-file-upload img {
+  width: 24px;
+  height: 24px;
+} */
  
