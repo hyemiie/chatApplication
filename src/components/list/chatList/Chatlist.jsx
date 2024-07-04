@@ -6,8 +6,12 @@ import { io } from "socket.io-client";
 import EmojiPicker from "emoji-picker-react";
 import "../../chat/chat.css";
 import UserInfo from "../userInfo/UserInfo";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisH, faVideoCamera, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faEllipsisH,
+  faVideoCamera,
+  faAngleLeft,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Chatlist = ({ teamId }) => {
   const [addMode, setAddMode] = useState(false);
@@ -28,7 +32,7 @@ const Chatlist = ({ teamId }) => {
   const [images, setImages] = useState([]);
   const fileInputRef = useRef(null);
   const [file, setFile] = useState(null);
-
+  const [userSearch, setuserSearch] = useState("");
 
   useEffect(() => {
     socket.current = io("http://localhost:5000");
@@ -44,15 +48,15 @@ const Chatlist = ({ teamId }) => {
       endRef.current?.scrollIntoView({ behavior: "smooth" });
     });
 
-    socket.current.on('new image', (data) => {
-      setImages(prevImages => [...prevImages, data.url]);
+    socket.current.on("new image", (data) => {
+      setImages((prevImages) => [...prevImages, data.url]);
     });
 
     return () => {
       socket.current.off("connect");
       socket.current.off("receive_message");
       socket.current.disconnect();
-      socket.current.off('new image');
+      socket.current.off("new image");
     };
   }, [teamId]);
 
@@ -64,59 +68,75 @@ const Chatlist = ({ teamId }) => {
 
   const sendMessage = async () => {
     if (!text.trim() && !file) return; // Exit early if both text and file are empty
-  
+
     if (file) {
       // Handle file upload
       const formData = new FormData();
-      formData.append('image', file);
-  
+      formData.append("image", file);
+
       try {
-        const token = localStorage.getItem('token');
-        const response = await axios.post('http://localhost:5000/upload', formData, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data',
-          },
-        });
-  
+        const token = localStorage.getItem("token");
+        const response = await axios.post(
+          "http://localhost:5000/upload",
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        console.log("response", response);
+
         if (response.data.success) {
           const imageUrl = response.data.url;
-  
+
           const room = selectedTeamId;
-          const sender = localStorage.getItem('userName') || 'Guest';
-          const data = { url: imageUrl, room, sender, type: 'image' }; // Include type: 'image' for image messages
-  
-          socket.current.emit('sendMessage', data);
-  
+          const sender = localStorage.getItem("userName") || "Guest";
+          const data = { url: imageUrl, room, sender, type: "image" };
+          console.log("response", response);
+
+          socket.current.emit("sendMessage", data);
+          io.to(room).emit("new message");
+          alert("you have a new message");
+
           // Update chat history with the sent message
           setChatHistory((prevChatHistory) => [
             ...prevChatHistory,
-            { chatHistory: { type: 'image', data: imageUrl }, sender, createdAt: new Date().toISOString() },
+            {
+              chatHistory: { type: "image", data: imageUrl },
+              sender,
+              createdAt: new Date().toISOString(),
+            },
           ]);
         }
       } catch (error) {
-        console.error('Error uploading image:', error);
+        console.error("Error uploading image:", error);
       }
     } else {
       // Handle text message
       const userInput = text;
       const room = selectedTeamId;
-      const sender = localStorage.getItem('userName') || 'Guest';
-      const data = { message: userInput, room, sender, type: 'text' };
-  
-      socket.current.emit('sendMessage', data);
-  
+      const sender = localStorage.getItem("userName") || "Guest";
+      const data = { message: userInput, room, sender, type: "text" };
+
+      socket.current.emit("sendMessage", data);
+
       // Update chat history with the sent message
       setChatHistory((prevChatHistory) => [
         ...prevChatHistory,
-        { chatHistory: { type: 'text', data: userInput }, sender, createdAt: new Date().toISOString() },
+        {
+          chatHistory: { type: "text", data: userInput },
+          sender,
+          createdAt: new Date().toISOString(),
+        },
       ]);
     }
-  
-    setText(''); // Clear input field after sending
-    endRef.current?.scrollIntoView({ behavior: 'smooth' }); // Scroll to bottom of chat
+
+    setText(""); // Clear input field after sending
+    endRef.current?.scrollIntoView({ behavior: "smooth" }); // Scroll to bottom of chat
   };
-  
+
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
@@ -136,7 +156,7 @@ const Chatlist = ({ teamId }) => {
         params: { teamId },
       });
       setChatHistory(response.data);
-      console.log("res",chatHistory)
+      console.log("res", chatHistory);
     } catch (error) {
       console.error("Error fetching team chat:", error);
     }
@@ -214,11 +234,15 @@ const Chatlist = ({ teamId }) => {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.post("http://localhost:5000/addTeamError", data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.post(
+        "http://localhost:5000/addTeamError",
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       console.log(response);
     } catch (error) {
       console.log("error", error);
@@ -236,18 +260,21 @@ const Chatlist = ({ teamId }) => {
     const file = event.target.files[0];
     if (file) {
       const formData = new FormData();
-      formData.append('image', file);
+      formData.append("image", file);
 
-  
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.post("http://localhost:5000/upload", formData, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data'
-          },
-        });
-  
+        const response = await axios.post(
+          "http://localhost:5000/upload",
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+
         if (response.data.success) {
           console.log("Image URL:", response.data.url);
           // Handle further logic (e.g., sending the URL via socket.io)
@@ -260,20 +287,43 @@ const Chatlist = ({ teamId }) => {
 
   const handleFilesChange = (e) => {
     setFile(e.target.files[0]);
-    console.log('file', file)
+    console.log("file", file);
   };
-  
-  
-const deleteChat = async()=>{
-  try{
-    const response =  await axios.delete('http://localhost:5000/delete')
-  }
-  catch(error){
-    console.log(error)
-  }
-}
 
+  const deleteChat = async () => {
+    try {
+      const response = await axios.delete("http://localhost:5000/delete");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  const searchChat = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.get(`http://localhost:5000/getAllTeams`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: { teamId },
+      });
+      // setTeamErrors(response.data);
+      const searchedTeam = response.data.teams;
+      const userSearchUpdate = searchedTeam.filter((searched) =>
+        searched.teamName.includes(userSearch)
+      );
+      console.log("userSearchupdate", userSearchUpdate);
+
+      setTeams(userSearchUpdate)
+    } catch (error) {
+      console.error("Error fetching team chat:", error);
+    }
+  };
+
+  const Search = (e) => {
+    setuserSearch(e.target.value);
+    console.log("userSearch", userSearch);
+  };
 
   return (
     <div className="fullChat">
@@ -282,7 +332,11 @@ const deleteChat = async()=>{
           Go back
         </button>
         {teamErrors.map((error) => (
-          <div key={error._id} className="teamErrDiv" onClick={() => handleErrorClick(error._id)}>
+          <div
+            key={error._id}
+            className="teamErrDiv"
+            onClick={() => handleErrorClick(error._id)}
+          >
             {error.teamError.length < 1 ? (
               <p>Empty error</p>
             ) : (
@@ -300,9 +354,15 @@ const deleteChat = async()=>{
 
           <div className="search">
             <div className="searchBar">
-              <img src="/search.png" alt="search icon" />
-              <input type="text" placeholder="Search" />
-            </div>
+              <img src="/search.png" alt="search icon" onClick={searchChat} />
+              <input 
+  type="text" 
+  placeholder="Search" 
+  onChange={(event) => {
+    Search(event);
+    searchChat(event.target.value);
+  }} 
+/>            </div>
             <img
               src={addMode ? "./minus.png" : "./plus.png"}
               alt="toggle add mode"
@@ -316,20 +376,26 @@ const deleteChat = async()=>{
               <img src="./avatar.png" alt="avatar" />
               <div className="texts">
                 <div className="teamDiv">
-                  <span onClick={() => handleteamClick(team._id)} className="teamName">
+                  <span
+                    onClick={() => handleteamClick(team._id)}
+                    className="teamName"
+                  >
                     {team.teamName}
                   </span>
-                  <button onClick={() => toggleInputVisibility(team._id)} className="addTeamBtn">
+                  <button
+                    onClick={() => toggleInputVisibility(team._id)}
+                    className="addTeamBtn"
+                  >
                     {inputVisibility[team._id] ? <h2>-</h2> : <h2>+</h2>}
                   </button>
                 </div>
-                <div className="chatSnippet">
-                  recent messages
-                </div>
+                <div className="chatSnippet">recent messages</div>
                 {inputVisibility[team._id] && (
                   <div className="newTeamError">
                     <input id="newErrorName" />
-                    <button type="submit" onClick={addTeamError}>Add to List</button>
+                    <button type="submit" onClick={addTeamError}>
+                      Add to List
+                    </button>
                   </div>
                 )}
               </div>
@@ -339,12 +405,19 @@ const deleteChat = async()=>{
       </div>
 
       {addMode && <Adduser />}
-      <div className={`chatHistory ${isMobileChatOpen ? 'mobile-open' : 'mobilechatHistory'}`}>
+      <div
+        className={`chatHistory ${
+          isMobileChatOpen ? "mobile-open" : "mobilechatHistory"
+        }`}
+      >
         {selectedTeamId ? (
           <div className="chat">
             <div className="top">
               <div className="user">
-                <button onClick={() => setIsMobileChatOpen(false)} className="chatBackButton">
+                <button
+                  onClick={() => setIsMobileChatOpen(false)}
+                  className="chatBackButton"
+                >
                   <FontAwesomeIcon icon={faAngleLeft} className="angleLeft" />
                 </button>
                 <img src="./avatar.png" alt="" />
@@ -367,27 +440,36 @@ const deleteChat = async()=>{
                 </div>
               ) : (
                 chatHistory.map((chat) => (
-                  
                   <div
                     key={chat._id}
-                    className={`message ${chat.sender !== userName ? "message" : "own"}`}
+                    className={`message ${
+                      chat.sender !== userName ? "message" : "own"
+                    }`}
                   >
-                  {
-                    chat.chatHistory.type == 'text'?
-                  <div>
-                    <img src="./avatar.png" alt="avatar" />
-                    <div className="texts userTxt">
-                      <p>{chat.chatHistory.data}</p>
-                      <span>{new Date(chat.createdAt).toLocaleString()}</span>
-                    </div>
-                    </div>
-                    :  <div>
-                    <img src="./avatar.png" alt="avatar" />
-                    <div className="texts userTxt">
-                      <img src={`http://localhost:5000${chat.chatHistory.data}`} alt="Image" />
-                      <span>{new Date(chat.createdAt).toLocaleString()}</span>
-                    </div>
-                    </div>}
+                    {chat.chatHistory.type == "text" ? (
+                      <div>
+                        <img src="./avatar.png" alt="avatar" />
+                        <div className="texts userTxt">
+                          <p>{chat.chatHistory.data}</p>
+                          <span>
+                            {new Date(chat.createdAt).toLocaleString()}
+                          </span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div>
+                        <img src="./avatar.png" alt="avatar" />
+                        <div className="texts userTxt">
+                          <img
+                            src={`http://localhost:5000${chat.chatHistory.data}`}
+                            alt="Image"
+                          />
+                          <span>
+                            {new Date(chat.createdAt).toLocaleString()}
+                          </span>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ))
               )}
@@ -402,11 +484,16 @@ const deleteChat = async()=>{
                 style={{ display: 'none' }}
               /> */}
               {/* <div className="icons"> */}
-                {/* <img src="./img.png" alt="" /> */}
-                {/* <label htmlFor="fileInput" className="custom-file-upload">
+              {/* <img src="./img.png" alt="" /> */}
+              {/* <label htmlFor="fileInput" className="custom-file-upload">
                 <img src="./img.png" alt="" />
 </label> */}
-                <input type="file" onChange={handleFilesChange} accept="image/*"  className="imageInput"/>
+              <input
+                type="file"
+                onChange={handleFilesChange}
+                accept="image/*"
+                className="imageInput"
+              />
               {/* </div> */}
               <input
                 type="text"

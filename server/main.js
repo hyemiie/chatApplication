@@ -123,6 +123,7 @@ io.on("connection", (socket) => {
 
       // Save the updated TeamError document
       await teamError.save();
+      res.status(200).json({message:`hello ${sender} sent a message`});
 
       io.to(errorId).emit("message", newChat);
       console.log("Message added successfully", newChat);
