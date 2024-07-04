@@ -314,7 +314,7 @@ const Chatlist = ({ teamId }) => {
       );
       console.log("userSearchupdate", userSearchUpdate);
 
-      setTeams(userSearchUpdate)
+      setTeams(userSearchUpdate);
     } catch (error) {
       console.error("Error fetching team chat:", error);
     }
@@ -355,14 +355,15 @@ const Chatlist = ({ teamId }) => {
           <div className="search">
             <div className="searchBar">
               <img src="/search.png" alt="search icon" onClick={searchChat} />
-              <input 
-  type="text" 
-  placeholder="Search" 
-  onChange={(event) => {
-    Search(event);
-    searchChat(event.target.value);
-  }} 
-/>            </div>
+              <input
+                type="text"
+                placeholder="Search"
+                onChange={(event) => {
+                  Search(event);
+                  searchChat(event.target.value);
+                }}
+              />{" "}
+            </div>
             <img
               src={addMode ? "./minus.png" : "./plus.png"}
               alt="toggle add mode"
@@ -389,6 +390,10 @@ const Chatlist = ({ teamId }) => {
                     {inputVisibility[team._id] ? <h2>-</h2> : <h2>+</h2>}
                   </button>
                 </div>
+                {/* {!inputVisibility[team._id] ? 
+  <div className="chatSnippet">recent messages</div>
+  : null
+} */}
                 <div className="chatSnippet">recent messages</div>
                 {inputVisibility[team._id] && (
                   <div className="newTeamError">

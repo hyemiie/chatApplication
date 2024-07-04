@@ -173,12 +173,12 @@
 
   .emoji {
     padding: 10px;
-    position: relative;
+    /* position: relative; */
 
     .picker {
       position: absolute;
-      bottom: 0;
-      left: 40px;
+      bottom: 60px;
+      right: 10px;
     }
   }
 }

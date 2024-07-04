@@ -98,6 +98,24 @@
     width: 60%;
 }
 
+.newTeamError{
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  margin-top: -20px;
+
+  input{
+    border: none;
+    outline: none;
+    border-bottom: 1px solid black;
+  }
+
+  button{
+    padding: 5px;
+  }
+}
+
 .search {
     display: flex;
     align-items: center;
