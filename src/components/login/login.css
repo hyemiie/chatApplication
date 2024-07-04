@@ -21,10 +21,9 @@
 
       input {
         padding: 20px;
-        border: none;
+        border: 1px solid grey;
         outline: none;
-        background-color: rgba(17, 25, 40, 0.6);
-        color: white;
+        color: rgb(38, 35, 35);
         border-radius: 5px;
       }
 

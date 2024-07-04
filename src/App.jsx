@@ -26,6 +26,7 @@ const App = () => {
       {user ? (
         <>
           <List />
+          <Login/>
           {/* <Chat /> */}
           {/* <Detail /> */}
         </>

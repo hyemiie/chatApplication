@@ -16,6 +16,9 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
+  const [selectedRole, setselectedRole] = useState("");
+  const [roleKey, setroleKey] = useState("");
+  const [checkRole, setcheckRole] = useState(false);
 
   const handleAvatar = (e) => {
     if (e.target.files[0]) {
@@ -36,10 +39,16 @@ const Login = () => {
 
     const password = document.getElementById("signUpPassword").value;
     const email = document.getElementById("signUpemail").value;
+    const role = selectedRole;
+    
+    console.log(role)
 
     const data = {
       password,
       email,
+      role,
+      roleKey
+
     };
     console.log("Signup data:", data);
 
@@ -60,16 +69,18 @@ const Login = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    const username = document.getElementById("username").value;
+    const username = document.getElementById("SignUpusername").value;
     const password = document.getElementById("password").value;
     const email = document.getElementById("email").value;
-    const role = document.getElementById("role").value;
+    const role = selectedRole;
+    console.log('signup role', role)
 
     const data = {
       username,
       password,
       email,
       role,
+      roleKey,
     };
 
     try {
@@ -85,6 +96,15 @@ const Login = () => {
     }
   };
 
+  const handleChange = (event) => {
+    setselectedRole(event.target.value);
+    selectedRole =="Employee"? setcheckRole(true):setcheckRole(false)
+    console.log (checkRole) };
+
+    const handleKeyInput = (event) => {
+      setroleKey(event.target.value);
+      console.log (roleKey) };
+
   return (
     <div className="login">
       <div className="item">
@@ -97,11 +117,27 @@ const Login = () => {
             id="signUpemail"
           />
           <input
+            type="text"
+            placeholder="Username"
+            name="username"
+            id="username"
+          />
+          <input
             type="password"
             placeholder="Password"
             name="password"
             id="signUpPassword"
           />
+         
+
+          {checkRole ? <input placeholder="enter Executive Key" id ="roleKey" type="password" onChange={handleKeyInput}/>:<input placeholder="enter Employee Key" id="empRoleKey" type="password" onChange={handleKeyInput}/> }
+ <div>
+            <label>Role</label>
+            <select value={selectedRole} onChange={handleChange}>
+              <option value="Executive">Executive</option>
+              <option value="Employee">Employee</option>
+            </select>{" "}
+          </div>
           <button type="submit" disabled={loading}>
             {loading ? "Loading" : "Sign In"}
           </button>
@@ -111,21 +147,11 @@ const Login = () => {
       <div className="item">
         <h2>Create an Account</h2>
         <form onSubmit={handleSignup}>
-          {/* <label htmlFor="file">
-            <img src={avatar.url || "./avatar.png"} alt="" />
-            Upload an image
-          </label>
-          <input
-            type="file"
-            id="file"
-            style={{ display: "none" }}
-            onChange={handleAvatar}
-          /> */}
           <input
             type="text"
             placeholder="Username"
             name="username"
-            id="username"
+            id="SignUpusername"
           />
           <input type="text" placeholder="Email" name="email" id="email" />
           <input
@@ -135,6 +161,13 @@ const Login = () => {
             id="password"
           />
           <input type="text" name="role" id="role" />
+          <div>
+            <label>Role</label>
+            <select value={selectedRole} onChange={handleChange}>
+              <option value="Executive">Executive</option>
+              <option value="Employee">Employee</option>
+            </select>{" "}
+          </div>
 
           <button disabled={loading}>{loading ? "Loading" : "Sign Up"}</button>
         </form>
@@ -146,8 +179,6 @@ const Login = () => {
           <input type="text" name="role" id="role" />
           <button type="submit">Send</button>
         </form> */}
-
-        
       </div>
     </div>
   );

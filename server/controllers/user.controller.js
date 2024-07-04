@@ -10,11 +10,10 @@ const jwt = require("jsonwebtoken");
 const secretKey = "thisisthesecretkey";
 
 const Login = async (req, res) => {
-  const { email, password } = req.body;
-  console.log(email, password);
+  const { email, password, role, roleKey } = req.body;
+  console.log(email, password, role, roleKey);
 
   try {
-    // Find user by email
     const user = await UserSchema.findOne({ email });
     if (!user) {
       console.log("No user");
@@ -23,17 +22,23 @@ const Login = async (req, res) => {
     }
 
     if (password == user.password) {
+      if(role == user.role)
+        {
+       console.log('ok')
+       const token = jwt.sign({ userId: user._id, email: user.email }, secretKey);
+       res.status(200).json({ token });
+        }  
+        else{
+          console.log('oop')
+          return res.status(400).json({ error: "Wrong Role" });
+
+        }
       // console.log("Yes");
     } else {
       console.log("Password Invalid");
       return res.status(401).json({ error: "Invalid password" });
     }
 
-    // Generate JWT token
-    const token = jwt.sign({ userId: user._id, email: user.email }, secretKey);
-
-    // Return token as response
-    res.status(200).json({ token });
   } catch (error) {
     console.error("Login error:", error);
     res.status(500).json({ error: "Internal server error" });
