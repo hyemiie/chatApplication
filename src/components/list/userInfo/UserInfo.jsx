@@ -21,12 +21,14 @@ const UserInfo = () => {
         },
       });
 console.log('token', token)
-      const username = response.data.username;
+      const username = response.data.signedInUser.username;
+      console.log("response", response)
       // const decoded = jwtDecode(token)
 
       // const userId = decoded.userId
 
-      localStorage.setItem('userName', response.data.username)
+      localStorage.setItem('userName', response.data.signedInUser.username)
+      localStorage.setItem('userRole', response.data.signedInUser.role)
       // console.log(userId)
       // console.log(decoded)
       

@@ -175,7 +175,14 @@
 
   .texts{
     height: fit-content;
+    color: rgb(81, 69, 89);
 
+  }
+
+  .delChat{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   
   .item {

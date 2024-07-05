@@ -72,7 +72,7 @@ const getCurrentUser = async (req, res) => {
     const username = signedInUser.username;
     console.log("username", username);
 
-    res.status(200).json({ username });
+    res.status(200).json({ signedInUser });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });

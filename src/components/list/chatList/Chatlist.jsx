@@ -11,6 +11,7 @@ import {
   faEllipsisH,
   faVideoCamera,
   faAngleLeft,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Chatlist = ({ teamId }) => {
@@ -33,6 +34,7 @@ const Chatlist = ({ teamId }) => {
   const fileInputRef = useRef(null);
   const [file, setFile] = useState(null);
   const [userSearch, setuserSearch] = useState("");
+  const [userRole, setUserRole] = useState("");
 
   useEffect(() => {
     socket.current = io("http://localhost:5000");
@@ -180,8 +182,11 @@ const Chatlist = ({ teamId }) => {
 
     const checkSignedUser = () => {
       const Username = localStorage.getItem("userName");
+      const userRole = localStorage.getItem("userRole");
       setUsername(Username);
+      setUserRole(userRole);
       console.log("userNames", Username);
+      console.log("userRole", userRole);
     };
 
     getTeams();
@@ -383,12 +388,16 @@ const Chatlist = ({ teamId }) => {
                   >
                     {team.teamName}
                   </span>
-                  <button
-                    onClick={() => toggleInputVisibility(team._id)}
-                    className="addTeamBtn"
-                  >
-                    {inputVisibility[team._id] ? <h2>-</h2> : <h2>+</h2>}
-                  </button>
+                  {userRole == "Executive" ? (
+                    <button
+                      onClick={() => toggleInputVisibility(team._id)}
+                      className="addTeamBtn"
+                    >
+                      {inputVisibility[team._id] ? <h2>-</h2> : <h2>+</h2>}
+                    </button>
+                  ) : (
+                    ""
+                  )}
                 </div>
                 {/* {!inputVisibility[team._id] ? 
   <div className="chatSnippet">recent messages</div>
@@ -455,7 +464,13 @@ const Chatlist = ({ teamId }) => {
                       <div>
                         <img src="./avatar.png" alt="avatar" />
                         <div className="texts userTxt">
-                          <p>{chat.chatHistory.data}</p>
+                          <div className="delChat">
+                            <p>{chat.chatHistory.data} </p>
+                            {userRole == "Executive" ? 
+                            <FontAwesomeIcon icon={faTrash} />
+                             :""}
+                          </div>
+
                           <span>
                             {new Date(chat.createdAt).toLocaleString()}
                           </span>
