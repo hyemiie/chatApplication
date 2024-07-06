@@ -13,6 +13,7 @@ import {
   faAngleLeft,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
+import { deleteModel } from "mongoose";
 
 const Chatlist = ({ teamId }) => {
   const [addMode, setAddMode] = useState(false);
@@ -35,6 +36,7 @@ const Chatlist = ({ teamId }) => {
   const [file, setFile] = useState(null);
   const [userSearch, setuserSearch] = useState("");
   const [userRole, setUserRole] = useState("");
+  const [messageID, setMessageID] = useState("");
 
   useEffect(() => {
     socket.current = io("http://localhost:5000");
@@ -296,12 +298,28 @@ const Chatlist = ({ teamId }) => {
   };
 
   const deleteChat = async () => {
+    if (!messageID) return; // Exit if no messageId is set
     try {
-      const response = await axios.delete("http://localhost:5000/delete");
+      const response = await axios.delete(`http://localhost:5000/delete`, {
+        params: { messageID, selectedTeamId},
+      });
+      console.log("deleted");
+      alert("Message deleted");
+      setMessageID(null);
+      setChatHistory(response.data.updatedChat)
+      console.log("response", response)
     } catch (error) {
       console.log(error);
+      alert("Failed to delete message");
     }
   };
+
+
+  useEffect(() => {
+    if (messageID) {
+      deleteChat();
+    }
+  }, [messageID]);
 
   const searchChat = async () => {
     try {
@@ -466,9 +484,18 @@ const Chatlist = ({ teamId }) => {
                         <div className="texts userTxt">
                           <div className="delChat">
                             <p>{chat.chatHistory.data} </p>
-                            {userRole == "Executive" ? 
-                            <FontAwesomeIcon icon={faTrash} />
-                             :""}
+                            {userRole == "Executive" ? (
+                              <FontAwesomeIcon
+                icon={faTrash}
+                onClick={() => {
+                  if (window.confirm("Are you sure you want to delete this message?")) {
+                    setMessageID(chat._id);
+                  }
+                }}
+              />
+                            ) : (
+                              ""
+                            )}
                           </div>
 
                           <span>

@@ -85,15 +85,36 @@ console.log(errorId)
 };
 
 
-const deleteChat = async(req, res)=>{
-  try{
-    await Chat.deleteMany({})
-    console.log("record deleted")
+const deleteChat = async (req, res) => {
+  const messageId = req.query.messageID;
+  const teamId = req.query.selectedTeamId;
+  console.log("teamId", teamId)
+  console.log("Attempting to delete message with ID:", messageId);
+
+  try {
+    const result = await Chat.deleteOne({ _id: messageId });
+
+    if (result.deletedCount === 1) {
+      console.log("Message deleted successfully");
+      
+    
+      const updatedChat = await Chat.find({errorId:teamId }).sort({ createdAt: 1 });
+
+      res.status(200).json({ 
+        message: "Chat deleted successfully",
+        updatedChat: updatedChat
+      });
+      console.log("Done");
+
+    } else {
+      console.log("Message not found");
+      res.status(404).json({ error: "Message not found" });
+    }
+  } catch (error) {
+    console.log('Error deleting message:', error);
+    res.status(500).json({ error: "Error deleting chat", details: error.message });
   }
-  catch(error){
-    console.log('error', error)
-  }
-}
+};
 
 module.exports = {  
   getTeamChat, addtoChat,deleteChat
