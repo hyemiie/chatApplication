@@ -514,6 +514,18 @@ const Chatlist = ({ teamId }) => {
                           <span>
                             {new Date(chat.createdAt).toLocaleString()}
                           </span>
+                          {userRole == "Executive" ? (
+                              <FontAwesomeIcon
+                icon={faTrash}
+                onClick={() => {
+                  if (window.confirm("Are you sure you want to delete this message?")) {
+                    setMessageID(chat._id);
+                  }
+                }}
+              />
+                            ) : (
+                              ""
+                            )}
                         </div>
                       </div>
                     )}
