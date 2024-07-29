@@ -4,6 +4,7 @@ import Detail from "./components/detail/Detail";
 import Login from "./components/login/Login";
 import Notification from "./components/notification/Notification";
 import { useEffect, useState } from "react";
+import Landing from "./components/landing/Landing";
 const App = () => {
   const [user, setUser] = useState(false);
 
@@ -25,8 +26,9 @@ const App = () => {
     <div className="container">
       {user ? (
         <>
-          <List />
-          <Login/>
+          {/* <List /> */}
+          <Landing/>
+          {/* <Login/> */}
           {/* <Chat /> */}
           {/* <Detail /> */}
         </>
