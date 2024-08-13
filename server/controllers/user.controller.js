@@ -103,9 +103,22 @@ const Register = async (req, res) => {
   }
 };
 
+
+const getAllUsers = async (req, res) => {
+  try {
+    const AllUsers = await UserSchema.find({});
+    console.log("AllUsers", AllUsers);
+    res.status(200).send({ AllUsers }); // Sending as an object with a key "AllUsers"
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).send({ error: "Failed to fetch users" });
+  }
+};
+
 // eslint-disable-next-line no-undef
 module.exports = {
   Login,
   Register,
   getCurrentUser,
+  getAllUsers
 };

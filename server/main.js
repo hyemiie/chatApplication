@@ -13,7 +13,7 @@ const fs = require('fs');
 
 const Chat = require("./models/chat.model");
 const TeamError = require("./models/team.model");
-const { Register, getCurrentUser } = require("./controllers/user.controller");
+const { Register, getCurrentUser, getAllUsers } = require("./controllers/user.controller");
 const { Login } = require("./controllers/user.controller");
 const { GetAllTeams, AddTeam } = require("./controllers/team.controller");
 const { getTeamChat, addtoChat, deleteChat } = require("./controllers/chat.controller");
@@ -144,6 +144,7 @@ app.post("/addChat", addtoChat);
 app.get('/teamErrors', GetTeamErrors);
 app.post('/addTeamError', AddTeamError);
 app.delete('/delete', deleteChat)
+app.get('/allUsers', getAllUsers)
 
 const PORT = 5000;
 server.listen(PORT, () => {
