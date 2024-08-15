@@ -1,0 +1,55 @@
+.landinPage{
+    /* background-color: rgb(227, 225, 227); */
+ 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    height: 90vh;
+
+.landingDiv{
+    width: 50%;
+    /* background-color: rgb(161, 224, 224); */
+
+    p{
+        font-size: 40px;
+        color: rgb(41, 39, 39);
+        font-weight: 900;
+        /* background-color: rebeccapurple; */
+
+    }
+
+    h3{
+        font-weight: 400;
+        font-size: 20px;
+    }
+
+    button{
+        background-color: plum;
+        border: none;
+        margin-top: 30px;
+        a{
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            font-size: 30px;
+            padding: 20px;
+            height: 40px;
+        }
+    }
+
+}
+}
+
+.landingImg{
+    background-image: url(../../Images/teamDiscussion.gif);
+    height: 500px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat
+    ;
+    
+}
+
+.imgDiv{
+    width: 50%;
+}

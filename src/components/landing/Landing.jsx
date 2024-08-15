@@ -1,13 +1,22 @@
 import React from 'react'
+import './landing.css'
+import Navbar from '../Navbar/Navbar'
 
 const Landing = () => {
   return (
     <div>
-        <div>
-            <p>All team discussions, in one room</p>
-            <button> <a href='/'>See more</a></button>
+        <Navbar/>
+
+    <div className='landinPage'>
+        <div className='landingDiv'>
+            <p className='landingParagraph'>All team discussions, in one room</p>
+            <h3>Great software that allows you to communicate from anywhere at anytime</h3>
+            <button className='landingBtn'> <a href='/lists'>See more</a></button>
         </div>
-        <div>landingImage</div>
+        <div className='imgDiv'>   
+         <div className='landingImg'></div>
+</div>
+    </div>
     </div>
   )
 }

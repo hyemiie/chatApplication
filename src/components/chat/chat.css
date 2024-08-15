@@ -6,6 +6,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+  width: 100%;
 
   .top {
     padding: 20px;
@@ -37,17 +38,12 @@
       cursor: pointer;
     }
   }
-  img {
-    width: 60px;
-
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
+ 
 
   .texts {
     display: flex;
     flex-direction: column;
+    text-transform: capitalize;
     gap: 5px;
 
     span {
@@ -70,29 +66,34 @@
     gap: 20px;
 
     .message {
-      max-width: 70%;
+      max-width: 60%;
       display: flex;
       gap: 20px;
       color:white;
 
+      flex-direction: column-reverse;
+
 
       &.own {
         align-self: flex-end;
+        b
 
         .texts {
           p {
             background-color: #f6f0fc;
             color: rgb(78, 77, 74);
+            min-width: 100px;
           }
         }
       }
 
-      img {
+      /* img {
         width: 30px;
         height: 30px;
         border-radius: 50%;
         object-fit: cover;
-      }
+        background-color: tomato;
+      } */
       .texts {
         flex: 1;
         display: flex;
@@ -101,10 +102,10 @@
 
 
         img {
-          width: 100%;
+          /* width: 100%;
           height: 300px;
           border-radius: 10px;
-          object-fit: cover;
+          object-fit: cover; */
         }
 
         p {
@@ -132,6 +133,7 @@
     background-color: rgba(226, 222, 226, 0.5);
     height: 60px;
     position: sticky;
+    width: 100%;
   }
 
   .userMessage {
@@ -146,8 +148,39 @@
   }
 
 
+  .textsDiv{
+    /* font-size: 20px; */
+    display: flex;
+    flex-direction: column;
+    align-items:  baseline;
+    max-width: 90%;
+    color: black;
+    /* background-color: #f6f0fc;     */
+    padding: 10px;
+
+   
+  }
+
+  .chatSender{
+    font-size: 16px;
+    font-weight: 900;
+  }
+
+  .chatImage {
+    width: 80%;
+    height: 100%;
+
+    object-fit: cover;
+  }
+  /* .chatImage{
+    width: 300px !important;
+  } */
+
   .imageInput{
     background-color: rgb(243, 243, 238) ;
+    width: 20%;
+    font-size: 10px;
+    padding-right: 20px;
   }
   
   .sendButton {

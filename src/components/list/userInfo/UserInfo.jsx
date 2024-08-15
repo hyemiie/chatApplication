@@ -47,11 +47,11 @@ console.log('token', token)
         <img src="./avatar.png" alt="" />
         <h2>{username}</h2>
       </div>
-      <div className="icons">
+      {/* <div className="icons">
       <FontAwesomeIcon icon={faEllipsisH} />
       <FontAwesomeIcon icon={faVideoCamera} />
        
-      </div>
+      </div> */}
     </div>
   );
 };

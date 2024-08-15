@@ -24,6 +24,7 @@ const Chatlist = ({ teamId }) => {
   const [userName, setUsername] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
   const [teamErrors, setTeamErrors] = useState([]);
+  const [teamMembers, setTeamMembers] = useState([]);
   const endRef = useRef(null);
   const socket = useRef(null);
   const [isConnected, setIsConnected] = useState(false);
@@ -37,6 +38,8 @@ const Chatlist = ({ teamId }) => {
   const [userSearch, setuserSearch] = useState("");
   const [userRole, setUserRole] = useState("");
   const [messageID, setMessageID] = useState("");
+  const [membersView, setMembersView] = useState(false);
+  const [teamName, setTeamName] = useState('');
 
   useEffect(() => {
     socket.current = io("http://localhost:5000");
@@ -301,25 +304,45 @@ const Chatlist = ({ teamId }) => {
     if (!messageID) return; // Exit if no messageId is set
     try {
       const response = await axios.delete(`http://localhost:5000/delete`, {
-        params: { messageID, selectedTeamId},
+        params: { messageID, selectedTeamId },
       });
       console.log("deleted");
       alert("Message deleted");
       setMessageID(null);
-      setChatHistory(response.data.updatedChat)
-      console.log("response", response)
+      setChatHistory(response.data.updatedChat);
+      console.log("response", response);
     } catch (error) {
       console.log(error);
       alert("Failed to delete message");
     }
   };
 
+  const allUsers = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/allUsers`, {
+        params: { messageID, selectedTeamId },
+      });
+      console.log("Team members response", response.data);
+
+      setTeamMembers(response.data.AllUsers);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    console.log("teamMembers updated:", teamMembers);
+  }, [teamMembers]);
 
   useEffect(() => {
     if (messageID) {
       deleteChat();
     }
   }, [messageID]);
+
+  useEffect(() => {
+    allUsers();
+  }, []); // Empty dependency array means it runs only once
 
   const searchChat = async () => {
     try {
@@ -354,6 +377,7 @@ const Chatlist = ({ teamId }) => {
         <button onClick={() => setSelectedToggle(false)} className="lastDivBtn">
           Go back
         </button>
+
         {teamErrors.map((error) => (
           <div
             key={error._id}
@@ -364,7 +388,12 @@ const Chatlist = ({ teamId }) => {
               <p>Empty error</p>
             ) : (
               <ul className="teamLists">
-                <li onClick={() => handleChatSelect()}>{error.teamError}</li>
+                <li onClick={() => {
+                  handleChatSelect();
+                  setTeamName(error.teamError);
+                }}>
+                  {error.teamError}
+                </li>
               </ul>
             )}
           </div>
@@ -434,13 +463,29 @@ const Chatlist = ({ teamId }) => {
             </div>
           ))}
         </div>
+        <div className="thirdDivs ">
+          {membersView ? (
+            <div className="teamMembers">
+              <button onClick={() => setMembersView(false)}>Close View</button>
+
+              <h1>Team Members</h1>
+
+              <ul>
+                {teamMembers.map((member) => (
+                  <li key={member._id}>{member.username}</li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
 
       {addMode && <Adduser />}
       <div
-        className={`chatHistory ${
-          isMobileChatOpen ? "mobile-open" : "mobilechatHistory"
-        }`}
+        className={`chatHistory ${isMobileChatOpen ? "mobile-open" : "mobilechatHistory"
+          }`}
       >
         {selectedTeamId ? (
           <div className="chat">
@@ -454,16 +499,43 @@ const Chatlist = ({ teamId }) => {
                 </button>
                 <img src="./avatar.png" alt="" />
                 <div className="texts">
-                  <span>{userName}</span>
+                  <span>{teamName}</span>
                   <p>Lorem ipsum dolor sit</p>
                 </div>
               </div>
-              <div className="icons">
+              {/* <div className="icons">
                 <FontAwesomeIcon icon={faEllipsisH} />
                 <FontAwesomeIcon icon={faVideoCamera} />
+              </div> */}
+              <div className="buttonDiv">
+                <button
+                  onClick={() => setMembersView(true)}
+                  className="viewMembers"
+                >
+                  Members
+                </button>
               </div>
             </div>
             <div className="center">
+              <div className="thirdDiv">
+                {membersView ? (
+                  <div className="teamMembers">
+                    <button onClick={() => setMembersView(false)}>
+                      Close View
+                    </button>
+
+                    <h1>Team Members</h1>
+
+                    <ul>
+                      {teamMembers.map((member) => (
+                        <li key={member._id}>{member.username}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
               {chatHistory.length === 0 ? (
                 <div className="emptyDiv">
                   <p className="emptyChat">
@@ -474,58 +546,84 @@ const Chatlist = ({ teamId }) => {
                 chatHistory.map((chat) => (
                   <div
                     key={chat._id}
-                    className={`message ${
-                      chat.sender !== userName ? "message" : "own"
-                    }`}
+                    className={`message ${chat.sender !== userName ? "message" : "own"
+                      }`}
                   >
                     {chat.chatHistory.type == "text" ? (
                       <div>
-                        <img src="./avatar.png" alt="avatar" />
-                        <div className="texts userTxt">
+                        {/* <img src="./avatar.png" alt="avatar" /> */}
+                        <div className="textsDiv userTxt">
+                        <span className="textHeading">
+                          {new Date(chat.createdAt).toDateString()}
+                          {chat.sender === userName ? null : <h2 className="chatSender">{chat.sender}</h2>}
+
+                          </span>
+
                           <div className="delChat">
-                            <p>{chat.chatHistory.data} </p>
+                            <p className="chatData">{chat.chatHistory.data}
+                            <span>
+                            {new Date(chat.createdAt).toLocaleTimeString()}
+                          </span>
+                             </p>
                             {userRole == "Executive" ? (
                               <FontAwesomeIcon
-                icon={faTrash}
-                onClick={() => {
-                  if (window.confirm("Are you sure you want to delete this message?")) {
-                    setMessageID(chat._id);
-                  }
-                }}
-              />
+                                icon={faTrash}
+                                onClick={() => {
+                                  if (
+                                    window.confirm(
+                                      "Are you sure you want to delete this message?"
+                                    )
+                                  ) {
+                                    setMessageID(chat._id);
+                                  }
+                                }}
+                              />
                             ) : (
                               ""
                             )}
                           </div>
 
-                          <span>
-                            {new Date(chat.createdAt).toLocaleString()}
-                          </span>
+                          {/* <span>
+                          {new Date(chat.createdAt).toDateString()}
+                          </span> */}
                         </div>
                       </div>
                     ) : (
                       <div>
-                        <img src="./avatar.png" alt="avatar" />
-                        <div className="texts userTxt">
+                        <h2>{chat.sender}</h2>
+                        <div className="textsDiv userTxt">
+                          <span className="ImgTextHeading">
+                          {new Date(chat.createdAt).toDateString()}
+                          {chat.sender === userName ? null : <h2 className="chatSender">{chat.sender}</h2>}
+                          </span>
+<div>
                           <img
                             src={`http://localhost:5000${chat.chatHistory.data}`}
                             alt="Image"
+                            className="chatImage"
                           />
-                          <span>
-                            {new Date(chat.createdAt).toLocaleString()}
-                          </span>
+                          
                           {userRole == "Executive" ? (
-                              <FontAwesomeIcon
-                icon={faTrash}
-                onClick={() => {
-                  if (window.confirm("Are you sure you want to delete this message?")) {
-                    setMessageID(chat._id);
-                  }
-                }}
-              />
-                            ) : (
-                              ""
-                            )}
+                            <FontAwesomeIcon
+                              icon={faTrash}
+                              onClick={() => {
+                                if (
+                                  window.confirm(
+                                    "Are you sure you want to delete this message?"
+                                  )
+                                ) {
+                                  setMessageID(chat._id);
+                                }
+                              }}
+                            />
+                          ) : (
+                            ""
+                          )}
+                          </div>
+                          <span>
+                            {new Date(chat.createdAt).toLocaleTimeString()}
+                          </span>
+                          
                         </div>
                       </div>
                     )}
@@ -592,6 +690,25 @@ const Chatlist = ({ teamId }) => {
           <img key={index} src={url} alt={`Uploaded ${index}`} />
         ))}
       </div>
+      {/* <div className="buttonDiv">
+  <button onClick={() => setMembersView(true)} className="viewMembers">Members</button>
+</div> */}
+      {/* <div className="thirdDiv">
+  
+      {membersView ? 
+      <div className="teamMembers">
+      <button onClick={() => setMembersView(false)}>Close View</button>
+
+  <h1>Team Members</h1>
+
+  <ul>
+    {teamMembers.map((member) => (
+      <li key={member._id}>{member.username}</li>
+    ))}
+  </ul>
+</div>
+:""}
+</div> */}
 
       {/* <button onClick={deleteChat}>Delete</button> */}
     </div>
