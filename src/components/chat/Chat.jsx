@@ -13,7 +13,7 @@
 //   const [isConnected, setIsConnected] = useState(socket.connected);
 
 //   useEffect(() => {
-//     const newSocket = io("http://localhost:5000");
+//     const newSocket = io("https://chatapplication-backend-d65c.onrender.com");
 
 //     newSocket.on("connect", () => {
 //       setIsConnected(true);
@@ -50,7 +50,7 @@
 //   const getMessage = async (teamId) => {
 //     try {
 //       const token = localStorage.getItem("token");
-//       const response = await axios.get(`http://localhost:5000/teamChat`, {
+//       const response = await axios.get(`https://chatapplication-backend-d65c.onrender.com/teamChat`, {
 //         headers: {
 //           Authorization: `Bearer ${token}`,
 //         },

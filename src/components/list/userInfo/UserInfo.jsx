@@ -15,7 +15,7 @@ const UserInfo = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await axios.get("http://localhost:5000/getCurrentUser", {
+      const response = await axios.get("https://chatapplication-backend-d65c.onrender.com/getCurrentUser", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
