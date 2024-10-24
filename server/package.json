@@ -4,7 +4,9 @@
   "description": "chatApp server",
   "main": "main.js",
   "scripts": {
-    "test": "nodemon "
+    "build": "react-scripts build",
+    "start": "react-scripts start",
+    "test": "nodemon"
   },
   "author": "",
   "license": "ISC",
