@@ -4,8 +4,7 @@
   "description": "chatApp server",
   "main": "main.js",
   "scripts": {
-    "build": "react-scripts build",
-    "start": "react-scripts start",
+    "start": "node main.js",
     "test": "nodemon"
   },
   "author": "",
