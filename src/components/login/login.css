@@ -2,10 +2,10 @@
   display: flex;
   align-items: center;
   width: 100vw;
-  background-color: azure;
+  background-color: rgb(255, 255, 255);
   height: 100vh;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: column-reverse;
   overflow: hidden;
 
   /* gap: 100px; */
@@ -17,15 +17,19 @@
     flex-direction: row;
     width: 100vw;
     height: 100vh;
+    /* background: #000; */
     /* gap: 20px; */
 
     .formDiv{
       width: 50%;
+      background-color: rgb(255, 255, 255);
+
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 60px;
+      /* padding-top: 60px; */
     }
 
     form {
@@ -33,27 +37,30 @@
       align-items: center;
       flex-direction: column;
       justify-content: center;
-      gap: 20px;
+      gap: 10px;
       width: 50vw;
 
       input {
         padding: 20px;
-        border: none;
-        outline: none;
         color: rgb(38, 35, 35);
-        border-radius: 5px;
         width: 80%;
-        background-color: rgb(219, 233, 233);
-
-      }
+        outline: none;
+        background-color: transparent;
+        border: 1px solid rgb(148, 156, 164); /* explicitly set the border */
+        height: 20px !important;
+        box-sizing: border-box; /* makes sure padding doesn't affect width */
+    }
+    
 
       label {
-        width: 100%;
-        display: flex;
-        align-items: center;
+        /* display: flex;
         justify-content: space-between;
         cursor: pointer;
-        text-decoration: underline;
+        text-decoration: underline; */
+        align-items: flex-start;
+        width: 80%;
+        font-weight: 700;
+        font-size: 17px;
 
         img {
           width: 50px;
@@ -65,10 +72,10 @@
       }
 
       button {
-        width: 100%;
+        width: 80%;
         height: 40px;
         border: none;
-        background-color: #1f8ef1;
+        background-color: #2d3032;
         color: white;
         border-radius: 5px;
         cursor: pointer;
@@ -80,20 +87,73 @@
   .separator {
     height: 90%;
     width: 9px;
-    background-color: grey;
+    background-color: rgb(180, 40, 40);
   }
 }
 
 
 .loginImg{
-  background-image: url(../../Images/teamDiscussion.gif);
-  width: 100%;
+  background-image: url(../../Images/rb_56301.png);
+  width: 40%;
   background-position: center;
-  height: 50%;
+  height: 100%;
   background-size: contain;
   background-repeat: no-repeat;
+  background-color: rgb(189, 176, 202);
+  /* background-color: rgb(114, 31, 114); */
+}
+
+.signUpImg{
+  background-color: rgb(125, 117, 132);
+  background-image: url('../../Images/image1.png') !important;
 }
 
 .regItem{
   flex-direction: row-reverse !important;
+}
+
+
+.progress {
+   width: 100.8px;
+   height: 16.8px;
+   background: linear-gradient(#4772ff 50%,#0000 0),
+        linear-gradient(#0000 50%,#474bff 0),
+        linear-gradient(#474bff 50%,#0000 0),
+        linear-gradient(#0000 50%,#474bff 0),
+        linear-gradient(#474bff 50%,#0000 0),
+        linear-gradient(#0000 50%,#474bff 0)
+        #dbdcef;
+   background-size: calc(100%/6 + 1px) 200%;
+   background-repeat: no-repeat;
+   animation: progress-qh65fe 2s infinite;
+}
+
+@keyframes progress-qh65fe {
+   0% {
+      background-position: 0% 100%, 20%   0%, 40% 100%, 60%   0%, 80% 100%, 100%   0%;
+   }
+
+   16.67% {
+      background-position: 0%   0%, 20%   0%, 40% 100%, 60%   0%, 80% 100%, 100%   0%;
+   }
+
+   33.33% {
+      background-position: 0%   0%, 20% 100%, 40% 100%, 60%   0%, 80% 100%, 100%   0%;
+   }
+
+   50% {
+      background-position: 0%   0%, 20% 100%, 40%   0%, 60%   0%, 80% 100%, 100%   0%;
+   }
+
+   66.67% {
+      background-position: 0%   0%, 20% 100%, 40%   0%, 60% 100%, 80% 100%, 100%   0%;
+   }
+
+   83.33% {
+      background-position: 0%   0%, 20% 100%, 40%   0%, 60% 100%, 80%   0%, 100%   0%;
+   }
+
+   100% {
+      background-position: 0%   0%, 20% 100%, 40%   0%, 60% 100%, 80%   0%, 100% 100%;
+   }
 }

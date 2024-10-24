@@ -11,7 +11,7 @@ const Navbar = () => {
       </div>
 
       <div className="secDiv">
-        <a href="/login">Login</a>lists
+        <a href="/login">Login</a>
         <button>
           <a href="/lists">Get started free</a>
         </button>

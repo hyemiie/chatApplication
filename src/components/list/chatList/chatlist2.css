@@ -8,11 +8,12 @@
     width: 100%;
     height: 100%;
     display: flex;
-    background-color: #d9e0d9;
+    background-color: #ffffff;
     overflow: hidden;
     padding: 0;
     margin: 0;
 }
+
 .FirstDiv
 {
   background-color: #fdfdfd;
@@ -94,9 +95,23 @@
 
 
 .chatHistory{
-    height: 41vw;
-    width: 60%;
+    /* height: 41vw; */
+    width: 70%;
+    /* background-color: tan; */
+    background-image: url('../../../Images/video4.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 }
+/* .videoDiv{
+  display: flex;
+align-items: center;
+justify-content: center;
+position: fixed;
+
+video{
+  width: 20%;
+}} */
 
 .newTeamError{
   margin-left: auto;

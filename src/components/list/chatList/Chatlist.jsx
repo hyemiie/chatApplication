@@ -14,6 +14,7 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { deleteModel } from "mongoose";
+import video from "../../../Images/video2.mp4"
 
 const Chatlist = ({ teamId }) => {
   const [addMode, setAddMode] = useState(false);
@@ -39,7 +40,7 @@ const Chatlist = ({ teamId }) => {
   const [userRole, setUserRole] = useState("");
   const [messageID, setMessageID] = useState("");
   const [membersView, setMembersView] = useState(false);
-  const [teamName, setTeamName] = useState('');
+  const [teamName, setTeamName] = useState("");
 
   useEffect(() => {
     socket.current = io("http://localhost:5000");
@@ -388,10 +389,12 @@ const Chatlist = ({ teamId }) => {
               <p>Empty error</p>
             ) : (
               <ul className="teamLists">
-                <li onClick={() => {
-                  handleChatSelect();
-                  setTeamName(error.teamError);
-                }}>
+                <li
+                  onClick={() => {
+                    handleChatSelect();
+                    setTeamName(error.teamError);
+                  }}
+                >
                   {error.teamError}
                 </li>
               </ul>
@@ -484,9 +487,11 @@ const Chatlist = ({ teamId }) => {
 
       {addMode && <Adduser />}
       <div
-        className={`chatHistory ${isMobileChatOpen ? "mobile-open" : "mobilechatHistory"
-          }`}
+        className={`chatHistory ${
+          isMobileChatOpen ? "mobile-open" : "mobilechatHistory"
+        }`}
       >
+      {/* <div className="videoDiv"> <video src={video}/></div> */}
         {selectedTeamId ? (
           <div className="chat">
             <div className="top">
@@ -546,25 +551,28 @@ const Chatlist = ({ teamId }) => {
                 chatHistory.map((chat) => (
                   <div
                     key={chat._id}
-                    className={`message ${chat.sender !== userName ? "message" : "own"
-                      }`}
+                    className={`message ${
+                      chat.sender !== userName ? "message" : "own"
+                    }`}
                   >
                     {chat.chatHistory.type == "text" ? (
                       <div>
                         {/* <img src="./avatar.png" alt="avatar" /> */}
                         <div className="textsDiv userTxt">
-                        <span className="textHeading">
-                          {new Date(chat.createdAt).toDateString()}
-                          {chat.sender === userName ? null : <h2 className="chatSender">{chat.sender}</h2>}
-
+                          <span className="textHeading">
+                            {new Date(chat.createdAt).toDateString()}
+                            {chat.sender === userName ? null : (
+                              <h2 className="chatSender">{chat.sender}</h2>
+                            )}
                           </span>
 
                           <div className="delChat">
-                            <p className="chatData">{chat.chatHistory.data}
-                            <span>
-                            {new Date(chat.createdAt).toLocaleTimeString()}
-                          </span>
-                             </p>
+                            <p className="chatData">
+                              {chat.chatHistory.data}
+                              <span>
+                                {new Date(chat.createdAt).toLocaleTimeString()}
+                              </span>
+                            </p>
                             {userRole == "Executive" ? (
                               <FontAwesomeIcon
                                 icon={faTrash}
@@ -593,37 +601,38 @@ const Chatlist = ({ teamId }) => {
                         <h2>{chat.sender}</h2>
                         <div className="textsDiv userTxt">
                           <span className="ImgTextHeading">
-                          {new Date(chat.createdAt).toDateString()}
-                          {chat.sender === userName ? null : <h2 className="chatSender">{chat.sender}</h2>}
+                            {new Date(chat.createdAt).toDateString()}
+                            {chat.sender === userName ? null : (
+                              <h2 className="chatSender">{chat.sender}</h2>
+                            )}
                           </span>
-<div>
-                          <img
-                            src={`http://localhost:5000${chat.chatHistory.data}`}
-                            alt="Image"
-                            className="chatImage"
-                          />
-                          
-                          {userRole == "Executive" ? (
-                            <FontAwesomeIcon
-                              icon={faTrash}
-                              onClick={() => {
-                                if (
-                                  window.confirm(
-                                    "Are you sure you want to delete this message?"
-                                  )
-                                ) {
-                                  setMessageID(chat._id);
-                                }
-                              }}
+                          <div>
+                            <img
+                              src={`http://localhost:5000${chat.chatHistory.data}`}
+                              alt="Image"
+                              className="chatImage"
                             />
-                          ) : (
-                            ""
-                          )}
+
+                            {userRole == "Executive" ? (
+                              <FontAwesomeIcon
+                                icon={faTrash}
+                                onClick={() => {
+                                  if (
+                                    window.confirm(
+                                      "Are you sure you want to delete this message?"
+                                    )
+                                  ) {
+                                    setMessageID(chat._id);
+                                  }
+                                }}
+                              />
+                            ) : (
+                              ""
+                            )}
                           </div>
                           <span>
                             {new Date(chat.createdAt).toLocaleTimeString()}
                           </span>
-                          
                         </div>
                       </div>
                     )}

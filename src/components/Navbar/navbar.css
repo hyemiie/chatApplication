@@ -8,6 +8,8 @@
     right: 0;
     position: sticky;
     border-bottom: 1px solid rgb(199, 197, 197);
+    height: 60px;
+    padding:15px;
 }
 
 .firstDiv{
@@ -37,11 +39,12 @@
     }
 
     button{
-        padding: 8px;
+        padding: 10px;
         font-size: 17px;
         color: whitesmoke;
-        background-color: rebeccapurple;
+        background-color: plum;
         border: none;
+       
 
     }
 }
