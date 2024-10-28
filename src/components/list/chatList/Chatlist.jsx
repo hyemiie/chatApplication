@@ -43,7 +43,7 @@ const Chatlist = ({ teamId }) => {
   const [teamName, setTeamName] = useState("");
 
   useEffect(() => {
-    socket.current = io("http://localhost:5000");
+    socket.current = io("https://chatapplication-backend-d65c.onrender.com");
 
     socket.current.on("connect", () => {
       setIsConnected(true);
@@ -85,7 +85,7 @@ const Chatlist = ({ teamId }) => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.post(
-          "http://localhost:5000/upload",
+          "https://chatapplication-backend-d65c.onrender.com/upload",
           formData,
           {
             headers: {
@@ -157,7 +157,7 @@ const Chatlist = ({ teamId }) => {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(`http://localhost:5000/teamChat`, {
+      const response = await axios.get(`https://chatapplication-backend-d65c.onrender.com/teamChat`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -174,7 +174,7 @@ const Chatlist = ({ teamId }) => {
     const getTeams = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:5000/getAllTeams", {
+        const response = await axios.get("https://chatapplication-backend-d65c.onrender.com/getAllTeams", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -213,7 +213,7 @@ const Chatlist = ({ teamId }) => {
     console.log("teamId", teamId);
     const token = localStorage.getItem("token");
     try {
-      const response = await axios.get("http://localhost:5000/teamErrors", {
+      const response = await axios.get("https://chatapplication-backend-d65c.onrender.com/teamErrors", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -246,7 +246,7 @@ const Chatlist = ({ teamId }) => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "http://localhost:5000/addTeamError",
+        "https://chatapplication-backend-d65c.onrender.com/addTeamError",
         data,
         {
           headers: {
@@ -276,7 +276,7 @@ const Chatlist = ({ teamId }) => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.post(
-          "http://localhost:5000/upload",
+          "https://chatapplication-backend-d65c.onrender.com/upload",
           formData,
           {
             headers: {
@@ -304,7 +304,7 @@ const Chatlist = ({ teamId }) => {
   const deleteChat = async () => {
     if (!messageID) return; // Exit if no messageId is set
     try {
-      const response = await axios.delete(`http://localhost:5000/delete`, {
+      const response = await axios.delete(`https://chatapplication-backend-d65c.onrender.com/delete`, {
         params: { messageID, selectedTeamId },
       });
       console.log("deleted");
@@ -320,7 +320,7 @@ const Chatlist = ({ teamId }) => {
 
   const allUsers = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/allUsers`, {
+      const response = await axios.get(`https://chatapplication-backend-d65c.onrender.com/allUsers`, {
         params: { messageID, selectedTeamId },
       });
       console.log("Team members response", response.data);
@@ -348,7 +348,7 @@ const Chatlist = ({ teamId }) => {
   const searchChat = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(`http://localhost:5000/getAllTeams`, {
+      const response = await axios.get(`https://chatapplication-backend-d65c.onrender.com/getAllTeams`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -608,7 +608,7 @@ const Chatlist = ({ teamId }) => {
                           </span>
                           <div>
                             <img
-                              src={`http://localhost:5000${chat.chatHistory.data}`}
+                              src={`https://chatapplication-backend-d65c.onrender.com${chat.chatHistory.data}`}
                               alt="Image"
                               className="chatImage"
                             />

@@ -5,7 +5,7 @@
 //         console.log(teamId)
 //         const token = localStorage.getItem('token')
 //        try{
-//         const response = await axios.get("http://localhost:5000/teamErrors", {headers: {
+//         const response = await axios.get("https://chatapplication-backend-d65c.onrender.com/teamErrors", {headers: {
 //           Authorization: `Bearer ${token}`,
 //         },
 //         params: { teamId }},)

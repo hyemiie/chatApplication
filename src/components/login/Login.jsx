@@ -57,7 +57,7 @@ const Login = () => {
     console.log("Signup data:", data);
 
     try {
-      const response = await axios.post("http://localhost:5000/login", data);
+      const response = await axios.post("https://chatapplication-backend-d65c.onrender.com/login", data);
 
       const { token } = response.data;
       localStorage.setItem("token", token);
@@ -91,7 +91,7 @@ const Login = () => {
     };
 
     try {
-      const response = await axios.post("http://localhost:5000/register", data);
+      const response = await axios.post("https://chatapplication-backend-d65c.onrender.com/register", data);
 
       alert("SignUp Successful");
       setLoading(false)
@@ -160,7 +160,7 @@ const Login = () => {
               />
               {checkRole ? (
                 <div>
-                  <label>Password</label>
+                  <label>Access Key</label>
                   <input
                     placeholder="Enter Executive Key"
                     id="roleKey"
@@ -170,7 +170,7 @@ const Login = () => {
                 </div>
               ) : (
                 <div>
-                  <label>Password</label>
+                  <label>Access Key</label>
                   <input
                     placeholder="Enter Employee Key"
                     id="empRoleKey"

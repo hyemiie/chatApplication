@@ -16,7 +16,6 @@ const App = () => {
       setUser(true);
     } else {
       setUser(false);
-      alert("User not logged In");
     }
 
     return () => {

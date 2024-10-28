@@ -11,7 +11,7 @@ const addTeam = async () => {
       const token = localStorage.getItem("token");
       console.log(token);
 
-      const response = await axios.post("http://localhost:5000/addTeam", { teamName }, {
+      const response = await axios.post("https://chatapplication-backend-d65c.onrender.com/addTeam", { teamName }, {
           headers: {
               Authorization: `Bearer ${token}`,
           },
