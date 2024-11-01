@@ -5,7 +5,7 @@
   background-color: rgb(255, 255, 255);
   height: 100vh;
   justify-content: space-between;
-  flex-direction: column-reverse;
+  flex-direction: row;
   overflow: hidden;
 
 
@@ -154,4 +154,63 @@
    100% {
       background-position: 0%   0%, 20% 100%, 40%   0%, 60% 100%, 80%   0%, 100% 100%;
    }
+}
+
+@media screen and (max-width:800px) {
+  *{
+    padding: 0;
+    margin: 0;
+  }
+  .formDiv{
+    width: 40% !important;
+    height: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .loginImg{
+    width: 50% !important;
+  }
+
+  .item{
+    padding: 0 !important;
+    margin:0 !important;
+    form{
+      width: 100% !important;
+      padding: 0 !important;
+      margin:0 !important;
+      display: flex;
+ input{
+  width: 100% !important;
+ }
+    }
+  }
+}
+
+@media screen and (max-width:600px) {
+  *{
+    padding: 0;
+    margin: 0;
+  }
+  .formDiv{
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .loginImg{
+    width: 100vw !important;
+    display: none;
+  }
+
+  .item{
+
+    form{
+      width: 90% !important;
+label{
+  width: 100% !important;
+  margin-top: 20px;
+}
+
+    }
+  }
 }

@@ -70,3 +70,103 @@
 .imgDiv{
     width: 50%;
 }
+
+
+@media screen and (max-width:600px) {
+    .landinPage{
+    
+    .landingDiv{
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+    
+        p{
+            font-size: 35px;
+            color: rgb(44, 43, 43);
+            font-weight: 500;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
+            /* background-color: rebeccapurple; */
+    
+        }
+        h2{
+            font-size: 30px;
+            text-align: center;
+            color: rgb(196, 189, 189);
+            font-weight: 500;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
+        }
+    
+        h3{
+            font-weight: 400;
+            font-size: 18px;
+            text-align: center;
+        }
+    
+        button{
+            background-color: plum;
+            border: none;
+            margin-top: 30px;
+            border-radius: 15px;
+            padding: 5px;
+            a{
+                color: rgb(255, 255, 255);
+                text-decoration: none;
+                font-size: 25px;
+                padding: 20px;
+                height: 40px;
+            }
+        }
+    
+    }
+    }
+}
+
+@media screen and (max-width:400px) {
+
+    .landinPage{
+    
+    .landingDiv{
+ 
+    
+        p{
+            font-size: 30px;
+            color: rgb(44, 43, 43);
+            font-weight: 500;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
+            /* background-color: rebeccapurple; */
+    
+        }
+        h2{
+            font-size: 25px;
+            text-align: center;
+            color: rgb(196, 189, 189);
+            font-weight: 500;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
+        }
+    
+        h3{
+            font-weight: 400;
+            font-size: 15px;
+        }
+    
+        button{
+            background-color: plum;
+            border: none;
+            margin-top: 30px;
+            border-radius: 15px;
+            padding: 2px;
+            a{
+                color: rgb(255, 255, 255);
+                text-decoration: none;
+                font-size: 22px;
+                padding: 20px;
+                height: 40px;
+            }
+        }
+    
+    }
+    }
+}
+
