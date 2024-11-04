@@ -19,12 +19,12 @@ const { GetAllTeams, AddTeam } = require("./controllers/team.controller");
 const { getTeamChat, addtoChat, deleteChat } = require("./controllers/chat.controller");
 const { GetTeamErrors, AddTeamError } = require("./controllers/teamErrors.controller");
 
-app.use(cors({ origin: "http://localhost:10000" }));
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:10000",
+    origin: "*",
   },
 });
 
