@@ -1,25 +1,45 @@
 
 .landingBody{
+}
 
+.landingBodyDiv{
+    /* background-color: plum; */
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.navDiv{
+    background-color: hotpink;
+}
+
+.imgDiv{
+    background-image: url('../../Images/EbRAHV8Bw549jsF6v1.gif'); 
+    width: 40%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 }
 
 .landinPage{
-    background-image: url('../../Images/pattern.svg'); 
     display: flex;
-    align-items: center;
+    align-items:center;
+    justify-content: center;
     /* justify-content: space-between; */
     padding: 20px;
-    height: 90vh;
+    height: 80vh;
+    width: 60%;
 
 .landingDiv{
     width: 100%;
-    align-items: center;
+    height: 100%;
+    align-items: flex-start;
     justify-content: center;
     display: flex;
     flex-direction: column;
 
     p{
-        font-size: 60px;
+        font-size: 50px;
         color: rgb(44, 43, 43);
         font-weight: 500;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
@@ -27,38 +47,47 @@
 
     }
     h2{
-        font-size: 60px;
-        text-align: center;
-        color: rgb(196, 189, 189);
-        font-weight: 500;
+        font-size: 50px;
+        /* text-align: center; */
+        font-weight: 300;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
     }
 
     h3{
         font-weight: 400;
-        font-size: 20px;
+        font-size: 25px;
     }
 
     button{
-        background-color: plum;
+        background-color: rgb(111, 10, 111);
         border: none;
         margin-top: 30px;
-        border-radius: 15px;
+        border-radius: 8px;
         padding: 5px;
         a{
             color: rgb(255, 255, 255);
             text-decoration: none;
-            font-size: 25px;
+            font-size: 20px;
             padding: 20px;
-            height: 40px;
+            height: 50px;
         }
+    }
+
+    .landingBtn2{
+        background-color: transparent;
+        border: 1px solid rgb(91, 66, 91);
+        margin-left: 20px;
+        a{
+            color: purple ;
+        }
+
     }
 
 }
 }
 
 .landingImg{
-    background-image: url(../../Images/Chatting.gif);
+    /* background-image: url(../../Images/Chatting.gif); */
     height: 500px;
     /* background-position: center; */
     background-size: contain;
