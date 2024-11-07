@@ -8,13 +8,13 @@ const List = () => {
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //     const token = localStorage.getItem('userName');
-  //     console.log('token', token)
-  //     if (!token) {
-  //         navigate('/'); 
-  //     }
-  // }, [navigate]);
+  useEffect(() => {
+      const token = localStorage.getItem('userName');
+      console.log('token', token)
+      if (!token) {
+          navigate('/'); 
+      }
+  }, [navigate]);
   
   return (
     <div className="list">

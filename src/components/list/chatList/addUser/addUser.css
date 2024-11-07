@@ -1,32 +1,61 @@
 .addUser {
-  width: max-content;
+  width: 95%;
+  height: 100vh !important;
   padding: 30px;
   height: max-content;
-  background-color: rgba(17, 25, 40, 0.5);
+  background-color: rgba(17, 25, 40, 0.7);
   border-radius: 10px;
-  position: fixed;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   top: 0;
   bottom: 0;
   left: 0;
   margin: auto;
+
+
+  .cancelBtn{
+    margin-right: auto;
+    background-color: darkcyan;
+    color: white;
+    padding: 8px;
+    border: none;
+    border-radius:8px;
+  }
+  .addUserDiv{
+    background-color: rgb(196, 239, 239);
+    width: 40%;
+    height: fit-content;
+    padding: 20px;
+   
+  }
   form {
     display: flex;
     gap: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
 
     input {
       padding: 20px;
-      border-radius: 10px;
+      /* border-radius: 10px; */
       border: none;
       outline: none;
+      width: 80%;
+      background-color: transparent;
+      border-bottom: 1px solid rgb(88, 88, 88);
     }
 
     button {
-      padding: 20px;
-      border-radius: 10px;
+      /* padding: 20px; */
+      border-radius: 8px;
       background-color: rgb(113, 140, 241);
       color: white;
       border: none;
       cursor: pointer;
+      width: 80%;
     }
   }
 
@@ -40,6 +69,7 @@
       display: flex;
       align-items: center;
       gap: 20px;
+      justify-content: center;
       img {
         width: 50px;
         height: 50px;
@@ -50,11 +80,12 @@
 
     button {
       padding: 10px;
-      border-radius: 10px;
+      border-radius: 8px;
       background-color: rgb(114, 134, 207);
       color: white;
       border: none;
       cursor: pointer;
+      width: 80%;
     }
   }
 }

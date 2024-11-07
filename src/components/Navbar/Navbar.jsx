@@ -6,6 +6,7 @@ const Navbar = () => {
     <div className="navPage">
       <div className="firstDiv">
         <div className="navLogo">
+        <div></div>
           <h3>Tier</h3>
         </div>
       </div>

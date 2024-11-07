@@ -318,6 +318,14 @@ const Chatlist = ({ teamId }) => {
     }
   };
 
+  const isSameDay = (date1, date2) => {
+    return (
+      date1.getDate() === date2.getDate() &&
+      date1.getMonth() === date2.getMonth() &&
+      date1.getFullYear() === date2.getFullYear()
+    );
+  };
+
   const allUsers = async () => {
     try {
       const response = await axios.get(`https://chatapplication-backend-d65c.onrender.com/allUsers`, {
@@ -420,7 +428,7 @@ const Chatlist = ({ teamId }) => {
               />{" "}
             </div>
             <img
-              src={addMode ? "./minus.png" : "./plus.png"}
+              src={addMode ? "./plus.png" : "./plus.png"}
               alt="toggle add mode"
               className="add"
               onClick={() => setAddMode((prev) => !prev)}
@@ -429,7 +437,7 @@ const Chatlist = ({ teamId }) => {
 
           {teams.map((team) => (
             <div key={team._id} className="item">
-              <img src="./avatar.png" alt="avatar" />
+              <img src="./avatar.png" alt="avatar"  className="imgAvatar"/>
               <div className="texts">
                 <div className="teamDiv">
                   <span
@@ -438,7 +446,7 @@ const Chatlist = ({ teamId }) => {
                   >
                     {team.teamName}
                   </span>
-                  {userRole == "Executive" ? (
+                  {userRole !== "Executive" ? (
                     <button
                       onClick={() => toggleInputVisibility(team._id)}
                       className="addTeamBtn"
@@ -446,14 +454,14 @@ const Chatlist = ({ teamId }) => {
                       {inputVisibility[team._id] ? <h2>-</h2> : <h2>+</h2>}
                     </button>
                   ) : (
-                    ""
+                    null
                   )}
                 </div>
                 {/* {!inputVisibility[team._id] ? 
   <div className="chatSnippet">recent messages</div>
   : null
 } */}
-                <div className="chatSnippet">recent messages</div>
+                <p className="chatSnippet">recent messages</p>
                 {inputVisibility[team._id] && (
                   <div className="newTeamError">
                     <input id="newErrorName" />
@@ -503,7 +511,7 @@ const Chatlist = ({ teamId }) => {
                   <FontAwesomeIcon icon={faAngleLeft} className="angleLeft" />
                 </button>
                 <img src="./avatar.png" alt="" />
-                <div className="texts">
+                <div className="teamDetail">
                   <span>{teamName}</span>
                   <p>Lorem ipsum dolor sit</p>
                 </div>
@@ -542,103 +550,105 @@ const Chatlist = ({ teamId }) => {
                 )}
               </div>
               {chatHistory.length === 0 ? (
-                <div className="emptyDiv">
-                  <p className="emptyChat">
-                    <h3>This chat is currently empty</h3>
-                  </p>
-                </div>
-              ) : (
-                chatHistory.map((chat) => (
-                  <div
-                    key={chat._id}
-                    className={`message ${
-                      chat.sender !== userName ? "message" : "own"
-                    }`}
-                  >
-                    {chat.chatHistory.type == "text" ? (
-                      <div>
-                        {/* <img src="./avatar.png" alt="avatar" /> */}
-                        <div className="textsDiv userTxt">
-                          <span className="textHeading">
-                            {new Date(chat.createdAt).toDateString()}
-                            {chat.sender === userName ? null : (
-                              <h2 className="chatSender">{chat.sender}</h2>
-                            )}
-                          </span>
+  <div className="emptyDiv">
+    <h3 className="emptyChat">This chat is currently empty</h3>
+    <div className="emptyImg"></div>
+  </div>
+) : (
+  chatHistory.map((chat, index) => {
+    // Current message date
+    const currentDate = new Date(chat.createdAt);
+    // Previous message date, if it exists
+    const previousDate = index > 0 ? new Date(chatHistory[index - 1].createdAt) : null;
+    
+    // Determine if a new date header is needed
+    const showDateHeader = !previousDate || currentDate.toDateString() !== previousDate.toDateString();
 
-                          <div className="delChat">
-                            <p className="chatData">
-                              {chat.chatHistory.data}
-                              <span>
-                                {new Date(chat.createdAt).toLocaleTimeString()}
-                              </span>
-                            </p>
-                            {userRole == "Executive" ? (
-                              <FontAwesomeIcon
-                                icon={faTrash}
-                                onClick={() => {
-                                  if (
-                                    window.confirm(
-                                      "Are you sure you want to delete this message?"
-                                    )
-                                  ) {
-                                    setMessageID(chat._id);
-                                  }
-                                }}
-                              />
-                            ) : (
-                              ""
-                            )}
-                          </div>
+    return (
+      <div key={chat._id}>
+        {showDateHeader && (
+          <div className="dateHeader">
+            {currentDate.toDateString()}
+          </div>
+        )}
 
-                          {/* <span>
-                          {new Date(chat.createdAt).toDateString()}
-                          </span> */}
-                        </div>
-                      </div>
-                    ) : (
-                      <div>
-                        <h2>{chat.sender}</h2>
-                        <div className="textsDiv userTxt">
-                          <span className="ImgTextHeading">
-                            {new Date(chat.createdAt).toDateString()}
-                            {chat.sender === userName ? null : (
-                              <h2 className="chatSender">{chat.sender}</h2>
-                            )}
-                          </span>
-                          <div>
-                            <img
-                              src={`https://chatapplication-backend-d65c.onrender.com${chat.chatHistory.data}`}
-                              alt="Image"
-                              className="chatImage"
-                            />
+        {/* Chat message */}
+        <div
+          className={`message ${chat.sender !== userName ? "message" : "own"}`}
+        >
+          {chat.chatHistory.type === "text" ? (
+            <div>
+              {/* <img src="./avatar.png" alt="avatar" /> */}
+              <div className="textsDiv userTxt">
+                <span className="textHeading">
+                  {chat.sender === userName ? null : (
+                    <h2 className="chatSender">{chat.sender}</h2>
+                  )}
+                  {/* {new Date(chat.createdAt).toDateString()} */}
+                </span>
 
-                            {userRole == "Executive" ? (
-                              <FontAwesomeIcon
-                                icon={faTrash}
-                                onClick={() => {
-                                  if (
-                                    window.confirm(
-                                      "Are you sure you want to delete this message?"
-                                    )
-                                  ) {
-                                    setMessageID(chat._id);
-                                  }
-                                }}
-                              />
-                            ) : (
-                              ""
-                            )}
-                          </div>
-                          <span>
-                            {new Date(chat.createdAt).toLocaleTimeString()}
-                          </span>
-                        </div>
-                      </div>
-                    )}
+                <div className="delChat">
+                  <div className="dataDate">
+                    <p className="chatData">
+                      {chat.chatHistory.data}
+                    </p>
+                    <span className="underDate">
+                      {currentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    </span>
                   </div>
-                ))
-              )}
+                  {userRole === "Executive" && (
+                    <FontAwesomeIcon
+                      icon={faTrash}
+                      onClick={() => {
+                        if (window.confirm("Are you sure you want to delete this message?")) {
+                          setMessageID(chat._id);
+                        }
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div>
+              <h2>{chat.sender}</h2>
+              <div className="textsDiv userTxt">
+                {/* <img src="./avatar.png" alt="avatar" /> */}
+                <span className="ImgTextHeading">
+                  {/* {currentDate.toDateString()} */}
+                  {chat.sender === userName ? null : (
+                    <h2 className="chatSender">{chat.sender}</h2>
+                  )}
+                </span>
+                <div>
+                  <img
+                    src={`https://chatapplication-backend-d65c.onrender.com${chat.chatHistory.data}`}
+                    alt="Image"
+                    className="chatImage"
+                  />
+                  {userRole === "Executive" && (
+                    <FontAwesomeIcon
+                      icon={faTrash}
+                      onClick={() => {
+                        if (window.confirm("Are you sure you want to delete this message?")) {
+                          setMessageID(chat._id);
+                        }
+                      }}
+                    />
+                  )}
+                </div>
+                <span>
+                  {currentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </span>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  })
+)}
+
               <div ref={endRef}></div>
             </div>
             <div className="bottom">

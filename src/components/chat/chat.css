@@ -1,7 +1,7 @@
 .chat {
   /* flex: 2; */
   border-right: 1px solid grey;
-  background-color: #fefefe;
+  background-color: rgb(255, 255, 255);
 
   height: 100vh;
   display: flex;
@@ -13,9 +13,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid rgb(250, 238, 238);
+    border-bottom: 1px solid rgb(210, 208, 208);
     height: 30px;
-    background-color: #fefefe;
+  background-color: rgb(255, 255, 255);
     color: #7e5eab;
     
   }

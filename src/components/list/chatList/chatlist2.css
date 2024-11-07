@@ -16,23 +16,25 @@
 
 .FirstDiv
 {
-  background-color: #fdfdfd;
+  /* background-color: rgb(128, 123, 159); */
+
 }
 
 .chatList{
   width: 40%;
   height: 100vh;
-  border-right: 1px solid rgb(185, 185, 185);
-  border-left: 1px solid rgb(55, 53, 53);
+  /* border-right: 1px solid rgb(185, 185, 185); */
+  /* border-left: 1px solid rgb(55, 53, 53); */
   background-color: #fdfdfd;
   color: #7e5eab;
+  /* background-color: rgb(164, 162, 179); */
 
 
 
 .teamName{
   cursor: pointer;
   font-weight: bolder;
-  font-size: 1.4rem;
+  font-size: 17px;
 
 
 
@@ -43,6 +45,8 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
+  align-items: center;
+  height: 100%;
 }
 
 .addTeamBtn{
@@ -52,7 +56,8 @@
   height: 30px;
   border-radius: 360px;
   border: none;
-  color: rgb(179, 142, 209);
+  color: rgb(133, 85, 171);
+  margin-right: 20px;
 
   h2{
     font-size: 1.5rem;
@@ -68,11 +73,12 @@
 }
 
 .chatSnippet{
-  width: 300px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 20px;
+  font-size: 18px;
+  /* padding-top: 20px; */
 }
 }
 
@@ -88,6 +94,17 @@
   display: flex;
   width: 100%;
   font-size: 17px;
+  height: 100%;
+  flex-direction: column;
+
+  .emptyImg{
+    background-image: url('../../../Images/yiZgi0rI7IkcRa659j.gif');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100%;
+    height: 80%;
+  }
 }
 
 
@@ -189,8 +206,12 @@ video{
   }
 
   .texts{
-    height: fit-content;
     color: rgb(81, 69, 89);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    width:100%;
 
   }
 
@@ -202,19 +223,27 @@ video{
  
   }
 
+  .dataDate{
+    display: flex;
+    flex-direction: column;
+  }
+
   .chatData{
     font-size: 16px;
-    background-color: #e1e1e1;
+    background-color: transparent;
     height: fit-content;
     padding: 10px;
-    border-radius: 10px;
-    max-width: 200px;
-    min-width: 150px;
+    border-radius: 8px;
+    max-width: 400px;
+    min-width: 80px;
     display: flex;
     /* align-items: right;
     justify-content: right; */
     margin-right: 20px;
     flex-direction: column;
+    line-height: 25px;
+    position: relative;
+    border: 1px solid rgb(214, 185, 214);
 
     span{
       font-size: 10px;
@@ -228,11 +257,21 @@ video{
     min-width: 170px;
     max-width:200px;
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
+    flex-direction: row;
     margin-bottom: 10px;
+    align-items:self-start;
+    .chatSender{
+      margin-right: 5px;
+
+    }
   }
 
+
+  .dateHeader{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
   .ImgTextHeading{
     max-width:80%;
     min-width: 80%;
@@ -243,14 +282,12 @@ video{
   }
   .item {
     display: flex;
-    align-items: top;
-    gap: 20px;
-    padding: 20px;
-    /* cursor: pointer; */
+    padding: 10px;
     border-bottom: 1px solid rgb(220, 215, 215);
     height: 50px;
-    /* overflow-y:scroll;
-    overflow-x: hidden; */
+    align-items: center;
+    justify-content: center;
+    
   
     img {
       width: 50px;
@@ -275,6 +312,12 @@ video{
     }
   }
   
+
+  .underDate{
+max-width: inherit;
+min-width: inherit;
+text-align: right;
+}
 
   .teamErrors {
     display: flex;
@@ -341,7 +384,7 @@ video{
   }
 
   .thirdDiv{
-    background-color: rgb(218, 210, 227);
+    background-color: rgb(159, 156, 206);
     position: fixed;
     z-index: 1;
     right: 0;
@@ -351,29 +394,54 @@ video{
 
 
 
-    .viewMembers{
-      padding: 20px;
+  }
+  
+  .viewMembers{
+    padding: 5px;
+    background-color: rebeccapurple;
+    color: white;
+
+  }
+  .teamDetail{
+    font-size: 18px;
+    text-transform: capitalize;
+    span{
+    font-weight: 600;
     }
   }
  .teamMembers{
   overflow-y: scroll;
 padding: 10px;
+max-width: 300px;
+min-width: 200px;
+
+button{
+  background-color: rebeccapurple;
+  margin-left: auto;
+  color: whitesmoke;
+}
+
   h1{
     font-size: 20px;
     font-weight: 400;
     padding-bottom: 20px;
     padding-top: 20px;
+    text-align: center;
   }
   ul{
+    padding: 10px;
     li{
-      list-style:none;
+      list-style:decimal;
       font-size: 17px;
-      padding: 5px;
-      margin-top: 2px;
+      padding-right: 15px; 
+       padding: 3px; 
+      margin-top: 5px;
+      border-bottom: 1px solid rgb(217, 217, 217);
     }
 
     li:hover{
-      background-color: #d9e0d9;
+      background-color: rgb(180, 180, 180);
+      color: white;
     }
   }
  }
@@ -390,6 +458,10 @@ padding: 10px;
     color: white;
   }
 
+  .imgAvatar{
+    padding: 20px;
+    /* display: none; */
+  }
   .chatBackButton{
     display: none;
   }
@@ -430,11 +502,11 @@ padding: 10px;
     }
 
     .chatList{
-      width: fit-content;
+      width: 50%;
+      /* border-right: 1px solid black; */
 
     }
     .teamErrors {
-        /* display: none; */
         position: absolute;
         width: 30%;
         display: flex;
@@ -446,53 +518,44 @@ padding: 10px;
 
     .FirstDiv{
       overflow-y: scroll;
-      height: 85vh;
+      height: 100vh;
+      width: 100%;
     }
     .show{
-      width: 40vw;
+      width: 45vw;
       height: 100%;
     }
 
   }
 
+
+    
+
+  @media only screen and (max-width:800px){
+  .fullChat{
+    /* background-color: darkgreen !important; */
+    /* background-image: url('../../../Images/EbRAHV8Bw549jsF6v1.gif'); */
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+  }
+    .chatHistory{
+      height: 100%;
+      width: 70%;
+    }
+
+    .show{
+      width: 50%;
+      height: 100%;
+    }
+
+    .item{
+      height: 80px;
+    }
+  }
 
   @media only screen and (max-width:768px){
-
-    .fullChat{
-      height: 100%;
-      /* width: fit-content; */
-
-
-    }
-    .chatList{
-      width: fit-content;
-
-
-    }
-    .chatHistory{
-      height: 100%;
-      width: 60%;
-    }
-    .show{
-      width: 40vw;
-      height: 100%;
-    }
-  }
-
-  @media only screen and (max-width:771px){
-  
-    .chatHistory{
-      height: 100%;
-      width: 60%;
-    }
-
-    .show{
-      width: 40vw;
-      height: 100%;
-    }
-  }
-
-  @media only screen and (max-width:600px){
     .chatHistory{
       display: none;
     }
@@ -543,8 +606,8 @@ padding: 10px;
     }
 
     .show{
-      width: 60vw;
-      height: 100%;
+      width: 90%;
+      height: 100vh;
     }
 
     .chatBackButton{
@@ -553,6 +616,15 @@ padding: 10px;
       margin-right: auto;
 
     }
+    .item{
+      height: 80px;
+      padding: 90px;
+      display: flex;
+      align-items: center;
+
+     
+    }
+
 
 
     .angleLeft{
@@ -592,4 +664,34 @@ padding: 10px;
       display: none;
     }
   
+  }
+
+
+
+  @media only screen and (max-width:460px){
+
+    .teamDetail{
+      font-size: 16px !important;
+      text-transform: capitalize;
+    }
+
+    .viewMembers{
+      font-size: 12px;
+    }
+
+    .chatData{
+      width: fit-content;
+    }
+  }
+
+  @media only screen and (max-width:360px){
+
+    .teamDetail{
+      font-size: 11px !important;
+      text-transform: capitalize;
+    }
+
+    .viewMembers{
+      font-size: 10px;
+    }
   }

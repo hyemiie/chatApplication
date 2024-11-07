@@ -1,8 +1,6 @@
 .login {
   display: flex;
-  align-items: center;
-  width: 100vw;
-  background-color: rgb(255, 255, 255);
+  /* align-items: center; */
   height: 100vh;
   justify-content: space-between;
   flex-direction: column;
@@ -13,6 +11,22 @@
     width: 100%;
   }
 
+
+  .loginHeading{
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    div{
+      background-image: url('../../Images/Tier.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      width: 100px;
+      height: 100px;
+      
+    }
+  }
   .item {
     display: flex;
     align-items: center;
@@ -24,14 +38,19 @@
 
     .formDiv{
       width: 50%;
-      background-color: rgb(255, 255, 255);
 
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      align-items: first baseline;
+      justify-content: right;
       padding: 60px;
       /* padding-top: 60px; */
+      h2{
+        /* background-color: sandybrown; */
+        font-size: 20px !important;
+        font-weight: 500;
+
+      }
     }
 
     form {
@@ -40,16 +59,22 @@
       flex-direction: column;
       justify-content: center;
       gap: 10px;
-      width: 50vw;
+      width: 40vw;
+      /* background-color: rosybrown; */
+
+      h2{
+margin-right: auto;     
+ }
 
       input {
         padding: 20px;
         color: rgb(38, 35, 35);
-        width: 80%;
+        width: 100%;
         outline: none;
         background-color: transparent;
-        border: 1px solid rgb(148, 156, 164); /* explicitly set the border */
+        border: 1px solid rgb(99, 103, 107); /* explicitly set the border */
         height: 20px !important;
+        margin-top: 20px;
         box-sizing: border-box; /* makes sure padding doesn't affect width */
     }
     
@@ -60,9 +85,11 @@
         cursor: pointer;
         text-decoration: underline; */
         align-items: flex-start;
-        width: 80%;
-        font-weight: 700;
+        width: 100%;
+        font-weight: 200;
         font-size: 17px;
+        margin-top: 20px;
+        display: none;
 
         img {
           width: 50px;
@@ -74,14 +101,16 @@
       }
 
       button {
-        width: 80%;
-        height: 40px;
+        width: 100%;
+        height: 45px;
         border: none;
-        background-color: #2d3032;
+        background-color: #4d3a5e;
         color: white;
         border-radius: 5px;
         cursor: pointer;
         font-weight: 500;
+        margin-top: 20px;
+        font-size: 15px;
       }
     }
   }
@@ -90,23 +119,39 @@
     height: 90%;
     width: 9px;
     background-color: rgb(180, 40, 40);
+    display: none;
   }
 }
 
+.accessKey{
+  width: 100%;
+}
+
+.selectAccess{
+  width: 100%;
+  select{
+    width: 100%;
+    height: 40px;
+    margin-top: 20px;
+  }
+}
+
+.signupOption:hover{
+  color: rebeccapurple;
+  
+}
 
 .loginImg{
   background-image: url(../../Images/rb_56301.png);
-  width: 40%;
+  width: 80%;
   background-position: center;
   height: 100%;
   background-size: contain;
   background-repeat: no-repeat;
-  background-color: rgb(189, 176, 202);
   /* background-color: rgb(114, 31, 114); */
 }
 
 .signUpImg{
-  background-color: rgb(125, 117, 132);
   background-image: url('../../Images/image1.png') !important;
 }
 
@@ -114,16 +159,26 @@
   flex-direction: row-reverse !important;
 }
 
+.loginOption{
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  
+}
+.loginOption:hover{
+  /* border-bottom: 1px solid rebeccapurple; */
+  color:rebeccapurple
+}
 
 .progress {
-   width: 100.8px;
-   height: 16.8px;
-   background: linear-gradient(#4772ff 50%,#0000 0),
-        linear-gradient(#0000 50%,#474bff 0),
-        linear-gradient(#474bff 50%,#0000 0),
-        linear-gradient(#0000 50%,#474bff 0),
-        linear-gradient(#474bff 50%,#0000 0),
-        linear-gradient(#0000 50%,#474bff 0)
+   width: 200.8px;
+   height: 26.8px;
+   background: linear-gradient(#672f98 50%,#0000 0),
+        linear-gradient(#0000 50%,#672f98 0),
+        linear-gradient(#672f98 50%,#0000 0),
+        linear-gradient(#0000 50%,#672f98 0),
+        linear-gradient(#672f98 50%,#0000 0),
+        linear-gradient(#0000 50%,#672f98 0)
         #dbdcef;
    background-size: calc(100%/6 + 1px) 200%;
    background-repeat: no-repeat;

@@ -15,10 +15,16 @@
     align-items: center;
     gap: 20px;
     color: #7e5eab;
+    h2{
+
+    
+    font-size: 18px;
+    font-weight: 600;
+    }
 
     img {
-      width: 50px;
-      height: 50px;
+      width: 30px;
+      height: 30px;
     }
   }
 

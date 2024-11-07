@@ -21,6 +21,54 @@ justify-content: space-between;
     background-size: contain;
 }
 
+.textBrk2{
+    display: flex;
+}
+
+
+.img2{
+    width: 32%;
+    display: flex;
+    background-image: url('../../Images/4043231_afro_female_person_woman_icon.png'); 
+        align-items: center;
+        justify-content: left;
+        background-repeat: no-repeat;
+        background-position: left;
+        background-size: contain;     
+}
+
+.img1{
+    width: 30%;
+    display: flex;
+    background-image: url('../../Images/man.png'); 
+        align-items: center;
+        justify-content: left;
+        background-repeat: no-repeat;
+        background-position: left;
+        background-size: contain;     
+}
+
+.textBrk1{
+    display: flex;
+    width: 100%;
+    /* align-items: center;
+    justify-content: space-evenly; */
+}
+.callImg{
+    display: flex;
+    justify-content: space-around;
+}
+.landingParagraph{
+    font-size: 48px;
+    font-weight: 500;
+    width: 100%;
+    display: flex;
+    align-items: first baseline;
+    justify-content: left;
+    flex-direction: column;
+    padding: 30px;
+    
+}
 .landinPage{
     display: flex;
     align-items:center;
@@ -42,7 +90,7 @@ justify-content: space-between;
         font-size: 50px;
         color: rgb(44, 43, 43);
         font-weight: 500;
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
+        background-color: cadetblue;
         /* background-color: rebeccapurple; */
 
     }
@@ -50,22 +98,26 @@ justify-content: space-between;
         font-size: 50px;
         /* text-align: center; */
         font-weight: 300;
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
     }
 
     h3{
-        font-weight: 400;
-        font-size: 25px;
-    }
+        font-weight: 300;
+        font-size: 14px;
+        padding-left: 30px;
 
+    }
+    .landingBtns{
+        padding-left: 25px;
+    }
     button{
-        background-color: rgb(111, 10, 111);
         border: none;
+        background-color: transparent;
         margin-top: 30px;
         border-radius: 8px;
         padding: 5px;
+        border: 1px solid rgb(75, 74, 75);
         a{
-            color: rgb(255, 255, 255);
+            color: rgb(68, 65, 65);
             text-decoration: none;
             font-size: 20px;
             padding: 20px;
@@ -74,11 +126,12 @@ justify-content: space-between;
     }
 
     .landingBtn2{
-        background-color: transparent;
         border: 1px solid rgb(91, 66, 91);
         margin-left: 20px;
+        background-color: rgb(25, 10, 111);
+
         a{
-            color: purple ;
+            color: rgb(224, 224, 224) ;
         }
 
     }
@@ -97,7 +150,7 @@ justify-content: space-between;
 }
 
 .imgDiv{
-    width: 50%;
+    width: 60%;
 }
 
 
@@ -172,7 +225,6 @@ justify-content: space-between;
             text-align: center;
             color: rgb(196, 189, 189);
             font-weight: 500;
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
         }
     
         h3{

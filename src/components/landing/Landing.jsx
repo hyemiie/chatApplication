@@ -11,21 +11,43 @@ const Landing = () => {
       <div className="landingBodyDiv">
         <div className="landinPage">
           <div className="landingDiv">
-            <p className="landingParagraph">
-              {/* All team discussions<h2>in one room</h2> */}
-              All team discussions<h2>in one room</h2>
-            </p>
+            <div className="landingParagraph">
+              <div className="textBrk1">
+                <div className="brkText2">Discuss</div>
+                <div className="img1">
+                  <div></div>
+                </div>
+              </div>
+             
+              <div className="callImg">
+                without a 
+               
+              </div>
+              <div className="textBrk1">
+                <div className="brkText2">Hitch</div>
+                <div className="img2">
+                  <div></div>
+                </div>
+              </div>
+            </div>
             <h3>
-              Accessible and allows you to communicate from anywhere at anytime
+              Accessible and allows you to communicate <br/>from anywhere at anytime
             </h3>
-           <div className="landingBtns"> <button className="landingBtn">
+            {/* <div className="img1">
+              <div>hi</div>
+            </div> */}
+            <div className="img2"></div>
+            <div className="img3"></div>
+            <div className="landingBtns">
               {" "}
-              <a href="/lists">Get Started</a>
-            </button>
-            <button className="landingBtn2">
-              {" "}
-              <a href="/lists">Learn more</a>
-            </button>
+              <button className="landingBtn">
+                {" "}
+                <a href="/lists">Get Started</a>
+              </button>
+              <button className="landingBtn2">
+                {" "}
+                <a href="/lists">Learn more</a>
+              </button>
             </div>
           </div>
         </div>

@@ -4,7 +4,7 @@ import { useState} from "react";
  import axios from "axios";
 const Adduser = () => {
 
-//  const [teams, setTeams] = useState([])
+ const [teamView, setTeamView] = useState(false)
 const addTeam = async () => {
   const teamName = document.getElementById('newTeam').value; // Assuming 'newTeam' is an input element
   try {
@@ -26,16 +26,22 @@ const addTeam = async () => {
   }
 };
 
+if(teamView == true){
+  return;
+}
+
   return (
     <div className="addUser">
+    <div className="addUserDiv">
+    <button onClick={()=> setTeamView(true)} className="cancelBtn">[</button>
       <form action="">
         <input type="text" name="username" id="newTeam" placeholder="Team name" />
       </form>
       <div className="user">
         <div className="detail">
-          <img src="./avatar.png" alt="" />
-        </div>
         <button onClick={addTeam}>Add Team</button>
+        </div>
+      </div>
       </div>
     </div>
   );

@@ -16,9 +16,22 @@
 }
 
 .navLogo{
+    display: flex;
+    padding-left: 25px;
+
+    div{
+        background-image: url('../../Images/Tier1.png');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 80px;
+        
+    }
     h3{
         font-size: 40px;
-        color: rebeccapurple;
+        color: rgb(51, 68, 153);
+        /* padding-left: 25px; */
+
     }
 }
 
@@ -51,7 +64,7 @@
         padding: 10px;
         font-size: 17px;
         color: whitesmoke;
-        background-color: rgb(111, 10, 111);
+        background-color: rgb(51, 68, 153);
         border: none;
         width: fit-content;
         border-radius: 8px;

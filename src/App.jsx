@@ -11,11 +11,13 @@ const App = () => {
   const [user, setUser] = useState(false);
 
   useEffect(() => {
-    if (localStorage.length > 0) {
+    const loggedIn = localStorage.getItem('token')
+    if (loggedIn) {
       console.log("Logged In");
       setUser(true);
     } else {
       setUser(false);
+      console.log('user logged out')
     }
 
     return () => {

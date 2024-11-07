@@ -23,6 +23,7 @@ const Login = () => {
   const [roleKey, setroleKey] = useState("");
   const [checkRole, setcheckRole] = useState(false);
   const [loginView, setLoginView] = useState(true);
+  const navigate = useNavigate();
 
   const handleAvatar = (e) => {
     if (e.target.files[0]) {
@@ -65,6 +66,14 @@ const Login = () => {
       // const decoded = jwt_decode(token);
       console.log("TOKEN ADDED", token)
       alert("Login Successful");
+      
+  useEffect(() => {
+    const token = localStorage.getItem('userName');
+    console.log('token', token)
+    if (token) {
+        navigate('/lists'); 
+    }
+}, [navigate]);
       setLoading(false)
     } catch (error) {
       console.error("Login failed:", error.response.data.error);
@@ -117,7 +126,6 @@ const Login = () => {
     console.log(roleKey);
   };
 
-  const navigate = useNavigate();
 
   useEffect(() => {
       const token = localStorage.getItem('userName');
@@ -130,14 +138,15 @@ const Login = () => {
 
   return (
     <div className="login">
-    <div className="navDiv">      <Navbar/>
-</div>
       {loginView ? (
         <div className="item">
           <div className="loginImg"></div>
           <div className="formDiv">
-            <h2>Welcome back,</h2>
+            {/* <h2>Welcome back,</h2> */}
             <form onSubmit={handleLogin}>
+            <div className="loginHeading">
+            <div></div>
+            <h2>Welcome back,</h2></div>
               <label>Email</label>
               <input
                 type="text"
@@ -160,7 +169,7 @@ const Login = () => {
                 id="signUpPassword"
               />
               {checkRole ? (
-                <div>
+                <div className="accessKey">
                   <label>Access Key</label>
                   <input
                     placeholder="Enter Executive Key"
@@ -170,7 +179,7 @@ const Login = () => {
                   />
                 </div>
               ) : (
-                <div>
+                <div className="accessKey">
                   <label>Access Key</label>
                   <input
                     placeholder="Enter Employee Key"
@@ -180,7 +189,7 @@ const Login = () => {
                   />
                 </div>
               )}
-              <div>
+              <div className="selectAccess">
                 <label>Role</label>
                 <select value={selectedRole} onChange={handleChange}>
                   <option value="Executive">Executive</option>
@@ -193,7 +202,7 @@ const Login = () => {
 {loading ? "Loading" : "Sign in"}
                 </button>
                 }
-              <p onClick={() => setLoginView(false)}>Create a new Account?</p>
+              <p onClick={() => setLoginView(false)} className="signupOption">Create a new Account?</p>
             </form>
           </div>
         </div>
@@ -228,8 +237,8 @@ const Login = () => {
                 />
                 {/* <label>Role</label> */}
                 {/* <input type="text" name="role" id="role" /> */}
-                <div>
-                  <label>Role</label>
+                <div className="selectAccess">
+                <label>Role</label>
                   <select value={selectedRole} onChange={handleChange}>
                     <option value="Executive">Executive</option>
                     <option value="Employee">Employee</option>
@@ -244,7 +253,7 @@ const Login = () => {
                 }
                 </form>
 
-              <p onClick={() => setLoginView(true)}>
+              <p onClick={() => setLoginView(true)} className="loginOption">
                 Already have an account?..Login
               </p>
             </div>
