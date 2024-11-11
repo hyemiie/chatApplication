@@ -12,6 +12,7 @@ import {
   faVideoCamera,
   faAngleLeft,
   faTrash,
+  faFile,
 } from "@fortawesome/free-solid-svg-icons";
 import { deleteModel } from "mongoose";
 import video from "../../../Images/video2.mp4"
@@ -671,6 +672,7 @@ const Chatlist = ({ teamId }) => {
                 className="imageInput"
               />
               {/* </div> */}
+              <FontAwesomeIcon icon={faFile}/>
               <input
                 type="text"
                 placeholder="Type a message..."

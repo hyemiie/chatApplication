@@ -6,14 +6,14 @@ const Navbar = () => {
     <div className="navPage">
       <div className="firstDiv">
         <div className="navLogo">
-        <div></div>
+        {/* <div></div> */}
           <h3>Tier</h3>
         </div>
       </div>
 
       <div className="secDiv">
         <a href="/login" className="loginBtn">Login</a>
-        <button>
+        <button className="getStarted">
           <a href="/lists">Get started free</a>
         </button>
       </div>

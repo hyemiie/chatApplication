@@ -2,14 +2,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 5px;
+    /* padding: 5px; */
     top: 0;
     right: 0;
     position: sticky;
-    /* border-bottom: 1px solid rgb(199, 197, 197); */
+    border-bottom: 1px solid rgb(199, 197, 197);
     height: 60px;
     background-color: rgb(255, 255, 255);
-    padding:15px;
+    padding:10px;
 }
 
 .firstDiv{
@@ -17,7 +17,7 @@
 
 .navLogo{
     display: flex;
-    padding-left: 25px;
+    padding-left: 20px;
 
     div{
         background-image: url('../../Images/Tier1.png');
@@ -88,13 +88,13 @@
             text-decoration: none;
             color: black;
             border-radius: 10px;
-            font-size: 18px;
+            font-size: 15px;
             /* margin-right: 30px; */
             padding-left: 10px;
             padding-right: 10px;
             padding-top: 5px;
             padding-bottom: 5px;
-            background-color: rgb(111, 10, 111);
+            /* background-color: rgb(111, 10, 111); */
             color: #f7f7f7;
             font-weight: 700;
         }
@@ -104,17 +104,57 @@
         }
     
         button{
-            font-size: 13px;
+            font-size: 14px;
             color: whitesmoke;
             border: none;
            text-align: left;
            width: fit-content;
            height: fit-content;
-           display: none;
+           /* display: none; */
 
 
     
         }
     }
     
+}
+
+@media screen and (max-width:600px) {
+
+
+    .navPage{
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .navLogo{
+        h3{
+            font-size: 33px !important;
+
+        }
+    }
+    .getStarted{
+        display: none;
+    }
+
+    .loginBtn{
+        font-size: 14px;
+        color: whitesmoke !important;
+        border: none;
+       text-align: center;
+       width: fit-content;
+       height: fit-content;
+       background-color: rgb(65, 83, 169);
+       padding: 5px !important;
+       width: 100px;
+       a{
+        color: whitesmoke;
+
+       }
+
+
+    }
+
+    
+         
 }

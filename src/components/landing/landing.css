@@ -1,84 +1,97 @@
-
-.landingBody{
+.landingBody {
 }
 
-.landingBodyDiv{
-    /* background-color: plum; */
-display: flex;
-align-items: center;
-justify-content: space-between;
+.landingBodyDiv {
+  /* background-color: rgb(246, 245, 250); */
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 90vh;
 }
 
-.navDiv{
-    background-color: hotpink;
+.navDiv {
+  background-color: hotpink;
 }
 
-.imgDiv{
-    background-image: url('../../Images/EbRAHV8Bw549jsF6v1.gif'); 
-    width: 40%;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
+.imgDiv {
+  width: 45%;
+
+  height: 100%;
+  /* background-color: rgb(233, 230, 249); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
-.textBrk2{
-    display: flex;
+.landingImg {
+  background-image: url("../../Images/rb_5278.png");
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 60%;
+  position: fixed;
+}
+.textBrk2 {
+  display: flex;
 }
 
-
-.img2{
-    width: 32%;
-    display: flex;
-    background-image: url('../../Images/4043231_afro_female_person_woman_icon.png'); 
-        align-items: center;
-        justify-content: left;
-        background-repeat: no-repeat;
-        background-position: left;
-        background-size: contain;     
+.img2 {
+  width: 32%;
+  display: flex;
+  background-image: url("../../Images/4043231_afro_female_person_woman_icon.png");
+  align-items: center;
+  justify-content: left;
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: contain;
 }
 
-.img1{
-    width: 30%;
-    display: flex;
-    background-image: url('../../Images/man.png'); 
-        align-items: center;
-        justify-content: left;
-        background-repeat: no-repeat;
-        background-position: left;
-        background-size: contain;     
+.img1 {
+  width: 30%;
+  display: flex;
+  background-image: url("../../Images/man.png");
+  align-items: center;
+  justify-content: left;
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: contain;
 }
 
-.textBrk1{
-    display: flex;
-    width: 100%;
-    /* align-items: center;
+.textBrk1 {
+  display: flex;
+  width: 100%;
+  font-size: 60px;
+  /* align-items: center;
     justify-content: space-evenly; */
 }
-.callImg{
-    display: flex;
-    justify-content: space-around;
+.callImg {
+  display: flex;
+  justify-content: space-around;
+  font-size: 60px;
 }
-.landingParagraph{
-    font-size: 48px;
-    font-weight: 500;
-    width: 100%;
-    display: flex;
-    align-items: first baseline;
-    justify-content: left;
-    flex-direction: column;
-    padding: 30px;
-    
+.landingParagraph {
+  font-size: 48px;
+  font-weight: 500;
+  width: 100%;
+  display: flex;
+  align-items: first baseline;
+  justify-content: left;
+  flex-direction: column;
+  /* padding: 25px; */
 }
-.landinPage{
-    display: flex;
-    align-items:center;
-    justify-content: center;
-    /* justify-content: space-between; */
-    padding: 20px;
-    height: 80vh;
-    width: 60%;
+.landinPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* justify-content: space-between; */
+  padding: 20px;
+  height: 80%;
+  width: 30%;
 
-.landingDiv{
+  .landingDiv {
     width: 100%;
     height: 100%;
     align-items: flex-start;
@@ -86,168 +99,302 @@ justify-content: space-between;
     display: flex;
     flex-direction: column;
 
-    p{
-        font-size: 50px;
-        color: rgb(44, 43, 43);
-        font-weight: 500;
-        background-color: cadetblue;
-        /* background-color: rebeccapurple; */
-
+    p {
+      font-size: 50px;
+      color: rgb(44, 43, 43);
+      font-weight: 500;
+      background-color: cadetblue;
+      /* background-color: rebeccapurple; */
     }
-    h2{
-        font-size: 50px;
-        /* text-align: center; */
-        font-weight: 300;
-    }
-
-    h3{
-        font-weight: 300;
-        font-size: 14px;
-        padding-left: 30px;
-
-    }
-    .landingBtns{
-        padding-left: 25px;
-    }
-    button{
-        border: none;
-        background-color: transparent;
-        margin-top: 30px;
-        border-radius: 8px;
-        padding: 5px;
-        border: 1px solid rgb(75, 74, 75);
-        a{
-            color: rgb(68, 65, 65);
-            text-decoration: none;
-            font-size: 20px;
-            padding: 20px;
-            height: 50px;
-        }
+    h2 {
+      font-size: 50px;
+      /* text-align: center; */
+      font-weight: 300;
     }
 
-    .landingBtn2{
-        border: 1px solid rgb(91, 66, 91);
-        margin-left: 20px;
-        background-color: rgb(25, 10, 111);
-
-        a{
-            color: rgb(224, 224, 224) ;
-        }
-
+    h3 {
+      font-weight: 300;
+      font-size: 14px;
+      /* padding-left: 30px; */
+    }
+    .landingBtns {
+      /* padding-left: 25px; */
+    }
+    button {
+      border: none;
+      background-color: transparent;
+      margin-top: 30px;
+      border-radius: 8px;
+      padding: 10px;
+      border: 1px solid rgb(75, 74, 75);
+      a {
+        color: rgb(68, 65, 65);
+        text-decoration: none;
+        font-size: 20px;
+        padding: 20px;
+        height: 50px;
+      }
     }
 
-}
+    .landingBtn2 {
+      border: 1px solid rgb(91, 66, 91);
+      margin-left: 20px;
+      background-color: rgb(25, 10, 111);
+
+      a {
+        color: rgb(224, 224, 224);
+      }
+    }
+  }
 }
 
-.landingImg{
-    /* background-image: url(../../Images/Chatting.gif); */
-    height: 500px;
-    /* background-position: center; */
-    background-size: contain;
-    background-repeat: no-repeat
-    ;
-    
+.decriptionImg {
+  /* background-color: chocolate; */
+  background-image: url("../../Images/chatIcon2.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: contain;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
 }
 
-.imgDiv{
-    width: 60%;
+.txtDiv {
+  width: 10%;
+  height: 60vh;
+  display: flex;
+  align-items: last baseline;
+  justify-content: left;
+  margin-left: 50px;
+
+  h2 {
+    font-weight: 600;
+    font-size: 17px;
+  }
+  h3 {
+    font-weight: 400;
+    font-size: 16px;
+  }
 }
-
-
-@media screen and (max-width:600px) {
-    .landinPage{
-    
-    .landingDiv{
-        width: 100%;
-        align-items: center;
-        justify-content: center;
+@media (max-width: 480px) {
+    .landingBodyDiv {
         display: flex;
         flex-direction: column;
+        height: 100vh;
+      }
     
-        p{
-            font-size: 35px;
-            color: rgb(44, 43, 43);
-            font-weight: 500;
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
-            /* background-color: rebeccapurple; */
+      .landinPage {
+        width: 100%;
+        height: 35%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     
-        }
-        h2{
-            font-size: 30px;
-            text-align: center;
-            color: rgb(196, 189, 189);
-            font-weight: 500;
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
-        }
-    
-        h3{
-            font-weight: 400;
-            font-size: 18px;
-            text-align: center;
+        h3 {
+          width: 100%;
+          text-align: center;
+
         }
     
-        button{
-            background-color: plum;
-            border: none;
-            margin-top: 30px;
-            border-radius: 15px;
-            padding: 5px;
-            a{
-                color: rgb(255, 255, 255);
-                text-decoration: none;
-                font-size: 25px;
-                padding: 20px;
-                height: 40px;
-            }
-        }
+        .landingBtns {
+          width: 100%;
+          align-items: center;
+          justify-content: center;
+          display: flex;
+          flex-direction: column;
     
+          button {
+            width: 95%;
+            height: 50px;
+          }
+        }
+      }
+    
+      .landingBtn2 {
+        margin-left: 2px !important;
+      }
+    
+      .landingParagraph {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        div {
+          font-size: 28px;
+          width: fit-content;
+          margin-left: 8px;
+        }
+      }
+      .callImg {
+        width: 200px;
+      }
+    
+      .textBrk1 {
+      }
+    
+      .imgDiv {
+        width: 100%;
+        height: 30%;
+        .landingImg {
+          width: 100%;
+          height: 70%;
+        }
+      }
+    
+      .txtDiv {
+        width: 100%;
+        height: 20%;
+        padding-top: 20px !important;
+        display: flex;
+        align-items: first baseline;
+        justify-content: right;
+
     }
-    }
+
+      
 }
 
-@media screen and (max-width:400px) {
+@media (min-width: 481px) and (max-width: 767px) {
+  .landingBodyDiv {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
 
-    .landinPage{
-    
-    .landingDiv{
- 
-    
-        p{
-            font-size: 30px;
-            color: rgb(44, 43, 43);
-            font-weight: 500;
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
-            /* background-color: rebeccapurple; */
-    
-        }
-        h2{
-            font-size: 25px;
-            text-align: center;
-            color: rgb(196, 189, 189);
-            font-weight: 500;
-        }
-    
-        h3{
-            font-weight: 400;
-            font-size: 15px;
-        }
-    
-        button{
-            background-color: plum;
-            border: none;
-            margin-top: 30px;
-            border-radius: 15px;
-            padding: 2px;
-            a{
-                color: rgb(255, 255, 255);
-                text-decoration: none;
-                font-size: 22px;
-                padding: 20px;
-                height: 40px;
-            }
-        }
-    
+  .landinPage {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h3 {
+      width: 100%;
+      text-align: center;
     }
+
+    .landingBtns {
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      padding: 20px;
+      /* flex-direction: column; */
+
+      button {
+        width: 100%;
+        height: 60px;
+      }
     }
+  }
+
+  .landingBtn2 {
+    /* margin-left: 5px !important; */
+  }
+
+  .landingParagraph {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    div {
+      font-size: 40px;
+      width: fit-content;
+      margin-left: 10px;
+    }
+  }
+  .callImg {
+    width: 200px;
+  }
+
+  .textBrk1 {
+  }
+
+  .imgDiv {
+    width: 100%;
+    height: 30%;
+    .landingImg {
+      width: 90%;
+    }
+  }
+
+  .txtDiv {
+    width: 100%;
+    height: 30%;
+    padding-top: 20px !important;
+    display: flex;
+    align-items: first baseline;
+    justify-content: right;
+
+}
 }
 
+@media (min-width: 768px) and (max-width: 1000px) {
+  .landingBtn2 {
+    margin-left: 0px !important;
+    padding: 0;
+  }
+  button {
+    width: 200px;
+  }
+  .landingBodyDiv {
+  }
+  .landingImg {
+    width: 75%;
+    height: 55%;
+  }
+  .textBrk1 {
+    font-size: 40px;
+  }
+  .callImg {
+    font-size: 40px;
+  }
+  .txtDiv {
+    display: none;
+  }
+}
+
+@media (min-width: 1000px) and (max-width: 1200px) {
+  .landingBodyDiv {
+  }
+  .landingBtn2 {
+    margin-left: 2px !important;
+  }
+  button {
+    width: 250px;
+    padding: 15px !important;
+  }
+
+  .textBrk1 {
+    font-size: 40px;
+  }
+  .callImg {
+    font-size: 40px;
+  }
+  .txtDiv {
+    height: 85%;
+  }
+
+  .landingImg {
+    width: 70%;
+    height: 50%;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1440px) {
+  .textBrk1 {
+    font-size: 45px;
+  }
+  .callImg {
+    font-size: 45px;
+  }
+  .landingImg {
+    width: 100%;
+    height: 60%;
+  }
+
+  .txtDiv {
+    height: 85%;
+  }
+}
