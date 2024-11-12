@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 
 const UserInfo = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState("Guest? Try signing in");
   const [logoutView, setLogoutView] = useState(false);
   const getUsername = async () => {
     try {

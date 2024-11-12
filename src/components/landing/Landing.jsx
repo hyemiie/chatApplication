@@ -18,10 +18,10 @@
 //                   <div></div>
 //                 </div>
 //               </div>
-             
+
 //               <div className="callImg">
-//                 without a 
-               
+//                 without a
+
 //               </div>
 //               <div className="textBrk1">
 //                 <div className="brkText2">Hitch</div>
@@ -87,11 +87,8 @@ const Landing = () => {
                   <div></div>
                 </div> */}
               </div>
-             
-              <div className="callImg">
-                without a 
-               
-              </div>
+
+              <div className="callImg">without a</div>
               <div className="textBrk1">
                 <div className="brkText2">Hitch</div>
                 {/* <div className="img2">
@@ -100,7 +97,8 @@ const Landing = () => {
               </div>
             </div>
             <h3>
-              Accessible and allows you to communicate <br/>from anywhere at anytime
+              Accessible and allows you to communicate <br />
+              from anywhere at anytime
             </h3>
             {/* <div className="img1">
               <div>hi</div>
@@ -122,13 +120,12 @@ const Landing = () => {
         </div>
         <div className="imgDiv">
           <div className="landingImg"></div>
-        </div>
-        <div className="txtDiv">
-          <div className="landingDescImg"></div>
-          <div className="landingDesc">
-          <div className="decriptionImg"></div>
-          <h2>Message Chat</h2>
-          <h3>Live, Smart Communication</h3>
+          <div className="txtDiv">
+            <div className="landingDesc">
+              <div className="decriptionImg"></div>
+              <h2>Message Chat</h2>
+              <h3>Live, Smart Communication</h3>
+            </div>
           </div>
         </div>
       </div>

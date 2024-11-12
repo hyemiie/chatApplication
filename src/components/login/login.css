@@ -5,6 +5,9 @@
   justify-content: space-between;
   flex-direction: column;
   overflow: hidden;
+  /* background-color: rgb(243, 231, 243); */
+  /* background-color: rgb(242, 236, 242); */
+  background-color: rgb(245, 246, 255);
 
 
   .navDiv{
@@ -33,22 +36,28 @@
     flex-direction: row;
     width: 100vw;
     height: 100vh;
+    overflow-y: scroll !important;
+
     /* background: #000; */
     /* gap: 20px; */
 
     .formDiv{
-      width: 50%;
+      width: 75%;
 
       display: flex;
       flex-direction: column;
       align-items: first baseline;
-      justify-content: right;
+      justify-content: center;
       padding: 60px;
       /* padding-top: 60px; */
       h2{
-        /* background-color: sandybrown; */
         font-size: 20px !important;
         font-weight: 500;
+        align-items: center;
+        text-align: center !important;
+        width: 100%;
+        margin-top: 60px;
+
 
       }
     }
@@ -79,6 +88,23 @@ margin-right: auto;
     }
     
 
+    .passwordDiv{
+      width: 100%;
+      display: flex;
+      position: relative;
+
+      input{
+        width: 100%;     
+      }
+      .passwordButton{
+        position: absolute;
+        margin-left: 90%;
+        width: 10%;
+        background-color: transparent;
+        color: rebeccapurple;
+      }
+    }
+
       label {
         /* display: flex;
         justify-content: space-between;
@@ -105,6 +131,7 @@ margin-right: auto;
         height: 45px;
         border: none;
         background-color: #4d3a5e;
+        background-color: rgb(51, 68, 153);
         color: white;
         border-radius: 5px;
         cursor: pointer;
@@ -228,12 +255,16 @@ margin-right: auto;
   }
 
   .loginImg{
-    width: 50% !important;
+    width: 70% !important;
   }
-
+.formDiv{
+  width: 80% !important;
+}
   .item{
     padding: 0 !important;
     margin:0 !important;
+    display: flex;
+    flex-direction: column !important;
     form{
       width: 100% !important;
       padding: 0 !important;
@@ -253,17 +284,22 @@ margin-right: auto;
   }
   .formDiv{
     width: 100% !important;
-    height: 100% !important;
+    height: 50% !important;
+    display: flex;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-bottom: 20px !important;
   }
 
   .loginImg{
-    width: 100vw !important;
-    display: none;
+    width: 50% !important;
+    height: 40%;
   }
 
   .item{
+overflow-x: scroll !important;
     form{
-      width: 90% !important;
+      width: 80% !important;
 label{
   width: 100% !important;
   margin-top: 20px;

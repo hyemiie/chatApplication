@@ -5,16 +5,16 @@
   justify-content: space-between;
   position: sticky;
   top: 0; 
-  background-color: #fefefe;
+  background-color: #e7e7e7;
   height: 30px;
-  border-bottom: 1px solid rgb(222, 221, 219);
+  border-bottom: 1px solid rgb(176, 176, 176);
 
 
   .user {
     display: flex;
     align-items: center;
     gap: 20px;
-    color: #7e5eab;
+    color: #313158;
     h2{
 
     

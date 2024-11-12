@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import Navbar from "../Navbar/Navbar";
 import { faL } from "@fortawesome/free-solid-svg-icons";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -23,6 +25,7 @@ const Login = () => {
   const [roleKey, setroleKey] = useState("");
   const [checkRole, setcheckRole] = useState(false);
   const [loginView, setLoginView] = useState(true);
+  const [passwordView, setPasswordView] = useState(false);
   const navigate = useNavigate();
 
   const handleAvatar = (e) => {
@@ -40,7 +43,7 @@ const Login = () => {
   // };
 
   const handleLogin = async (e) => {
-    setLoading(true)
+    setLoading(true);
     e.preventDefault();
 
     const password = document.getElementById("signUpPassword").value;
@@ -58,32 +61,30 @@ const Login = () => {
     console.log("Signup data:", data);
 
     try {
-      const response = await axios.post("https://chatapplication-backend-d65c.onrender.com/login", data);
+      const response = await axios.post(
+        "https://chatapplication-backend-d65c.onrender.com/login",
+        data
+      );
 
       const { token } = response.data;
       localStorage.setItem("token", token);
       localStorage.setItem("userName", token);
       // const decoded = jwt_decode(token);
-      console.log("TOKEN ADDED", token)
+      console.log("TOKEN ADDED", token);
       alert("Login Successful");
-      
-  useEffect(() => {
-    const token = localStorage.getItem('userName');
-    console.log('token', token)
-    if (token) {
-        navigate('/lists'); 
-    }
-}, [navigate]);
-      setLoading(false)
+
+      navigate("/lists");
+
+      setLoading(false);
     } catch (error) {
       console.error("Login failed:", error.response.data.error);
-      setLoading(false)
+      setLoading(false);
       alert(error);
     }
   };
 
   const handleSignup = async (e) => {
-    setLoading(true)
+    setLoading(true);
     e.preventDefault();
     const username = document.getElementById("SignUpusername").value;
     const password = document.getElementById("password").value;
@@ -100,19 +101,25 @@ const Login = () => {
     };
 
     try {
-      const response = await axios.post("https://chatapplication-backend-d65c.onrender.com/register", data);
+      const response = await axios.post(
+        "https://chatapplication-backend-d65c.onrender.com/register",
+        data
+      );
 
       alert("SignUp Successful");
-      setLoading(false)
-
+      setLoading(false);
     } catch (error) {
       console.error(
         "Signup failed:",
         error.response?.data?.error || error.message
       );
-      setLoading(false)
+      setLoading(false);
       alert("Signup failed: " + (error.response?.data?.error || error.message));
     }
+  };
+
+  const togglePasswordView = () => {
+    setPasswordView((prevState) => !prevState);
   };
 
   const handleChange = (event) => {
@@ -126,27 +133,27 @@ const Login = () => {
     console.log(roleKey);
   };
 
-
-  useEffect(() => {
-      const token = localStorage.getItem('userName');
-      console.log('token', token)
-      if (token) {
-          navigate('/lists'); 
-      }
-  }, [navigate]);
-
+  // useEffect(() => {
+  //     const token = localStorage.getItem('userName');
+  //     console.log('token', token)
+  //     if (token) {
+  //         navigate('/lists');
+  //     }
+  // }, [navigate]);
 
   return (
     <div className="login">
+    <Navbar/>
       {loginView ? (
         <div className="item">
           <div className="loginImg"></div>
           <div className="formDiv">
             {/* <h2>Welcome back,</h2> */}
             <form onSubmit={handleLogin}>
-            <div className="loginHeading">
-            <div></div>
-            <h2>Welcome back,</h2></div>
+              <div className="loginHeading">
+                {/* <div></div> */}
+                <h2>Enter your details to join your team</h2>
+              </div>
               <label>Email</label>
               <input
                 type="text"
@@ -162,12 +169,22 @@ const Login = () => {
                 id="username"
               />
               <label>Password</label>
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                id="signUpPassword"
-              />
+              <div className="passwordDiv">
+                <input
+                  type={passwordView ? "text" : "password"}
+                  placeholder="Password"
+                  name="password"
+                  id="signUpPassword"
+                />
+                <button
+                  type="button"
+                  className="passwordButton"
+                  onClick={togglePasswordView}
+                  aria-label={passwordView ? "Hide password" : "Show password"}
+                >
+                  {passwordView ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
               {checkRole ? (
                 <div className="accessKey">
                   <label>Access Key</label>
@@ -196,13 +213,16 @@ const Login = () => {
                   <option value="Employee">Employee</option>
                 </select>
               </div>
-              {loading? <div className="progress"></div>
-
-: <button disabled={loading}>
-{loading ? "Loading" : "Sign in"}
+              {loading ? (
+                <div className="progress"></div>
+              ) : (
+                <button disabled={loading}>
+                  {loading ? "Loading" : "Sign in"}
                 </button>
-                }
-              <p onClick={() => setLoginView(false)} className="signupOption">Create a new Account?</p>
+              )}
+              <p onClick={() => setLoginView(false)} className="signupOption">
+                Create a new Account?
+              </p>
             </form>
           </div>
         </div>
@@ -228,30 +248,51 @@ const Login = () => {
                   name="email"
                   id="email"
                 />
-                <label>Password</label>
+                {/* <label>Password</label>
                 <input
                   type="password"
                   placeholder="Password"
                   name="password"
                   id="password"
-                />
+                /> */}
+                <label>Password</label>
+                <div className="passwordDiv">
+                  <input
+                    type={passwordView ? "text" : "password"}
+                    placeholder="Password"
+                    name="password"
+                    id="password"
+                  />
+                  <button
+                    type="button"
+                    className="passwordButton"
+                    onClick={togglePasswordView}
+                    aria-label={
+                      passwordView ? "Hide password" : "Show password"
+                    }
+                  >
+                    {passwordView ? <FaEyeSlash /> : <FaEye />}
+                  </button>
+                </div>
+
                 {/* <label>Role</label> */}
                 {/* <input type="text" name="role" id="role" /> */}
                 <div className="selectAccess">
-                <label>Role</label>
+                  <label>Role</label>
                   <select value={selectedRole} onChange={handleChange}>
                     <option value="Executive">Executive</option>
                     <option value="Employee">Employee</option>
                   </select>
                 </div>
-               
-                {loading? <div className="progress"></div>
 
-: <button disabled={loading}>
-{loading ? "Loading" : "Sign Up"}
-                </button>
-                }
-                </form>
+                {loading ? (
+                  <div className="progress"></div>
+                ) : (
+                  <button disabled={loading}>
+                    {loading ? "Loading" : "Sign Up"}
+                  </button>
+                )}
+              </form>
 
               <p onClick={() => setLoginView(true)} className="loginOption">
                 Already have an account?..Login

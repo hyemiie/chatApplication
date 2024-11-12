@@ -13,9 +13,12 @@ import {
   faAngleLeft,
   faTrash,
   faFile,
+  faSquareEnvelope,
+  faPaperPlane,
+  faSmile,
 } from "@fortawesome/free-solid-svg-icons";
 import { deleteModel } from "mongoose";
-import video from "../../../Images/video2.mp4"
+import video from "../../../Images/video2.mp4";
 
 const Chatlist = ({ teamId }) => {
   const [addMode, setAddMode] = useState(false);
@@ -158,12 +161,15 @@ const Chatlist = ({ teamId }) => {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(`https://chatapplication-backend-d65c.onrender.com/teamChat`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        params: { teamId },
-      });
+      const response = await axios.get(
+        `https://chatapplication-backend-d65c.onrender.com/teamChat`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          params: { teamId },
+        }
+      );
       setChatHistory(response.data);
       console.log("res", chatHistory);
     } catch (error) {
@@ -175,11 +181,14 @@ const Chatlist = ({ teamId }) => {
     const getTeams = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("https://chatapplication-backend-d65c.onrender.com/getAllTeams", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          "https://chatapplication-backend-d65c.onrender.com/getAllTeams",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         setTeams(response.data.teams);
         console.log(response.data);
       } catch (error) {
@@ -214,12 +223,15 @@ const Chatlist = ({ teamId }) => {
     console.log("teamId", teamId);
     const token = localStorage.getItem("token");
     try {
-      const response = await axios.get("https://chatapplication-backend-d65c.onrender.com/teamErrors", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        params: { teamId },
-      });
+      const response = await axios.get(
+        "https://chatapplication-backend-d65c.onrender.com/teamErrors",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          params: { teamId },
+        }
+      );
       console.log(response);
       setTeamErrors(response.data.teamErrors);
       setSelectedToggle(true);
@@ -305,9 +317,12 @@ const Chatlist = ({ teamId }) => {
   const deleteChat = async () => {
     if (!messageID) return; // Exit if no messageId is set
     try {
-      const response = await axios.delete(`https://chatapplication-backend-d65c.onrender.com/delete`, {
-        params: { messageID, selectedTeamId },
-      });
+      const response = await axios.delete(
+        `https://chatapplication-backend-d65c.onrender.com/delete`,
+        {
+          params: { messageID, selectedTeamId },
+        }
+      );
       console.log("deleted");
       alert("Message deleted");
       setMessageID(null);
@@ -329,9 +344,12 @@ const Chatlist = ({ teamId }) => {
 
   const allUsers = async () => {
     try {
-      const response = await axios.get(`https://chatapplication-backend-d65c.onrender.com/allUsers`, {
-        params: { messageID, selectedTeamId },
-      });
+      const response = await axios.get(
+        `https://chatapplication-backend-d65c.onrender.com/allUsers`,
+        {
+          params: { messageID, selectedTeamId },
+        }
+      );
       console.log("Team members response", response.data);
 
       setTeamMembers(response.data.AllUsers);
@@ -357,12 +375,15 @@ const Chatlist = ({ teamId }) => {
   const searchChat = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(`https://chatapplication-backend-d65c.onrender.com/getAllTeams`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        params: { teamId },
-      });
+      const response = await axios.get(
+        `https://chatapplication-backend-d65c.onrender.com/getAllTeams`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          params: { teamId },
+        }
+      );
       // setTeamErrors(response.data);
       const searchedTeam = response.data.teams;
       const userSearchUpdate = searchedTeam.filter((searched) =>
@@ -438,7 +459,7 @@ const Chatlist = ({ teamId }) => {
 
           {teams.map((team) => (
             <div key={team._id} className="item">
-              <img src="./avatar.png" alt="avatar"  className="imgAvatar"/>
+              <img src="./avatar.png" alt="avatar" className="imgAvatar" />
               <div className="texts">
                 <div className="teamDiv">
                   <span
@@ -454,9 +475,7 @@ const Chatlist = ({ teamId }) => {
                     >
                       {inputVisibility[team._id] ? <h2>-</h2> : <h2>+</h2>}
                     </button>
-                  ) : (
-                    null
-                  )}
+                  ) : null}
                 </div>
                 {/* {!inputVisibility[team._id] ? 
   <div className="chatSnippet">recent messages</div>
@@ -500,7 +519,7 @@ const Chatlist = ({ teamId }) => {
           isMobileChatOpen ? "mobile-open" : "mobilechatHistory"
         }`}
       >
-      {/* <div className="videoDiv"> <video src={video}/></div> */}
+        {/* <div className="videoDiv"> <video src={video}/></div> */}
         {selectedTeamId ? (
           <div className="chat">
             <div className="top">
@@ -551,104 +570,125 @@ const Chatlist = ({ teamId }) => {
                 )}
               </div>
               {chatHistory.length === 0 ? (
-  <div className="emptyDiv">
-    <h3 className="emptyChat">This chat is currently empty</h3>
-    <div className="emptyImg"></div>
-  </div>
-) : (
-  chatHistory.map((chat, index) => {
-    // Current message date
-    const currentDate = new Date(chat.createdAt);
-    // Previous message date, if it exists
-    const previousDate = index > 0 ? new Date(chatHistory[index - 1].createdAt) : null;
-    
-    // Determine if a new date header is needed
-    const showDateHeader = !previousDate || currentDate.toDateString() !== previousDate.toDateString();
-
-    return (
-      <div key={chat._id}>
-        {showDateHeader && (
-          <div className="dateHeader">
-            {currentDate.toDateString()}
-          </div>
-        )}
-
-        {/* Chat message */}
-        <div
-          className={`message ${chat.sender !== userName ? "message" : "own"}`}
-        >
-          {chat.chatHistory.type === "text" ? (
-            <div>
-              {/* <img src="./avatar.png" alt="avatar" /> */}
-              <div className="textsDiv userTxt">
-                <span className="textHeading">
-                  {chat.sender === userName ? null : (
-                    <h2 className="chatSender">{chat.sender}</h2>
-                  )}
-                  {/* {new Date(chat.createdAt).toDateString()} */}
-                </span>
-
-                <div className="delChat">
-                  <div className="dataDate">
-                    <p className="chatData">
-                      {chat.chatHistory.data}
-                    </p>
-                    <span className="underDate">
-                      {currentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                    </span>
-                  </div>
-                  {userRole === "Executive" && (
-                    <FontAwesomeIcon
-                      icon={faTrash}
-                      onClick={() => {
-                        if (window.confirm("Are you sure you want to delete this message?")) {
-                          setMessageID(chat._id);
-                        }
-                      }}
-                    />
-                  )}
+                <div className="emptyDiv">
+                  <h3 className="emptyChat">This chat is currently empty</h3>
+                  <div className="emptyImg"></div>
                 </div>
-              </div>
-            </div>
-          ) : (
-            <div>
-              <h2>{chat.sender}</h2>
-              <div className="textsDiv userTxt">
-                {/* <img src="./avatar.png" alt="avatar" /> */}
-                <span className="ImgTextHeading">
-                  {/* {currentDate.toDateString()} */}
-                  {chat.sender === userName ? null : (
-                    <h2 className="chatSender">{chat.sender}</h2>
-                  )}
-                </span>
-                <div>
-                  <img
-                    src={`https://chatapplication-backend-d65c.onrender.com${chat.chatHistory.data}`}
-                    alt="Image"
-                    className="chatImage"
-                  />
-                  {userRole === "Executive" && (
-                    <FontAwesomeIcon
-                      icon={faTrash}
-                      onClick={() => {
-                        if (window.confirm("Are you sure you want to delete this message?")) {
-                          setMessageID(chat._id);
-                        }
-                      }}
-                    />
-                  )}
-                </div>
-                <span>
-                  {currentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                </span>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  })
-)}
+              ) : (
+                chatHistory.map((chat, index) => {
+                  // Current message date
+                  const currentDate = new Date(chat.createdAt);
+                  // Previous message date, if it exists
+                  const previousDate =
+                    index > 0
+                      ? new Date(chatHistory[index - 1].createdAt)
+                      : null;
+
+                  // Determine if a new date header is needed
+                  const showDateHeader =
+                    !previousDate ||
+                    currentDate.toDateString() !== previousDate.toDateString();
+
+                  return (
+                    <div key={chat._id}>
+                      {showDateHeader && (
+                        <div className="dateHeader">
+                          {currentDate.toDateString()}
+                        </div>
+                      )}
+
+                      {/* Chat message */}
+                      <div
+                        className={`message ${
+                          chat.sender !== userName ? "message" : "own"
+                        }`}
+                      >
+                        {chat.chatHistory.type === "text" ? (
+                          <div>
+                            {/* <img src="./avatar.png" alt="avatar" /> */}
+                            <div className="textsDiv userTxt">
+                              <span className="textHeading">
+                                {chat.sender === userName ? null : (
+                                  <h2 className="chatSender">{chat.sender}</h2>
+                                )}
+                                {/* {new Date(chat.createdAt).toDateString()} */}
+                              </span>
+
+                              <div className="delChat">
+                                <div className="dataDate">
+                                  <p className="chatData">
+                                    {chat.chatHistory.data}
+                                  </p>
+                                  <span className="underDate">
+                                    {currentDate.toLocaleTimeString([], {
+                                      hour: "2-digit",
+                                      minute: "2-digit",
+                                    })}
+                                  </span>
+                                </div>
+                                {userRole === "Executive" && (
+                                  <FontAwesomeIcon
+                                    icon={faTrash}
+                                    onClick={() => {
+                                      if (
+                                        window.confirm(
+                                          "Are you sure you want to delete this message?"
+                                        )
+                                      ) {
+                                        setMessageID(chat._id);
+                                      }
+                                    }}
+                                  />
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          <div>
+                            {/* <h2>{chat.sender}</h2> */}
+                            <div className="textsDiv userTxt">
+                              {/* <img src="./avatar.png" alt="avatar" /> */}
+                              <span className="ImgTextHeading">
+                                {/* {currentDate.toDateString()} */}
+                                {chat.sender === userName ? null : (
+                                  <h2 className="chatSender">{chat.sender}</h2>
+                                )}
+                              </span>
+                              <div>
+                                <img
+                                  src={`https://chatapplication-backend-d65c.onrender.com${chat.chatHistory.data}`}
+                                  alt="Image"
+                                  className="chatImage"
+                                />
+                                {userRole === "Executive" && (
+                                  <FontAwesomeIcon
+                                    icon={faTrash}
+                                    onClick={() => {
+                                      if (
+                                        window.confirm(
+                                          "Are you sure you want to delete this message?"
+                                        )
+                                      ) {
+                                        setMessageID(chat._id);
+                                      }
+                                    }}
+                                  />
+                                )}
+                              </div>
+                              <span>
+                                {currentDate.toLocaleTimeString([], {
+                                  hour: "2-digit",
+                                  minute: "2-digit",
+                                })}
+                              </span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })
+              )}
 
               <div ref={endRef}></div>
             </div>
@@ -671,8 +711,7 @@ const Chatlist = ({ teamId }) => {
                 accept="image/*"
                 className="imageInput"
               />
-              {/* </div> */}
-              <FontAwesomeIcon icon={faFile}/>
+              {/* <FontAwesomeIcon icon={faFile}/> */}
               <input
                 type="text"
                 placeholder="Type a message..."
@@ -683,10 +722,15 @@ const Chatlist = ({ teamId }) => {
                 className="userMessage"
               />
               <div className="emoji">
-                <img
+                {/* <img
                   src="./emoji.png"
                   alt=""
                   onClick={() => setOpen((prev) => !prev)}
+                /> */}
+                <FontAwesomeIcon
+                  icon={faSmile}
+                  onClick={() => setOpen((prev) => !prev)}
+                  className="emojiIcon"
                 />
                 {open && (
                   <div className="picker">
@@ -695,7 +739,7 @@ const Chatlist = ({ teamId }) => {
                 )}
               </div>
               <button className="sendButton" onClick={sendMessage}>
-                Send
+                <FontAwesomeIcon icon={faPaperPlane} />
               </button>
             </div>
           </div>

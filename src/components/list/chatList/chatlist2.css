@@ -25,7 +25,7 @@
   height: 100vh;
   /* border-right: 1px solid rgb(185, 185, 185); */
   /* border-left: 1px solid rgb(55, 53, 53); */
-  background-color: #fdfdfd;
+  background-color: #e7e7e7;
   color: #7e5eab;
   /* background-color: rgb(164, 162, 179); */
 
@@ -56,7 +56,7 @@
   height: 30px;
   border-radius: 360px;
   border: none;
-  color: rgb(133, 85, 171);
+  color: rgb(85, 95, 171);
   margin-right: 20px;
 
   h2{
@@ -66,7 +66,7 @@
 }
 
 .addTeamBtn:hover{
-  background-color: #ba95ee;
+  background-color: #ad95ee;
   color: white;
 
 
@@ -212,7 +212,22 @@ video{
     justify-content: space-around;
     flex-direction: column;
     width:100%;
+  }
 
+  .own{
+    .delChat{
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: end;
+  
+   
+    }
+    .dataDate{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
   }
 
   .delChat{
@@ -222,28 +237,32 @@ video{
 
  
   }
-
   .dataDate{
-    display: flex;
-    flex-direction: column;
-  }
+
+  display: flex;
+  flex-direction: column;
+}
+
+ 
+
+  
 
   .chatData{
     font-size: 16px;
-    background-color: transparent;
+    /* background-color: transparent; */
     height: fit-content;
     padding: 10px;
     border-radius: 8px;
     max-width: 400px;
     min-width: 80px;
     display: flex;
-    /* align-items: right;
-    justify-content: right; */
+    background-color: #e7e7e7;
     margin-right: 20px;
     flex-direction: column;
     line-height: 25px;
     position: relative;
-    border: 1px solid rgb(214, 185, 214);
+    border: 1px solid rgb(255, 255, 255);
+color: rgb(41, 41, 41);    /* background-color: #aba7ae; */
 
     span{
       font-size: 10px;
@@ -252,6 +271,30 @@ video{
       color: #aba7ae;
     }
   }
+
+
+  .own{
+    .chatData{
+      background-color: rgb(110, 127, 214);
+      color: white;
+      margin-right: 0px !important;
+    }
+  }
+    
+    .textHeading{
+      min-width: 170px;
+      max-width:200px;
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 10px;
+      align-items:self-start;
+  
+      .chatSender{
+        margin-right: 5px;
+  
+      }
+    }
+  
   
   .textHeading{
     min-width: 170px;
@@ -260,6 +303,7 @@ video{
     flex-direction: row;
     margin-bottom: 10px;
     align-items:self-start;
+
     .chatSender{
       margin-right: 5px;
 
@@ -279,6 +323,11 @@ video{
     flex-direction: row-reverse;
     justify-content: space-between;
     margin-bottom: 10px;
+    h2{
+      text-align: right;
+      margin-right: auto;
+
+    }
   }
   .item {
     display: flex;
@@ -353,7 +402,7 @@ text-align: right;
   
   .show {
     display: block;
-    background-color: rgb(172, 192, 208);
+    background-color: rgb(56, 63, 82);
     height: 100%;
     position: absolute;
     width: 25%;
@@ -380,6 +429,7 @@ text-align: right;
     padding-left: 20px;
     padding-right: 20px;
     font-size: 17px;
+    color: white;
     
   }
 
@@ -398,7 +448,7 @@ text-align: right;
   
   .viewMembers{
     padding: 5px;
-    background-color: rebeccapurple;
+    background-color: rgb(14, 51, 94);
     color: white;
 
   }
@@ -495,7 +545,6 @@ button{
     
    .fullChat{
         height: 100%;
-        /* width: fit-content; */
 
 
         
@@ -503,7 +552,6 @@ button{
 
     .chatList{
       width: 50%;
-      /* border-right: 1px solid black; */
 
     }
     .teamErrors {
@@ -533,25 +581,50 @@ button{
 
   @media only screen and (max-width:800px){
   .fullChat{
-    /* background-color: darkgreen !important; */
     /* background-image: url('../../../Images/EbRAHV8Bw549jsF6v1.gif'); */
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
 
   }
+
+  .chatList{
+    width: 100%;
+  }
     .chatHistory{
       height: 100%;
-      width: 70%;
+      width: 100%;
+      /* background-color: #172121 !important; */
+    }
+    .FirstDiv{
+       /* background-color: #aba7ae; */
     }
 
     .show{
       width: 50%;
       height: 100%;
+      /* background-color: seagreen; */
     }
 
     .item{
       height: 80px;
+      flex-wrap: wrap;
+      /* width: 20px; */
+      /* background-color: #1d1c1f; */
+      /* display: grid !important;
+      grid-template-columns: repeat(3, 1fr); */
+
+    }
+
+    .texts{
+      display: flex;
+      flex-direction: column !important;
+
+    }
+
+    .imgAvatar{
+      /* background-color: #b094da; */
+      margin-right: auto;
     }
   }
 
@@ -589,7 +662,15 @@ button{
     .SmallSizechatHistory{
       display: none;
     }
-  
+  .texts{
+    /* background-color: sienna; */
+    width: 80%;
+    margin-right: auto;
+  }
+
+  .imgAvatar{
+    /* background-color: darkmagenta; */
+  }
 
     .fullChat{
       width: 100%;
@@ -619,11 +700,13 @@ button{
     .item{
       height: 80px;
       padding: 90px;
-      display: flex;
-      align-items: center;
-
-     
-    }
+      display: flex !important;
+          align-items: center;
+justify-content: space-around;
+flex-wrap: wrap;
+flex-direction: column-reverse !important;
+overflow: hidden !important;
+}
 
 
 
@@ -682,6 +765,12 @@ button{
     .chatData{
       width: fit-content;
     }
+
+    .texts{
+      /* background-color: sienna; */
+      width: 72%;
+      margin-right: auto;
+    }
   }
 
   @media only screen and (max-width:360px){
@@ -693,5 +782,11 @@ button{
 
     .viewMembers{
       font-size: 10px;
+    }
+
+    .texts{
+      /* background-color: sienna; */
+      width: 72%;
+      margin-right: auto;
     }
   }

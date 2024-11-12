@@ -15,10 +15,9 @@
 }
 
 .imgDiv {
-  width: 45%;
+  width: 50%;
 
   height: 100%;
-  /* background-color: rgb(233, 230, 249); */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,12 +26,12 @@
 
 .landingImg {
   background-image: url("../../Images/rb_5278.png");
-  width: 100%;
+  width: 80%;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  height: 60%;
-  position: fixed;
+  height: 100%;
+  /* position: fixed; */
 }
 .textBrk2 {
   display: flex;
@@ -161,7 +160,7 @@
 }
 
 .txtDiv {
-  width: 10%;
+  width: 20%;
   height: 60vh;
   display: flex;
   align-items: last baseline;
@@ -170,11 +169,11 @@
 
   h2 {
     font-weight: 600;
-    font-size: 17px;
+    font-size: 14px;
   }
   h3 {
     font-weight: 400;
-    font-size: 16px;
+    font-size: 12px;
   }
 }
 @media (max-width: 480px) {
@@ -186,7 +185,7 @@
     
       .landinPage {
         width: 100%;
-        height: 35%;
+        height: 30%;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -202,17 +201,17 @@
           align-items: center;
           justify-content: center;
           display: flex;
-          flex-direction: column;
+          /* flex-direction: column; */
     
           button {
-            width: 95%;
+            /* width: 85%; */
             height: 50px;
           }
         }
       }
     
       .landingBtn2 {
-        margin-left: 2px !important;
+        /* margin-left: 12px !important; */
       }
     
       .landingParagraph {
@@ -235,10 +234,13 @@
     
       .imgDiv {
         width: 100%;
-        height: 30%;
+        height: 50%;
+        flex-direction: column;
         .landingImg {
           width: 100%;
-          height: 70%;
+          height: 100%;
+          background-position: center;
+          background-size: contain !important;
         }
       }
     
@@ -249,6 +251,11 @@
         display: flex;
         align-items: first baseline;
         justify-content: right;
+        font-size: 2px;
+
+        .decriptionImg{
+          height: 40px;
+        }
 
     }
 
@@ -313,14 +320,15 @@
 
   .imgDiv {
     width: 100%;
-    height: 30%;
+    flex-direction: column;
+    height: 60%;
     .landingImg {
       width: 90%;
     }
   }
 
   .txtDiv {
-    width: 100%;
+    width: 80%;
     height: 30%;
     padding-top: 20px !important;
     display: flex;
@@ -340,8 +348,11 @@
   }
   .landingBodyDiv {
   }
+
+  .imgDiv{
+  }
   .landingImg {
-    width: 75%;
+    width: 90%;
     height: 55%;
   }
   .textBrk1 {
@@ -377,8 +388,14 @@
   }
 
   .landingImg {
-    width: 70%;
-    height: 50%;
+    width: 100%;
+    height: 100%;
+  }
+
+  .imgDiv{
+    width: 75%;
+    height: 100%;
+
   }
 }
 
@@ -391,10 +408,17 @@
   }
   .landingImg {
     width: 100%;
-    height: 60%;
+    height: 100%;
+  }
+
+  .imgDiv{
+    width: 55%;
+
   }
 
   .txtDiv {
-    height: 85%;
+    height: 80%;
+    /* background-color: rgb(63, 82, 76); */
+
   }
 }
