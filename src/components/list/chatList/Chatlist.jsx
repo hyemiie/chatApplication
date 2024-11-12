@@ -19,6 +19,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { deleteModel } from "mongoose";
 import video from "../../../Images/video2.mp4";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const Chatlist = ({ teamId }) => {
   const [addMode, setAddMode] = useState(false);
@@ -545,7 +546,7 @@ const Chatlist = ({ teamId }) => {
                   onClick={() => setMembersView(true)}
                   className="viewMembers"
                 >
-                  Members
+                  <FaArrowLeft/>
                 </button>
               </div>
             </div>
@@ -554,7 +555,7 @@ const Chatlist = ({ teamId }) => {
                 {membersView ? (
                   <div className="teamMembers">
                     <button onClick={() => setMembersView(false)}>
-                      Close View
+<FaArrowLeft/>
                     </button>
 
                     <h1>Team Members</h1>
@@ -692,6 +693,7 @@ const Chatlist = ({ teamId }) => {
 
               <div ref={endRef}></div>
             </div>
+          
             <div className="bottom">
               {/* <input
                 type="file"

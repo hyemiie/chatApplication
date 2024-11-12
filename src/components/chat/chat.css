@@ -135,12 +135,12 @@ width: 300% !important;
     }
   }
   .bottom {
-    padding-left: 12px;
+    padding: 8px;
     display: flex;
     align-items: center;
     justify-content: space-around;
     border-top: 1px solid grey;
-    margin-bottom: auto;
+    /* margin-bottom: auto; */
     background-color: rgba(255, 255, 255);
     height: 60px;
     position: sticky;
@@ -199,12 +199,13 @@ width: 300% !important;
   .sendButton {
     background-color: rgb(51, 68, 153);
     color: white;
-    padding: 10px 8px;
+    /* padding: 10px 8px; */
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 5%;
+    /* width: 5%; */
     font-size: 12px;
+    padding: 10px;
   }
 
   .icons {

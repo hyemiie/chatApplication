@@ -176,7 +176,9 @@
     font-size: 12px;
   }
 }
-@media (max-width: 480px) {
+
+  
+  @media (max-width: 350px) {
     .landingBodyDiv {
         display: flex;
         flex-direction: column;
@@ -184,7 +186,108 @@
       }
     
       .landinPage {
+        width: 90%;
+        height: 30%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* background-color: sandybrown; */
+    
+        h3 {
+          width: 100%;
+          text-align: center;
+
+        }
+
+        div{
+          /* background-color: aquamarine; */
+          font-size: 22px !important;
+        }
+    
+        .landingBtns {
+          width: 100% !important;
+          align-items: center;
+          justify-content: center;
+          display: flex;
+          /* flex-direction: column; */
+    
+          button{
+            /* width: 85%; */
+            height: 50px;
+            padding: 0;
+            a{
+              font-size: 14px !important;
+
+            }
+          }
+        }
+      }
+
+     
+    
+      .landingBtn2 {
+        /* margin-left: 12px !important; */
+      }
+    
+      .landingParagraph {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        div {
+          font-size: 28px;
+          width: fit-content;
+          margin-left: 8px;
+        }
+      }
+      .callImg {
+        width: 200px;
+      }
+    
+      .textBrk1 {
+      }
+    
+      .imgDiv {
         width: 100%;
+        height: 50%;
+        flex-direction: column;
+        .landingImg {
+          width: 100%;
+          height: 100%;
+          background-position: center;
+          background-size: contain !important;
+        }
+      }
+    
+      .txtDiv {
+        width: 80%;
+        height: 20%;
+        padding-top: 20px !important;
+        display: flex;
+        align-items: first baseline;
+        justify-content: right;
+        font-size: 2px;
+        /* display: none; */
+
+        .decriptionImg{
+          height: 40px;
+        }
+
+    }
+
+      
+}
+
+@media (min-width: 350px) and (max-width: 480px) {
+    .landingBodyDiv {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+    
+      .landinPage {
+        width: 90% !important;
         height: 30%;
         display: flex;
         align-items: center;
@@ -195,17 +298,26 @@
           text-align: center;
 
         }
+
+        div{
+          /* background-color: aquamarine; */
+          font-size: 28px !important;
+        }
     
         .landingBtns {
-          width: 100%;
+          width: 100% !important;
           align-items: center;
           justify-content: center;
           display: flex;
+          /* padding-left: 10px; */
           /* flex-direction: column; */
     
           button {
-            /* width: 85%; */
+            width: 80%;
             height: 50px;
+            a{
+            font-size: 17px !important;
+            }
           }
         }
       }
@@ -245,13 +357,14 @@
       }
     
       .txtDiv {
-        width: 100%;
+        width: 70%;
         height: 20%;
         padding-top: 20px !important;
         display: flex;
         align-items: first baseline;
         justify-content: right;
         font-size: 2px;
+        /* display: none; */
 
         .decriptionImg{
           height: 40px;
@@ -270,8 +383,10 @@
   }
 
   .landinPage {
-    width: 100%;
+    width: 90%;
     height: 50%;
+    /* background-color: blue; */
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -280,13 +395,15 @@
       width: 100%;
       text-align: center;
     }
-
+div{
+  font-size: 35px !important;
+}
     .landingBtns {
       width: 100%;
       align-items: center;
       justify-content: center;
       display: flex;
-      padding: 20px;
+      /* padding: 20px; */
       /* flex-direction: column; */
 
       button {
@@ -328,7 +445,7 @@
   }
 
   .txtDiv {
-    width: 80%;
+    width: 90%;
     height: 30%;
     padding-top: 20px !important;
     display: flex;
@@ -362,7 +479,7 @@
     font-size: 40px;
   }
   .txtDiv {
-    display: none;
+    /* display: none; */
   }
 }
 

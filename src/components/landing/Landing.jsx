@@ -113,7 +113,7 @@ const Landing = () => {
               </button>
               <button className="landingBtn2">
                 {" "}
-                <a href="/lists">Learn more</a>
+                <a href="/login">Learn more</a>
               </button>
             </div>
           </div>

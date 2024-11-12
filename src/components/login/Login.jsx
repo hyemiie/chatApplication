@@ -161,13 +161,13 @@ const Login = () => {
                 name="email"
                 id="signUpemail"
               />
-              <label>Username</label>
+              {/* <label>Username</label>
               <input
                 type="text"
                 placeholder="Username"
                 name="username"
                 id="username"
-              />
+              /> */}
               <label>Password</label>
               <div className="passwordDiv">
                 <input
