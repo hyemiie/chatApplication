@@ -65,7 +65,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    /* background-color: black; */
+    margin-bottom: 20px !important;
 
     .message {
       max-width: 100%;
@@ -74,6 +74,8 @@
       color:white;
       flex-direction: column-reverse;
       width: 100% !important;
+      padding-bottom: 20px !important;
+
       /* background-color: aqua; */
 
       &.own {
@@ -143,8 +145,9 @@ width: 300% !important;
     /* margin-bottom: auto; */
     background-color: rgba(255, 255, 255);
     height: 60px;
-    position: sticky;
-    width: 97%;
+    position: fixed;
+    width: 60%;
+    bottom: 0;
   }
 
   .userInput{
