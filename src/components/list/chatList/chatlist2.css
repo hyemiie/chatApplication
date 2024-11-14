@@ -212,6 +212,7 @@ video{
   display: flex;
   align-items: center;
   width: 100%;
+  /* background-color: darkturquoise; */
 }
 .dataDate {
   display: flex;
@@ -244,10 +245,43 @@ video{
 }
 
 .own {
+  /* background-color: red !important; */
+  display: flex;
+  align-items: center ;
+  /* justify-content: right !important; */
+
+  .messageDiv{
+    /* background-color: darkolivegreen; */
+    width: 100% !important;
+
+  }
+.imgSection{
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  width: 100%;
+  .userTxt{
+    width: 35% !important;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+  }
+
+  .imageDivision{
+    max-width: 400px;
+    min-width: 80px;
+    border: 1px solid rgb(225, 225, 225);
+
+  }
+
+  .chatImage{
+    width: 100%;
+  }
+}
+  
   .chatData {
-    background-color: rgb(110, 127, 214);
+    background-color: rgb(35, 51, 132);
     color: white;
-    margin-right: 0px !important;
   }
 }
 
@@ -289,9 +323,11 @@ video{
   flex-direction: row-reverse;
   justify-content: space-between;
   margin-bottom: 10px;
+  background-color: #ad95ee !important;
   h2 {
     text-align: right;
     margin-right: auto;
+    color: black;
   }
 }
 .item {
@@ -327,6 +363,7 @@ video{
   max-width: inherit;
   min-width: inherit;
   text-align: right;
+  color: black;
 }
 
 .teamErrors {

@@ -605,9 +605,9 @@ const Chatlist = ({ teamId }) => {
                         }`}
                       >
                         {chat.chatHistory.type === "text" ? (
-                          <div>
+                          <div className="messageDiv">
                             {/* <img src="./avatar.png" alt="avatar" /> */}
-                            <div className="textsDiv userTxt">
+                            {/* <div className="textsDiv userTxt"> */}
                               <span className="textHeading">
                                 {chat.sender === userName ? null : (
                                   <h2 className="chatSender">{chat.sender}</h2>
@@ -642,10 +642,10 @@ const Chatlist = ({ teamId }) => {
                                   />
                                 )}
                               </div>
-                            </div>
+                            {/* </div> */}
                           </div>
                         ) : (
-                          <div>
+                          <div className="imgSection">
                             {/* <h2>{chat.sender}</h2> */}
                             <div className="textsDiv userTxt">
                               {/* <img src="./avatar.png" alt="avatar" /> */}
@@ -655,7 +655,7 @@ const Chatlist = ({ teamId }) => {
                                   <h2 className="chatSender">{chat.sender}</h2>
                                 )}
                               </span>
-                              <div>
+                              <div className="imageDivision">
                                 <img
                                   src={`https://chatapplication-backend-d65c.onrender.com${chat.chatHistory.data}`}
                                   alt="Image"

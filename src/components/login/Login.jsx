@@ -216,7 +216,7 @@ const Login = () => {
               {loading ? (
                 <div className="progress"></div>
               ) : (
-                <button disabled={loading}>
+                <button disabled={loading} className="signInBtn">
                   {loading ? "Loading" : "Sign in"}
                 </button>
               )}

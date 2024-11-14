@@ -78,26 +78,7 @@
 
       /* background-color: aqua; */
 
-      &.own {
-        align-items: last baseline !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        /* background-color: #f6f0fc; */
-        
-
-        .texts {
-          margin-left: 100% !important;
-background-color: rgb(83, 227, 179) !important;
-width: 300% !important;
-          p {
-            background-color: #482968;
-            color: rgb(78, 77, 74);
-            min-width: 100px;
-            margin-left: 100% !important;
-
-          }
-        }
-      }
+    
 
       /* img {
         width: 30px;
@@ -158,7 +139,7 @@ width: 300% !important;
     background-color: rgba(212, 212, 212, 0.5);
     outline: none;
     border: none;
-    color: white;
+    color: rgb(66, 66, 66);
     padding: 10px;
     border-radius: 10px;
     font-size: 16px;
