@@ -1,13 +1,12 @@
-// eslint-disable-next-line no-undef
+/* eslint-disable no-undef */
 const express = require("express");
-// eslint-disable-next-line no-undef
 const bcrypt = require("bcrypt");
+import dotenv from "dotenv";
 
-// eslint-disable-next-line no-undef
+dotenv.config();
 const UserSchema = require("../models/user.model");
-// eslint-disable-next-line no-undef
 const jwt = require("jsonwebtoken");
-const secretKey = "thisisthesecretkey";
+const secretKey = process.env.JWT_SECRET_TOKEN;
 
 const Login = async (req, res) => {
   const { email, password, role, roleKey } = req.body;

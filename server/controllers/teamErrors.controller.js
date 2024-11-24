@@ -2,13 +2,14 @@
 const express = require("express");
 // eslint-disable-next-line no-undef
 const bcrypt = require("bcrypt");
+require('dotenv').config();
 
 // eslint-disable-next-line no-undef
 const TeamErrors =  require('../models/team.model')
 // eslint-disable-next-line no-undef
 const jwt = require("jsonwebtoken");
 const TeamNames = require("../models/teamNames.model");
-const secretKey = "thisisthesecretkey";
+const secretKey =  process.env.JWT_SECRET_TOKEN;
 
 
 const GetTeamErrors = async (req, res) => {

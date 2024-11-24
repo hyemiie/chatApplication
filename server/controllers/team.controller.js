@@ -1,15 +1,12 @@
 /* eslint-disable no-undef */
-// eslint-disable-next-line no-undef
 const express = require("express");
-// eslint-disable-next-line no-undef
 const bcrypt = require("bcrypt");
-
-// eslint-disable-next-line no-undef
 const TeamError =  require('../models/team.model')
-// eslint-disable-next-line no-undef
+import dotenv from "dotenv";
+dotenv.config();
 const jwt = require("jsonwebtoken");
 const TeamNames = require("../models/teamNames.model");
-const secretKey = "thisisthesecretkey";
+const secretKey = process.env.JWT_SECRET_TOKEN;
 
 const GetAllTeams = async (req, res) => {
   const { email, password } = req.body;
