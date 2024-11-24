@@ -32,15 +32,13 @@ Make sure you have the following installed:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/work-group-chat-app.git
-   cd work-group-chat-app
+   git clone https://github.com/hyemiie/chatApplication
    ```
 
 2. **Install dependencies**:
    ```bash
    npm install
    cd client
-   npm install
    ```
 
 3. **Set up environment variables**:
