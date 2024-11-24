@@ -4,7 +4,7 @@ const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
 const mongoose = require('mongoose');
-
+require('dotenv').config();
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
@@ -12,8 +12,8 @@ const io = socketIo(server);
 // Connect to MongoDB
 mongoose
   .connect(
-    "mongodb+srv://yemiojedapo1:09030184479@cluster0.wx4gmqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-  )
+    process.env.MONGO_URI
+    )
   .then(() => {
     console.log("Connected to database!");
   })
