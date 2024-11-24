@@ -45,7 +45,7 @@ Make sure you have the following installed:
    Create a `.env` file in the root directory and add the following:
    ```env
    MONGO_URI=your_mongodb_connection_string
-   JWT_SECRET=your_jwt_secret
+   JWT_SECRET_TOKEN=your_jwt_secret
    ```
 
 4. **Start the server and client**:
