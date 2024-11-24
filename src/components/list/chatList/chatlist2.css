@@ -285,6 +285,34 @@ video{
   }
 }
 
+.messageDiv{
+  /* background-color: darkolivegreen; */
+  width: 100% !important;
+
+}
+.imgSection{
+display: flex;
+align-items: center;
+justify-content: left;
+width: 100%;
+.userTxt{
+  width: 35% !important;
+  display: flex;
+  align-items: center;
+  justify-content: right ;
+}
+
+.imageDivision{
+  max-width: 400px;
+  min-width: 80px;
+  /* border: 1px solid rgb(225, 225, 225); */
+
+}
+
+.chatImage{
+  width: 100%;
+}
+}
 .textHeading {
   min-width: 170px;
   max-width: 200px;
@@ -295,6 +323,7 @@ video{
 
   .chatSender {
     margin-right: 5px;
+    color: #172121 !important;
   }
 }
 
@@ -308,6 +337,7 @@ video{
 
   .chatSender {
     margin-right: 5px;
+    color: black !important;
   }
 }
 
@@ -323,7 +353,7 @@ video{
   flex-direction: row-reverse;
   justify-content: space-between;
   margin-bottom: 10px;
-  background-color: #ad95ee !important;
+  /* background-color: #ad95ee !important; */
   h2 {
     text-align: right;
     margin-right: auto;

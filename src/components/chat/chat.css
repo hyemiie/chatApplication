@@ -162,6 +162,7 @@
   .chatSender{
     font-size: 16px;
     font-weight: 900;
+    color: black !important;
   }
 
   .chatImage {
