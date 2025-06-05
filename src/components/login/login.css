@@ -1,13 +1,56 @@
+/* .screen-background {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+ */
+
+.login-page {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+
+
+  .nav-div{
+    height: 20%;
+  }
+
+}
+
+/* 
+.user-login{
+  background-color: blanchedalmond;
+} */
+
+.screen-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+
+
+
+
+
 .login {
   display: flex;
-  /* align-items: center; */
+  align-items: center;
   height: 100vh;
+  
   justify-content: space-between;
   flex-direction: column;
   overflow: hidden;
+    background-color: #f4f5f7;
+
   /* background-color: rgb(243, 231, 243); */
   /* background-color: rgb(242, 236, 242); */
-  background-color: rgb(245, 246, 255);
 
 
   .navDiv{
@@ -19,6 +62,7 @@
     width: 100%;
     display: flex;
     align-items: center;
+    flex-direction: column;
 
     div{
       background-image: url('../../Images/Tier.png');
@@ -32,24 +76,25 @@
   }
   .item {
     display: flex;
-    align-items: center;
+    align-items: last baseline;
+    justify-content: center;
     flex-direction: row;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
-    overflow-y: scroll !important;
+    /* overflow-y: scroll !important; */
+    
 
     /* background: #000; */
     /* gap: 20px; */
 
     .formDiv{
       width: 75%;
-
+      height: 60%;
       display: flex;
       flex-direction: column;
-      align-items: first baseline;
+      align-items: center;
       justify-content: center;
       padding: 60px;
-      /* padding-top: 60px; */
       h2{
         font-size: 20px !important;
         font-weight: 500;
@@ -69,6 +114,7 @@
       justify-content: center;
       gap: 10px;
       width: 40vw;
+
       /* background-color: rosybrown; */
 
       h2{
@@ -81,10 +127,13 @@ margin-right: auto;
         width: 100%;
         outline: none;
         background-color: transparent;
-        border: 1px solid rgb(99, 103, 107); /* explicitly set the border */
         height: 20px !important;
         margin-top: 20px;
-        box-sizing: border-box; /* makes sure padding doesn't affect width */
+        box-sizing: border-box; 
+        outline: none;
+        background-color: rgb(231, 231, 231);
+        border-radius: 12px;
+        border: none;
     }
     
 
@@ -101,15 +150,11 @@ margin-right: auto;
         margin-left: 90%;
         width: 10%;
         background-color: transparent;
-        color: rebeccapurple;
+        color: rgb(80, 80, 81);
       }
     }
 
       label {
-        /* display: flex;
-        justify-content: space-between;
-        cursor: pointer;
-        text-decoration: underline; */
         align-items: flex-start;
         width: 100%;
         font-weight: 200;
@@ -130,8 +175,7 @@ margin-right: auto;
         width: 100%;
         height: 45px;
         border: none;
-        background-color: #4d3a5e;
-        background-color: rgb(51, 68, 153);
+        background-color: #2a2a2b;
         color: white;
         border-radius: 5px;
         cursor: pointer;
@@ -142,12 +186,11 @@ margin-right: auto;
     }
   }
 
-  .separator {
-    height: 90%;
-    width: 9px;
-    background-color: rgb(180, 40, 40);
-    display: none;
+  .signInBtn{
+    background: linear-gradient(to right, #4f4f4f, #7d7c7c, #353434);
+
   }
+
 }
 
 .accessKey{
@@ -200,12 +243,12 @@ margin-right: auto;
 .progress {
    width: 200.8px;
    height: 26.8px;
-   background: linear-gradient(rgb(51, 68, 153) 50%,#0000 0),
-        linear-gradient(#0000 50%,rgb(51, 68, 153) 0),
-        linear-gradient(rgb(51, 68, 153) 50%,#0000 0),
-        linear-gradient(#0000 50%,rgb(51, 68, 153) 0),
-        linear-gradient(rgb(51, 68, 153) 50%,#0000 0),
-        linear-gradient(#0000 50%,rgb(51, 68, 153) 0)
+   background: linear-gradient(rgb(122, 123, 123) 50%,#58585800 0),
+        linear-gradient(#87878700 50%,rgb(127, 128, 130) 0),
+        linear-gradient(rgb(92, 92, 92) 50%,#3d3c3c00 0),
+        linear-gradient(#68686800 50%,rgb(112, 112, 112) 0),
+        linear-gradient(rgb(120, 120, 121) 50%,#48484800 0),
+        linear-gradient(#0000 50%,rgb(92, 92, 92) 0)
         #dbdcef;
    background-size: calc(100%/6 + 1px) 200%;
    background-repeat: no-repeat;
@@ -241,8 +284,9 @@ margin-right: auto;
       background-position: 0%   0%, 20% 100%, 40%   0%, 60% 100%, 80%   0%, 100% 100%;
    }
 }
-
+/* 
 @media screen and (max-width:800px) {
+
   *{
     padding: 0;
     margin: 0;
@@ -254,28 +298,12 @@ margin-right: auto;
     margin: 0 !important;
   }
 
-  .loginImg{
-    width: 70% !important;
-  }
 .formDiv{
   width: 80% !important;
 }
-  .item{
-    padding: 0 !important;
-    margin:0 !important;
-    display: flex;
-    flex-direction: column !important;
-    form{
-      width: 100% !important;
-      padding: 0 !important;
-      margin:0 !important;
-      display: flex;
- input{
-  width: 100% !important;
- }
-    }
-  }
-}
+  
+} */
+ 
 
 @media screen and (max-width:600px) {
   *{
@@ -283,7 +311,7 @@ margin-right: auto;
     margin: 0;
   }
   .formDiv{
-    width: 100% !important;
+    /* width: 100% !important; */
     height: 50% !important;
     display: flex;
     align-items: center !important;
@@ -291,20 +319,16 @@ margin-right: auto;
     margin-bottom: 20px !important;
   }
 
-  .loginImg{
-    width: 50% !important;
-    height: 40%;
-  }
 
   .item{
 overflow-x: scroll !important;
     form{
       width: 80% !important;
 label{
-  width: 100% !important;
+  /* width: 100% !important; */
   margin-top: 20px;
 }
 
     }
   }
-}
+} 

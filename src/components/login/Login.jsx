@@ -142,17 +142,45 @@ const Login = () => {
   // }, [navigate]);
 
   return (
+    // <div className="user-login">    
+    //   <div className="nav-div">
+    // </div>
+
+    <div className="login-page">
+        <Navbar/>
+
+     {/* <svg className="screen-background">
+        <defs>
+          <pattern
+            id="vlines"
+            width="80"
+            height="100"
+            patternUnits="userSpaceOnUse"
+          >
+            <line
+              x1="0"
+              y1="0"
+              x2="0"
+              y2="100%"
+              stroke="#e0e0e0"
+              strokeWidth="1"
+            />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#vlines)" />
+      </svg> */}
     <div className="login">
-    <Navbar/>
+{/*  */}
       {loginView ? (
         <div className="item">
-          <div className="loginImg"></div>
+          {/* <div className="loginImg"></div> */}
           <div className="formDiv">
             {/* <h2>Welcome back,</h2> */}
             <form onSubmit={handleLogin}>
               <div className="loginHeading">
                 {/* <div></div> */}
-                <h2>Enter your details to join your team</h2>
+                <h2>Login</h2>
+                <p>Enter your details to join your team</p>
               </div>
               <label>Email</label>
               <input
@@ -228,11 +256,14 @@ const Login = () => {
         </div>
       ) : (
         <>
-          {/* <div className="separator"></div> */}
           <div className="item regItem">
-            <div className="loginImg signUpImg"></div>
+            {/* <div className="loginImg signUpImg"></div> */}
             <div className="formDiv">
-              <h2>Create an Account</h2>
+             <div className="loginHeading">
+                {/* <div></div> */}
+                <h2>Create an account</h2>
+                <p>Enter your details to join your team</p>
+              </div>
               <form onSubmit={handleSignup}>
                 <label>Username</label>
                 <input
@@ -302,6 +333,8 @@ const Login = () => {
         </>
       )}
     </div>
+    </div>
+    // </div>
   );
 };
 
