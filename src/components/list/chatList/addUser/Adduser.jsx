@@ -2,6 +2,7 @@ import React from "react";
 import "./addUser.css";
 import { useState} from "react";
  import axios from "axios";
+import { Check, UserCheck, X } from "lucide-react";
 const Adduser = () => {
 
  const [teamView, setTeamView] = useState(false)
@@ -11,7 +12,7 @@ const addTeam = async () => {
       const token = localStorage.getItem("token");
       console.log(token);
 
-      const response = await axios.post("https://chatapplication-backend-d65c.onrender.com/addTeam", { teamName }, {
+      const response = await axios.post("https://chat-server-3s8b.onrender.com/addTeam", { teamName }, {
           headers: {
               Authorization: `Bearer ${token}`,
           },
@@ -33,13 +34,15 @@ if(teamView == true){
   return (
     <div className="addUser">
     <div className="addUserDiv">
-    <button onClick={()=> setTeamView(true)} className="cancelBtn">[</button>
-      <form action="">
+    {/* <button onClick={()=> setTeamView(true)} className="cancelBtn"><X/></button> */}
+            <div className="user">
+<form action="">
+          <button onClick={()=> setTeamView(true)} className="cancelBtn"><X/></button>
+
         <input type="text" name="username" id="newTeam" placeholder="Team name" />
       </form>
-      <div className="user">
         <div className="detail">
-        <button onClick={addTeam}>Add Team</button>
+        <button onClick={addTeam} className="addnewteam"><Check/></button>
         </div>
       </div>
       </div>

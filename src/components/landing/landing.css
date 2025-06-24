@@ -5,284 +5,79 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
 
 .landingPage {
-  /* background: linear-gradient(to bottom right, #f5f7fa, #c3cfe2); */
-  background-color: #f4f5f7;
+  /* Remove fixed backgrounds that might cause issues */
+  font-family: 'Inter', sans-serif;
+  /* background-color: aquamarine; */
+  width: 100%;
+  /* margin: px; */
 }
 
+
 .landingBody {
-  /* background: linear-gradient(to bottom right, #f5f7fa, #c3cfe2); */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  overflow: hidden;
-  /* background: linear-gradient(to bottom right, #f5f7fa, #c3cfe2); */
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
-.teamSection {
-  position: relative;
-  width: 95vw;
-  max-width: 800px;
-  aspect-ratio: 1 / 1;
-  margin-top: 2rem;
-  height: 30%;
-}
-
-.circleDesign {
-  position: absolute;
+.other-screens {
+  margin-top: 0px;
   width: 100%;
-  height: 100%;
-  z-index: 0;
-  animation: rotateCircles 30s linear infinite;
-}
-
-.outerCircle,
-.middleCircle,
-.innerCircle {
-  fill: none;
-  stroke: #b1b1b1;
-  stroke-width: 1;
-  opacity: 0.3;
-  stroke-dasharray: 10 10;
-}
-
-.centralText {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 3.5rem;
-  text-align: center;
-  font-weight: bold;
-  color: #333;
-  z-index: 10;
-  text-wrap: balance;
-  /* background: rgba(245, 247, 250, 0.9); */
-  padding: 1rem;
-  border-radius: 10px;
-  backdrop-filter: blur(5px);
-  font-family: 'Rubik', sans-serif;
-}
-
-.centralParagraph {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1.5rem;
-  text-align: center;
-  font-weight: light;
-  color: #333;
-  z-index: 10;
-  text-wrap: balance;
-  padding: 1rem;
-  border-radius: 10px;
-  backdrop-filter: blur(5px);
-  font-family: 'Rubik', sans-serif;
-
-}
-
-.orbitContainer {
-  width: 100%;
-  height: 100%;
   position: relative;
+  z-index: 5;
 }
 
-/* Static orbital paths - no rotation */
-.orbit {
-  position: absolute;
-  border-radius: 50%;
-  border: 1px dashed rgba(198, 198, 198, 0.1);
+.div-landing{
+  height: 230vh;
 }
 
-.orbit1 {
-  width: 85%;
-  height: 85%;
-  top: 7.5%;
-  left: 7.5%;
+/* Ensure smooth scrolling and proper spacing */
+.landingPage > * {
+  position: relative;
+  width: 100%;
 }
 
-.orbit2 {
-  width: 65%;
-  height: 65%;
-  top: 17.5%;
-  left: 17.5%;
+/* Add spacing between sections */
+.other-screens > * {
+  margin-bottom: 2rem;
 }
 
-.orbit3 {
-  width: 45%;
-  height: 45%;
-  top: 27.5%;
-  left: 27.5%;
+/* Responsive adjustments */
+@media only screen and (max-width: 1024px) {
+
 }
 
-@keyframes rotateCircles {
-  from {
-    transform: rotate(40deg);
+@media only screen and (max-width: 768px) {
+  .landingPage {
+    overflow-x: hidden;
   }
-  to {
-    transform: rotate(360deg);
+  
+
+  
+  .other-screens > * {
+    margin-bottom: 1.5rem;
   }
 }
 
-.avatar,
-.icon {
-  border-radius: 50%;
-  position: absolute;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
-}
-
-.avatar:hover,
-.icon:hover {
-  transform: scale(1.1);
-  z-index: 15;
-}
-
-/* Smaller avatars */
-.avatar {
-  width: 50px;
-  height: 50px;
-  background-size: cover;
-  background-position: center;
-}
-
-/* Much smaller icons */
-.icon {
-  width: 30px;
-  height: 30px;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-}
-
-/* Avatars on outer orbit */
-.avatar1 {
-  background-image: url(../../Images/avatar10-removebg-preview.png);
-  top: -25px;
-  left: calc(50% - 25px);
-}
-
-.avatar2 {
-  background-image: url(../../Images/avatar4-removebg-preview.png);
-  top: calc(50% - 25px);
-  right: -25px;
-}
-
-.avatar3 {
-  background-image: url(../../Images/avatar5-removebg-preview.png);
-  bottom: -25px;
-  left: calc(50% - 25px);
-}
-
-.avatar4 {
-  background-image: url(../../Images/avatar6-removebg-preview.png);
-  top: calc(50% - 25px);
-  left: -25px;
-}
-
-/* Avatars on middle orbit */
-.avatar5 {
-  background-image: url(../../Images/avatar8-removebg-preview.png);
-  top: calc(15% - 25px);
-  right: calc(15% - 25px);
-}
-
-.avatar6 {
-  background-image: url(../../Images/avatar9-removebg-preview.png);
-  bottom: calc(15% - 25px);
-  left: calc(15% - 25px);
-}
-
-/* Static icons scattered on different orbits */
-.icon1 {
-  top: calc(25% - 15px);
-  left: -15px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-}
-
-.icon2 {
-  top: -15px;
-  right: calc(25% - 15px);
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  color: white;
-}
-
-.icon4 {
-  bottom: -15px;
-  left: calc(25% - 15px);
-  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-  color: white;
-}
-
-.icon5 {
-  top: calc(35% - 15px);
-  right: calc(35% - 15px);
-  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-  color: white;
-}
-
-.icon7 {
-  top: calc(10% - 15px);
-  left: calc(50% - 15px);
-  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-  color: #333;
-}
-
-.icon8 {
-  bottom: calc(10% - 15px);
-  right: calc(50% - 15px);
-  background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
-  color: white;
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.icon {
-  animation: float 5s ease-in-out infinite;
-}
-
-.icon:nth-child(even) {
-  animation-delay: 1.5s;
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.avatar {
-  animation: float 5s ease-in-out infinite;
-}
-
-.avatar:nth-child(even) {
-  animation-delay: 1.5s;
-}
-
-
-@media only screen and (max-width: 600px){
-  .centralParagraph{
-    top: 100%;
-    margin-top: 60px;
+@media only screen and (max-width: 600px) {
+  .centralParagraph {
+    top: 60%;
+    margin-top: 40px;
     width: 350px;
   }
   
+  .centralText {
+    font-size: 1.5rem;
+  }
+  
+  .other-screens > * {
+    margin-bottom: 1rem;
+  }
+
+  .div-landing{
+  height: 150vh;
+}
 }

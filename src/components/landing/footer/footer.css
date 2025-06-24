@@ -1,6 +1,6 @@
 .footer {
-  background-color: #1a1a1a;
-  color: #f0f0f0;
+  /* background-color: #cdcdcd; */
+  color: #242424;
   padding: 2rem 1rem;
   text-align: center;
   margin-top: 4rem;
@@ -16,7 +16,7 @@
 }
 
 .footer-nav a {
-  color: #ccc;
+  color: #282828;
   margin: 0 0.75rem;
   text-decoration: none;
   font-size: 0.95rem;

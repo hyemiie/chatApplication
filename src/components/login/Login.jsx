@@ -60,17 +60,28 @@ const Login = () => {
     };
     console.log("Signup data:", data);
 
+
     try {
       const response = await axios.post(
-        "https://chatapplication-backend-d65c.onrender.com/login",
+        "https://chat-server-3s8b.onrender.com/login",
         data
       );
 
+
       const { token } = response.data;
+      const usernameResponse =  await axios.get(
+              "https://chat-server-3s8b.onrender.com/getCurrentUser",
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
+      const username = usernameResponse.data.signedInUser.username;
+      console.log("response", response);
       localStorage.setItem("token", token);
-      localStorage.setItem("userName", token);
-      // const decoded = jwt_decode(token);
-      console.log("TOKEN ADDED", token);
+      localStorage.setItem("userName", username);
+      console.log("TOKEN ADDED", response.data);
       alert("Login Successful");
 
       navigate("/lists");
@@ -102,7 +113,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "https://chatapplication-backend-d65c.onrender.com/register",
+        "https://chat-server-3s8b.onrender.com/register",
         data
       );
 
@@ -147,8 +158,9 @@ const Login = () => {
     // </div>
 
     <div className="login-page">
-        <Navbar/>
-
+   <div className="navDiv">
+            <Navbar />
+          </div>
      {/* <svg className="screen-background">
         <defs>
           <pattern
@@ -179,7 +191,7 @@ const Login = () => {
             <form onSubmit={handleLogin}>
               <div className="loginHeading">
                 {/* <div></div> */}
-                <h2>Login</h2>
+                <h2>Log in to your account</h2>
                 <p>Enter your details to join your team</p>
               </div>
               <label>Email</label>
@@ -223,8 +235,8 @@ const Login = () => {
                     onChange={handleKeyInput}
                   />
                 </div>
-              ) : (
-                <div className="accessKey">
+              ) : null
+                /* <div className="accessKey">
                   <label>Access Key</label>
                   <input
                     placeholder="Enter Employee Key"
@@ -232,8 +244,9 @@ const Login = () => {
                     type="password"
                     onChange={handleKeyInput}
                   />
-                </div>
-              )}
+                </div> */
+                
+              }
               <div className="selectAccess">
                 <label>Role</label>
                 <select value={selectedRole} onChange={handleChange}>

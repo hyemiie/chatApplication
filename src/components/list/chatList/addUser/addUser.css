@@ -1,91 +1,90 @@
+/* Simple component container */
 .addUser {
-  width: 95%;
-  height: 100vh !important;
-  padding: 30px;
-  height: max-content;
-  background-color: rgba(17, 25, 40, 0.7);
-  border-radius: 10px;
+  position: relative;
+  background: transparent;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-width: 320px;
+  margin: 20px auto;
+  max-width: 400px;
+}
+
+/* Cancel button - top left */
+.cancelBtn {
   position: absolute;
+  top: 8px;
+  left: 8px;
+  background: #f0f0f0;
+  color: #666;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.cancelBtn:hover {
+  background: #e0e0e0;
+}
+
+/* Form styling */
+.addUserDiv form {
   display: flex;
   align-items: center;
-  justify-content: center;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
+  gap: 10px;
+  margin-top: 15px;
+  margin-bottom: 0;
+}
 
+/* Input field */
+#newTeam {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+  flex: 1;
+}
 
-  .cancelBtn{
-    margin-right: auto;
-    background-color: darkcyan;
-    color: white;
-    padding: 8px;
-    border: none;
-    border-radius:8px;
-  }
-  .addUserDiv{
-    background-color: rgb(196, 239, 239);
-    width: 40%;
-    height: fit-content;
-    padding: 20px;
-   
-  }
-  form {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
+#newTeam:focus {
+  border-color: #4CAF50;
+}
 
-    input {
-      padding: 20px;
-      /* border-radius: 10px; */
-      border: none;
-      outline: none;
-      width: 80%;
-      background-color: transparent;
-      border-bottom: 1px solid rgb(88, 88, 88);
-    }
+#newTeam::placeholder {
+  color: #999;
+}
 
-    button {
-      /* padding: 20px; */
-      border-radius: 8px;
-      background-color: rgb(113, 140, 241);
-      color: white;
-      border: none;
-      cursor: pointer;
-      width: 80%;
-    }
-  }
+/* Button container */
+.user {
+  display: inline;
+}
 
-  .user {
-    margin-top: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.user .detail {
+  display: inline;
+}
 
-    .detail {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      justify-content: center;
-      img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        object-fit: cover;
-      }
-    }
+/* Add button */
+.user .detail button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+}
 
-    button {
-      padding: 10px;
-      border-radius: 8px;
-      background-color: rgb(114, 134, 207);
-      color: white;
-      border: none;
-      cursor: pointer;
-      width: 80%;
-    }
-  }
+.user .detail button:hover {
+  background-color: #45a049;
+}
+
+.user .detail button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }

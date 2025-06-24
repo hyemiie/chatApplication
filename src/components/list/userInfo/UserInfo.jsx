@@ -22,7 +22,7 @@ const UserInfo = () => {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        "https://chatapplication-backend-d65c.onrender.com/getCurrentUser",
+        "https://chat-server-3s8b.onrender.com/getCurrentUser",
         {
           headers: {
             Authorization: `Bearer ${token}`,

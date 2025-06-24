@@ -1,0 +1,180 @@
+.channel-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8fafc;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.channel-header {
+  padding:3px;
+  background: linear-gradient(135deg, #dddde1 0%, #bababa 100%);
+  color: rgb(0, 0, 0);
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 0.5rem;
+}
+
+.team-indicator {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: #10b981;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.channel-list {
+  flex: 1;
+  padding: 0.5rem;
+  overflow-y: auto;
+}
+
+.channel-item {
+  padding: 3px;
+  /* margin-bottom: 0.5rem; */
+  background-color: white;
+  /* border-radius: 0.75rem; */
+  border-bottom: 1px solid #464647;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.channel-item:hover {
+  background-color: #f3f4f6;
+  border-color: #d1d5db;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.channel-item.selected {
+  background: linear-gradient(135deg, #ede9fe 0%, #f3e8ff 100%);
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
+}
+
+.channel-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.channel-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.channel-name-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.channel-hash {
+  font-size: 1rem;
+  font-weight: lighter;
+  color: #6b7280;
+}
+
+.channel-name {
+  font-weight: 400;
+  font-size: 1rem;
+  color: #1f2937;
+}
+
+.status-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-dot.online {
+  background-color: #10b981;
+}
+
+.status-dot.offline {
+  background-color: #6b7280;
+}
+
+.channel-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.member-count {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.unread-badge {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  min-width: 1.25rem;
+  text-align: center;
+}
+
+.last-message {
+  font-size: 0.25rem;
+  color: #6b7280;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.channel-footer {
+  padding: 1rem;
+  background-color: white;
+  border-top: 1px solid #e5e7eb;
+}
+
+.add-channel-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  /* background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%); */
+  background-color: #59b8b4;
+  color: white;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.add-channel-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.plus-icon {
+  width: 1rem;
+  height: 1rem;
+}

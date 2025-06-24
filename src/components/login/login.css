@@ -12,13 +12,27 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
+    /* background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%); */
+/* background: linear-gradient(135deg, #dbdcef, #cde7f7); */
+background: radial-gradient(circle at bottom right, #E8E3F0 70%, #f7f7f7 2%);
+/* background: linear-gradient(135deg, #B5FFFC 0%, #FFDEE9 100%);
+background: linear-gradient(135deg, #F8F4F6 0%, #F0FFFE 100%); */
+/* background-color: #dbdcef; */
+background-color: #FDF8F9;
+/* background: linear-gradient(135deg, #E8E3F0 0%, #F0F4F8 100%); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 
 
-  .nav-div{
-    height: 20%;
-  }
+
 
 }
+
+  .navDiv{
+    padding-top: 10px;
+  }
 
 /* 
 .user-login{
@@ -42,12 +56,11 @@
 .login {
   display: flex;
   align-items: center;
-  height: 100vh;
   
   justify-content: space-between;
-  flex-direction: column;
+  /* flex-direction: column; */
   overflow: hidden;
-    background-color: #f4f5f7;
+    /* background-color: #f4f5f7; */
 
   /* background-color: rgb(243, 231, 243); */
   /* background-color: rgb(242, 236, 242); */
@@ -76,11 +89,12 @@
   }
   .item {
     display: flex;
-    align-items: last baseline;
+    align-items: center;
     justify-content: center;
     flex-direction: row;
     width: 100%;
     height: 100vh;
+
     /* overflow-y: scroll !important; */
     
 
@@ -88,13 +102,13 @@
     /* gap: 20px; */
 
     .formDiv{
-      width: 75%;
+      width: 65%;
       height: 60%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 60px;
+      padding: 30px;
       h2{
         font-size: 20px !important;
         font-weight: 500;
@@ -113,7 +127,7 @@
       flex-direction: column;
       justify-content: center;
       gap: 10px;
-      width: 40vw;
+      width: 30vw;
 
       /* background-color: rosybrown; */
 
@@ -122,7 +136,7 @@ margin-right: auto;
  }
 
       input {
-        padding: 20px;
+        padding: 15px;
         color: rgb(38, 35, 35);
         width: 100%;
         outline: none;
@@ -131,9 +145,10 @@ margin-right: auto;
         margin-top: 20px;
         box-sizing: border-box; 
         outline: none;
-        background-color: rgb(231, 231, 231);
-        border-radius: 12px;
-        border: none;
+        /* background-color: rgb(255, 255, 255); */
+        /* border-radius: 12px; */
+                border: none;
+        border-bottom: 1px solid rgb(196, 190, 190);
     }
     
 
@@ -173,7 +188,7 @@ margin-right: auto;
 
       button {
         width: 100%;
-        height: 45px;
+        height: 35px;
         border: none;
         background-color: #2a2a2b;
         color: white;
@@ -187,7 +202,9 @@ margin-right: auto;
   }
 
   .signInBtn{
-    background: linear-gradient(to right, #4f4f4f, #7d7c7c, #353434);
+    /* background: linear-gradient(to right, #4f4f4f, #7d7c7c, #353434); */
+    background-color: #7c3aed;
+
 
   }
 
@@ -311,7 +328,8 @@ margin-right: auto;
     margin: 0;
   }
   .formDiv{
-    /* width: 100% !important; */
+    width: 100% !important;
+    /* background-color: #353434; */
     height: 50% !important;
     display: flex;
     align-items: center !important;
@@ -320,10 +338,14 @@ margin-right: auto;
   }
 
 
+
+
   .item{
 overflow-x: scroll !important;
+background-color: #dbdcef;
+
     form{
-      width: 80% !important;
+      width: 80vw !important;
 label{
   /* width: 100% !important; */
   margin-top: 20px;

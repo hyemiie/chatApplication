@@ -24,7 +24,7 @@ export default function TestimonialsSection() {
 
   return (
     <section className="testimonials-section">
-     <svg className="screen-background">
+     {/* <svg className="screen-background">
         <defs>
           <pattern
             id="vlines"
@@ -43,7 +43,7 @@ export default function TestimonialsSection() {
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#vlines)" />
-      </svg>
+      </svg> */}
       <h2 className="testimonials-title">What Our Users Say</h2>
       <div className="testimonials-grid">
         {testimonials.map((t, i) => (

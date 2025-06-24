@@ -4,7 +4,7 @@ import './action.css'
 const Action = () => {
   return (
     <div className="action-page">
-     <svg className="screen-background">
+     {/* <svg className="screen-background">
         <defs>
           <pattern
             id="vlines"
@@ -23,7 +23,7 @@ const Action = () => {
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#vlines)" />
-      </svg>
+      </svg> */}
       <div className="action-div">
         <h2>Get Started</h2>
         <p>No extensive techincal expertise required</p>

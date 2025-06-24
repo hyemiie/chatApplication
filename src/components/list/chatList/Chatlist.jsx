@@ -7,6 +7,7 @@ import EmojiPicker from "emoji-picker-react";
 import "../../chat/chat.css";
 import UserInfo from "../userInfo/UserInfo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Mail, MessageCircle, MessageCircleCode, MessageSquare, MessagesSquare, Speech, StickyNote } from "lucide-react";
 import {
   faEllipsisH,
   faVideoCamera,
@@ -20,6 +21,12 @@ import {
 import { deleteModel } from "mongoose";
 import video from "../../../Images/video2.mp4";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { Cross, CrossIcon, FolderPlus, SearchIcon } from "lucide-react";
+import { FaCross } from "react-icons/fa6";
+import { CgCrop, CgCross } from "react-icons/cg";
+import ChatComponent from "../../chat/Chat";
+import ChatList from "../TeamError/TeamError";
+import TeamChannels from "../TeamError/TeamError";
 
 const Chatlist = ({ teamId }) => {
   const [addMode, setAddMode] = useState(false);
@@ -48,7 +55,7 @@ const Chatlist = ({ teamId }) => {
   const [teamName, setTeamName] = useState("");
 
   useEffect(() => {
-    socket.current = io("https://chatapplication-backend-d65c.onrender.com");
+    socket.current = io("https://chat-server-3s8b.onrender.com");
 
     socket.current.on("connect", () => {
       setIsConnected(true);
@@ -90,7 +97,7 @@ const Chatlist = ({ teamId }) => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.post(
-          "https://chatapplication-backend-d65c.onrender.com/upload",
+          "https://chat-server-3s8b.onrender.com/upload",
           formData,
           {
             headers: {
@@ -163,7 +170,7 @@ const Chatlist = ({ teamId }) => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `https://chatapplication-backend-d65c.onrender.com/teamChat`,
+        `https://chat-server-3s8b.onrender.com/teamChat`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -183,7 +190,7 @@ const Chatlist = ({ teamId }) => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          "https://chatapplication-backend-d65c.onrender.com/getAllTeams",
+          "https://chat-server-3s8b.onrender.com/getAllTeams",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -199,6 +206,7 @@ const Chatlist = ({ teamId }) => {
 
     const checkSignedUser = () => {
       const Username = localStorage.getItem("userName");
+      
       const userRole = localStorage.getItem("userRole");
       setUsername(Username);
       setUserRole(userRole);
@@ -225,7 +233,7 @@ const Chatlist = ({ teamId }) => {
     const token = localStorage.getItem("token");
     try {
       const response = await axios.get(
-        "https://chatapplication-backend-d65c.onrender.com/teamErrors",
+        "https://chat-server-3s8b.onrender.com/teamErrors",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -260,7 +268,7 @@ const Chatlist = ({ teamId }) => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "https://chatapplication-backend-d65c.onrender.com/addTeamError",
+        "https://chat-server-3s8b.onrender.com/addTeamError",
         data,
         {
           headers: {
@@ -290,7 +298,7 @@ const Chatlist = ({ teamId }) => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.post(
-          "https://chatapplication-backend-d65c.onrender.com/upload",
+          "https://chat-server-3s8b.onrender.com/upload",
           formData,
           {
             headers: {
@@ -319,7 +327,7 @@ const Chatlist = ({ teamId }) => {
     if (!messageID) return; // Exit if no messageId is set
     try {
       const response = await axios.delete(
-        `https://chatapplication-backend-d65c.onrender.com/delete`,
+        `https://chat-server-3s8b.onrender.com/delete`,
         {
           params: { messageID, selectedTeamId },
         }
@@ -346,7 +354,7 @@ const Chatlist = ({ teamId }) => {
   const allUsers = async () => {
     try {
       const response = await axios.get(
-        `https://chatapplication-backend-d65c.onrender.com/allUsers`,
+        `https://chat-server-3s8b.onrender.com/allUsers`,
         {
           params: { messageID, selectedTeamId },
         }
@@ -377,7 +385,7 @@ const Chatlist = ({ teamId }) => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `https://chatapplication-backend-d65c.onrender.com/getAllTeams`,
+        `https://chat-server-3s8b.onrender.com/getAllTeams`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -405,379 +413,88 @@ const Chatlist = ({ teamId }) => {
 
   return (
     <div className="fullChat">
-      <div className={`show ${selectedToggle ? "slide-in" : "hide"}`}>
-        <button onClick={() => setSelectedToggle(false)} className="lastDivBtn">
-          Go back
-        </button>
+    {!isMobileChatOpen && (
+  <>
+    <div className={`show ${selectedToggle ? "slide-in" : "hide"}`}>
+      <button onClick={() => {
+        setSelectedToggle(false);
+        setIsMobileChatOpen(false); 
+      }} className="lastDivBtn">
+        Go back
+      </button>
 
-        {teamErrors.map((error) => (
-          <div
-            key={error._id}
-            className="teamErrDiv"
-            onClick={() => handleErrorClick(error._id)}
-          >
-            {error.teamError.length < 1 ? (
-              <p>Empty error</p>
-            ) : (
-              <ul className="teamLists">
-                <li
-                  onClick={() => {
-                    handleChatSelect();
-                    setTeamName(error.teamError);
-                  }}
-                >
-                  {error.teamError}
-                </li>
-              </ul>
-            )}
-          </div>
-        ))}
-      </div>
-
-      <div className="chatList">
-        <div className="FirstDiv">
-          <UserInfo />
-
-          <div className="search">
-            <div className="searchBar">
-              <img src="/search.png" alt="search icon" onClick={searchChat} />
-              <input
-                type="text"
-                placeholder="Search"
-                onChange={(event) => {
-                  Search(event);
-                  searchChat(event.target.value);
-                }}
-              />{" "}
-            </div>
-            <img
-              src={addMode ? "./plus.png" : "./plus.png"}
-              alt="toggle add mode"
-              className="add"
-              onClick={() => setAddMode((prev) => !prev)}
-            />
-          </div>
-
-          {teams.map((team) => (
-            <div key={team._id} className="item">
-              <img src="./avatar.png" alt="avatar" className="imgAvatar" />
-              <div className="texts">
-                <div className="teamDiv">
-                  <span
-                    onClick={() => handleteamClick(team._id)}
-                    className="teamName"
-                  >
-                    {team.teamName}
-                  </span>
-                  {userRole !== "Executive" ? (
-                    <button
-                      onClick={() => toggleInputVisibility(team._id)}
-                      className="addTeamBtn"
-                    >
-                      {inputVisibility[team._id] ? <h2>-</h2> : <h2>+</h2>}
-                    </button>
-                  ) : null}
-                </div>
-                {/* {!inputVisibility[team._id] ? 
-  <div className="chatSnippet">recent messages</div>
-  : null
-} */}
-                <p className="chatSnippet">recent messages</p>
-                {inputVisibility[team._id] && (
-                  <div className="newTeamError">
-                    <input id="newErrorName" />
-                    <button type="submit" onClick={addTeamError}>
-                      Add to List
-                    </button>
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="thirdDivs ">
-          {membersView ? (
-            <div className="teamMembers">
-              <button onClick={() => setMembersView(false)}>Close View</button>
-
-              <h1>Team Members</h1>
-
-              <ul>
-                {teamMembers.map((member) => (
-                  <li key={member._id}>{member.username}</li>
-                ))}
-              </ul>
-            </div>
+      {teamErrors.map((error) => (
+        <div
+          key={error._id}
+          className="teamErrDiv"
+          onClick={() => handleErrorClick(error._id)}
+        >
+          {error.teamError.length < 1 ? (
+            <p>Empty error</p>
           ) : (
-            ""
+            <ul className="teamLists">
+              <li
+                onClick={() => {
+                  handleChatSelect(); 
+                  setTeamName(error.teamError);
+                }}
+              >
+                ...{error.teamError}
+              </li>
+            </ul>
           )}
         </div>
-      </div>
+      ))}
+    </div>
 
-      {addMode && <Adduser />}
-      <div
-        className={`chatHistory ${
-          isMobileChatOpen ? "mobile-open" : "mobilechatHistory"
-        }`}
-      >
-        {/* <div className="videoDiv"> <video src={video}/></div> */}
-        {selectedTeamId ? (
-          <div className="chat">
-            <div className="top">
-              <div className="user">
-                <button
-                  onClick={() => setIsMobileChatOpen(false)}
-                  className="chatBackButton"
-                >
-                  <FontAwesomeIcon icon={faAngleLeft} className="angleLeft" />
-                </button>
-                <img src="./avatar.png" alt="" />
-                <div className="teamDetail">
-                  <span>{teamName}</span>
-                  <p>Lorem ipsum dolor sit</p>
-                </div>
-              </div>
-              {/* <div className="icons">
-                <FontAwesomeIcon icon={faEllipsisH} />
-                <FontAwesomeIcon icon={faVideoCamera} />
-              </div> */}
-              <div className="buttonDiv">
-                <button
-                  onClick={() => setMembersView(true)}
-                  className="viewMembers"
-                >
-                  <FaArrowLeft/>
-                </button>
-              </div>
-            </div>
-            <div className="center">
-              <div className="thirdDiv">
-                {membersView ? (
-                  <div className="teamMembers">
-                    <button onClick={() => setMembersView(false)}>
-<FaArrowLeft/>
-                    </button>
+  </>
+)}
 
-                    <h1>Team Members</h1>
+<TeamChannels
+  teams={teams}
+  userRole={userRole}
+  handleteamClick={handleteamClick}
+  searchChat={searchChat}
+  addTeamError={addTeamError}
+  teamMembers={teamMembers}
+  membersView={membersView}
+  setMembersView={setMembersView}
+  isMobileChatOpen={isMobileChatOpen}
+    className={isMobileChatOpen ? "hide-on-mobile" : ""}
 
-                    <ul>
-                      {teamMembers.map((member) => (
-                        <li key={member._id}>{member.username}</li>
-                      ))}
-                    </ul>
-                  </div>
-                ) : (
-                  ""
-                )}
-              </div>
-              {chatHistory.length === 0 ? (
-                <div className="emptyDiv">
-                  <h3 className="emptyChat">This chat is currently empty</h3>
-                  <div className="emptyImg"></div>
-                </div>
-              ) : (
-                chatHistory.map((chat, index) => {
-                  // Current message date
-                  const currentDate = new Date(chat.createdAt);
-                  // Previous message date, if it exists
-                  const previousDate =
-                    index > 0
-                      ? new Date(chatHistory[index - 1].createdAt)
-                      : null;
+/>
 
-                  // Determine if a new date header is needed
-                  const showDateHeader =
-                    !previousDate ||
-                    currentDate.toDateString() !== previousDate.toDateString();
 
-                  return (
-                    <div key={chat._id}>
-                      {showDateHeader && (
-                        <div className="dateHeader">
-                          {currentDate.toDateString()}
-                        </div>
-                      )}
 
-                      {/* Chat message */}
-                      <div
-                        className={`message ${
-                          chat.sender !== userName ? "message" : "own"
-                        }`}
-                      >
-                        {chat.chatHistory.type === "text" ? (
-                          <div className="messageDiv">
-                            {/* <img src="./avatar.png" alt="avatar" /> */}
-                            {/* <div className="textsDiv userTxt"> */}
-                              <span className="textHeading">
-                                {chat.sender === userName ? null : (
-                                  <h2 className="chatSender">{chat.sender}</h2>
-                                )}
-                                {/* {new Date(chat.createdAt).toDateString()} */}
-                              </span>
-
-                              <div className="delChat">
-                                <div className="dataDate">
-                                  <p className="chatData">
-                                    {chat.chatHistory.data}
-                                  </p>
-                                  <span className="underDate">
-                                    {currentDate.toLocaleTimeString([], {
-                                      hour: "2-digit",
-                                      minute: "2-digit",
-                                    })}
-                                  </span>
-                                </div>
-                                {userRole === "Executive" && (
-                                  <FontAwesomeIcon
-                                    icon={faTrash}
-                                    onClick={() => {
-                                      if (
-                                        window.confirm(
-                                          "Are you sure you want to delete this message?"
-                                        )
-                                      ) {
-                                        setMessageID(chat._id);
-                                      }
-                                    }}
-                                  />
-                                )}
-                              </div>
-                            {/* </div> */}
-                          </div>
-                        ) : (
-                          <div className="imgSection">
-                            {/* <h2>{chat.sender}</h2> */}
-                            <div className="textsDiv userTxt">
-                              {/* <img src="./avatar.png" alt="avatar" /> */}
-                              <span className="ImgTextHeading">
-                                {/* {currentDate.toDateString()} */}
-                                {chat.sender === userName ? null : (
-                                  <h2 className="chatSender">{chat.sender}</h2>
-                                )}
-                              </span>
-                              <div className="imageDivision">
-                                <img
-                                  src={`https://chatapplication-backend-d65c.onrender.com${chat.chatHistory.data}`}
-                                  alt="Image"
-                                  className="chatImage"
-                                />
-                                {userRole === "Executive" && (
-                                  <FontAwesomeIcon
-                                    icon={faTrash}
-                                    onClick={() => {
-                                      if (
-                                        window.confirm(
-                                          "Are you sure you want to delete this message?"
-                                        )
-                                      ) {
-                                        setMessageID(chat._id);
-                                      }
-                                    }}
-                                  />
-                                )}
-                              </div>
-                              <span>
-                                {currentDate.toLocaleTimeString([], {
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                })}
-                              </span>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })
-              )}
-
-              <div ref={endRef}></div>
-            </div>
-          
-            <div className="bottom">
-              {/* <input
-                type="file"
-                accept="image/*"
-                onChange={handleFileChange}
-                ref={fileInputRef}
-                style={{ display: 'none' }}
-              /> */}
-              {/* <div className="icons"> */}
-              {/* <img src="./img.png" alt="" /> */}
-              {/* <label htmlFor="fileInput" className="custom-file-upload">
-                <img src="./img.png" alt="" />
-</label> */}
-              <input
-                type="file"
-                onChange={handleFilesChange}
-                accept="image/*"
-                className="imageInput"
-              />
-              {/* <FontAwesomeIcon icon={faFile}/> */}
-              <input
-                type="text"
-                placeholder="Type a message..."
-                onChange={(e) => setText(e.target.value)}
-                onKeyDown={handleKeyPress}
-                value={text}
-                id="userInput"
-                className="userMessage"
-              />
-              <div className="emoji">
-                {/* <img
-                  src="./emoji.png"
-                  alt=""
-                  onClick={() => setOpen((prev) => !prev)}
-                /> */}
-                <FontAwesomeIcon
-                  icon={faSmile}
-                  onClick={() => setOpen((prev) => !prev)}
-                  className="emojiIcon"
-                />
-                {open && (
-                  <div className="picker">
-                    <EmojiPicker onEmojiClick={handleEmoji} />
-                  </div>
-                )}
-              </div>
-              <button className="sendButton" onClick={sendMessage}>
-                <FontAwesomeIcon icon={faPaperPlane} />
-              </button>
-            </div>
-          </div>
-        ) : (
-          <div className="emptyDiv2">
-            <div className="emptyChat"></div>
-          </div>
-        )}
-      </div>
-
+<ChatComponent
+      addMode={addMode}
+      isMobileChatOpen={isMobileChatOpen}
+      selectedTeamId={selectedTeamId}
+      teamName={teamName}
+      teamMembers={teamMembers}
+      membersView={membersView}
+      setMembersView={membersView}
+      chatHistory={chatHistory}
+      userName={userName}
+      userRole={userRole}
+      setMessageID={messageID}
+      endRef={endRef}
+      handleFilesChange={handleFilesChange}
+      handleKeyPress={handleKeyPress}
+      handleEmoji={handleEmoji}
+      sendMessage={sendMessage}
+      text={text}
+      setText={setText}
+      setIsMobileChatOpen={setIsMobileChatOpen}
+      open={open}
+      setOpen={setOpen}
+      setAddMode={setAddMode}
+    />
       <div id="chat">
         {images.map((url, index) => (
           <img key={index} src={url} alt={`Uploaded ${index}`} />
         ))}
       </div>
-      {/* <div className="buttonDiv">
-  <button onClick={() => setMembersView(true)} className="viewMembers">Members</button>
-</div> */}
-      {/* <div className="thirdDiv">
-  
-      {membersView ? 
-      <div className="teamMembers">
-      <button onClick={() => setMembersView(false)}>Close View</button>
-
-  <h1>Team Members</h1>
-
-  <ul>
-    {teamMembers.map((member) => (
-      <li key={member._id}>{member.username}</li>
-    ))}
-  </ul>
-</div>
-:""}
-</div> */}
-
-      {/* <button onClick={deleteChat}>Delete</button> */}
     </div>
   );
 };
