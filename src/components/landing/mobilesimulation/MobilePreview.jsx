@@ -21,7 +21,6 @@ const MobilePreview = () => {
         <div className="blob blob-3"></div>
       </div> */}
 
-      {/* <div className="phone-container"> */}
         <div className="content-wrapper">
           
           {/* Text Content */}
