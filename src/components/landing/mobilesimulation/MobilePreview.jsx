@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './MobilePreview.css';
+import './mobilepreview.css';
 import MobileScreen from './MobileScreen';
 
 const MobilePreview = () => {
@@ -12,6 +12,7 @@ const MobilePreview = () => {
     { icon: '✨', text: 'Beautiful, intuitive design' }
   ];
 
+  
   return (
     <div className="mobile-preview-section">
       {/* Animated background elements */}
