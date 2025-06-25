@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Search, Plus, Minus, Hash, MessageCircle, Lightbulb, Users, Settings } from 'lucide-react';
-import './TeamError.css';
+import './teamError.css';
 import { FaPlus } from 'react-icons/fa';
 
 const TeamChannels = ({
