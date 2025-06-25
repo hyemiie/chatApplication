@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowLeft, Send, Phone, Video, MoreVertical, Paperclip, Smile } from 'lucide-react';
 import './screen.css';
-import CompanyLogosSection from './Companies/CompanyLogosSection';
+import CompanyLogosSection from './companies/CompanyLogosSection';
 
 export default function TeamChatApp() {
   const [message, setMessage] = useState('');
@@ -70,6 +70,7 @@ export default function TeamChatApp() {
     }
   };
 
+  
   return (
     <div className="chat-app-container">    
       <div className="chat-container">
