@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Search, Plus, Minus, Hash, MessageCircle, Lightbulb, Users, Settings } from 'lucide-react';
 import './teamError.css';
 import { FaPlus } from 'react-icons/fa';
@@ -13,7 +13,9 @@ const TeamChannels = ({
   membersView,
   setMembersView,
   className,
-  isMobileChatOpen
+  isMobileChatOpen,
+  handleErrorClick,
+  handleChatSelect
 
 }) => {
   const [addMode, setAddMode] = useState(false);
@@ -23,10 +25,13 @@ const TeamChannels = ({
 
   // Default channels that appear for all users
   const defaultChannels = [
-    { id: 'welcome', name: 'welcome', icon: MessageCircle, color: '#10b981' },
-    { id: 'suggestions', name: 'suggestions', icon: Lightbulb, color: '#f59e0b' },
-    { id: 'general', name: 'general', icon: Hash, color: '#6b7280' },
+    { id: '123456878', name: 'welcome', icon: MessageCircle, color: '#10b981' },
+    { id: '9876789', name: 'suggestions', icon: Lightbulb, color: '#f59e0b' },
+    { id: '5670876789987654', name: 'general', icon: Hash, color: '#6b7280' },
   ];
+
+  const inputRef = useRef();
+
 
   const toggleInputVisibility = (teamId) => {
     setInputVisibility(prev => ({
@@ -50,6 +55,10 @@ const TeamChannels = ({
       console.log(`Navigating to ${channelId} channel`);
     }
   };
+
+  const OpenChat = (channelId)=>{
+
+  }
 
   const filteredTeams = teams.filter(team => 
     team.teamName.toLowerCase().includes(searchTerm.toLowerCase())
@@ -91,7 +100,10 @@ const TeamChannels = ({
               <div
                 key={channel.id}
                 className={`channel-item ${activeChannel === channel.id ? 'active' : ''}`}
-                onClick={() => handleChannelClick(channel.id)}
+               onClick={() => {
+    handleErrorClick(channel.id);
+    handleChatSelect();
+  }}
               >
                 <IconComponent 
                   size={16} 
@@ -146,12 +158,16 @@ const TeamChannels = ({
                       id={`newErrorName-${team._id}`}
                       placeholder="Enter error name..."
                       className="error-input"
+                      ref={inputRef}
+
                     />
                     <button 
                       type="submit" 
                       onClick={(e) => {
                         e.stopPropagation();
-                        addTeamError();
+                        const value = inputRef.current.value;
+                        addTeamError(value, team._id);
+                        // localStorage.setItem('newErrorName', e.value())
                       }}
                       className="add-btn"
                     >

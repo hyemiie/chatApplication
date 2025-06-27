@@ -80,7 +80,7 @@
   position: absolute;
   width: 100%;
   max-width: 900px;
-  top: 60%;
+  top: 65%;
   z-index: 10;
   animation: fadeInUp 1s ease-out;
   /* Remove absolute positioning and negative margins */

@@ -28,7 +28,7 @@ import ChatComponent from "../../chat/Chat";
 import ChatList from "../TeamError/TeamError";
 import TeamChannels from "../TeamError/TeamError";
 
-const Chatlist = ({ teamId }) => {
+const Welcome = ({ teamId }) => {
   const [addMode, setAddMode] = useState(false);
   const [teams, setTeams] = useState([]);
   const [selectedTeamId, setSelectedTeamId] = useState(null);
@@ -87,10 +87,9 @@ const Chatlist = ({ teamId }) => {
   };
 
   const sendMessage = async () => {
-    if (!text.trim() && !file) return; // Exit early if both text and file are empty
+    if (!text.trim() && !file) return; 
 
     if (file) {
-      // Handle file upload
       const formData = new FormData();
       formData.append("image", file);
 
@@ -120,7 +119,6 @@ const Chatlist = ({ teamId }) => {
           io.to(room).emit("new message");
           alert("you have a new message");
 
-          // Update chat history with the sent message
           setChatHistory((prevChatHistory) => [
             ...prevChatHistory,
             {
@@ -134,7 +132,6 @@ const Chatlist = ({ teamId }) => {
         console.error("Error uploading image:", error);
       }
     } else {
-      // Handle text message
       const userInput = text;
       const room = selectedTeamId;
       const sender = localStorage.getItem("userName") || "Guest";
@@ -142,7 +139,6 @@ const Chatlist = ({ teamId }) => {
 
       socket.current.emit("sendMessage", data);
 
-      // Update chat history with the sent message
       setChatHistory((prevChatHistory) => [
         ...prevChatHistory,
         {
@@ -185,104 +181,22 @@ const Chatlist = ({ teamId }) => {
     }
   };
 
-  useEffect(() => {
-    const getTeams = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await axios.get(
-          "https://chat-server-3s8b.onrender.com/getAllTeams",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setTeams(response.data.teams);
-        console.log(response.data);
-      } catch (error) {
-        console.error("Error fetching teams:", error);
-      }
-    };
-
-    const checkSignedUser = () => {
-      const Username = localStorage.getItem("userName");
-      
-      const userRole = localStorage.getItem("userRole");
-      setUsername(Username);
-      setUserRole(userRole);
-      console.log("userNames", Username);
-      console.log("userRole", userRole);
-    };
-
-    getTeams();
-    checkSignedUser();
-  }, []);
+ 
 
   const handleEmoji = (e) => {
     setText((prev) => prev + e.emoji);
     setOpen(false);
   };
 
-  const handleErrorClick = (errorId) => {
-    getMessage(errorId);
-    console.log(errorId);
-  };
-
-  const getTeamErrors = async (teamId) => {
-    console.log("teamId", teamId);
-    const token = localStorage.getItem("token");
-    try {
-      const response = await axios.get(
-        "https://chat-server-3s8b.onrender.com/teamErrors",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          params: { teamId },
-        }
-      );
-      console.log(response);
-      setTeamErrors(response.data.teamErrors);
-      setSelectedToggle(true);
-      console.log("errors", teamErrors);
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
 
   const handleChatSelect = () => {
     setIsMobileChatOpen(true);
     console.log("mobilechat");
   };
 
-  const handleteamClick = (teamId) => {
-    getTeamErrors(teamId);
-    console.log(teamId);
-  };
 
-  const addTeamError = async (newError, teamID) => {
-    // const newChatError = document.getElementById("newErrorName").value;
-    const newChatError = newError
-    const teamId = teamID;
-    const data = { newChatError, teamId };
-    console.log('new tewm', data)
 
-    try {
-      const token = localStorage.getItem("token");
-      const response = await axios.post(
-        "https://chat-server-3s8b.onrender.com/addTeamError",
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log(response);
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
+
 
   const toggleInputVisibility = (teamId) => {
     setInputVisibility((prev) => ({
@@ -291,6 +205,7 @@ const Chatlist = ({ teamId }) => {
     }));
     setNewErrorTeamID(teamId);
   };
+
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -408,10 +323,7 @@ const Chatlist = ({ teamId }) => {
     }
   };
 
-  const Search = (e) => {
-    setuserSearch(e.target.value);
-    console.log("userSearch", userSearch);
-  };
+
 
   return (
     <div className="fullChat">
@@ -425,75 +337,17 @@ const Chatlist = ({ teamId }) => {
         Go back
       </button>
 
-      {teamErrors.map((error) => (
-        <div
-          key={error._id}
-          className="teamErrDiv"
-          onClick={() => handleErrorClick(error._id)}
-        >
-          {error.teamError.length < 1 ? (
-            <p>Empty error</p>
-          ) : (
-            <ul className="teamLists">
-              <li
-                onClick={() => {
-                  handleChatSelect(); 
-                  setTeamName(error.teamError);
-                }}
-              >
-                ...{error.teamError}
-              </li>
-            </ul>
-          )}
-        </div>
-      ))}
+  
     </div>
 
   </>
 )}
 
-<TeamChannels
-  teams={teams}
-  userRole={userRole}
-  handleteamClick={handleteamClick}
-  searchChat={searchChat}
-  addTeamError={addTeamError}
-  teamMembers={teamMembers}
-  membersView={membersView}
-  setMembersView={setMembersView}
-  isMobileChatOpen={isMobileChatOpen}
-    className={isMobileChatOpen ? "hide-on-mobile" : ""}
-    handleErrorClick= {handleErrorClick}
-    handleChatSelect={handleChatSelect}
-
-/>
 
 
 
-<ChatComponent
-      addMode={addMode}
-      isMobileChatOpen={isMobileChatOpen}
-      selectedTeamId={selectedTeamId}
-      teamName={teamName}
-      teamMembers={teamMembers}
-      membersView={membersView}
-      setMembersView={membersView}
-      chatHistory={chatHistory}
-      userName={userName}
-      userRole={userRole}
-      setMessageID={messageID}
-      endRef={endRef}
-      handleFilesChange={handleFilesChange}
-      handleKeyPress={handleKeyPress}
-      handleEmoji={handleEmoji}
-      sendMessage={sendMessage}
-      text={text}
-      setText={setText}
-      setIsMobileChatOpen={setIsMobileChatOpen}
-      open={open}
-      setOpen={setOpen}
-      setAddMode={setAddMode}
-    />
+
+
       <div id="chat">
         {images.map((url, index) => (
           <img key={index} src={url} alt={`Uploaded ${index}`} />
@@ -503,4 +357,4 @@ const Chatlist = ({ teamId }) => {
   );
 };
 
-export default Chatlist;
+export default Welcome;

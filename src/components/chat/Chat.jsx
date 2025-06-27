@@ -122,7 +122,7 @@ const ChatComponent = ({
 
             <div className="center">
               {chatHistory.length === 0 ? (
-                <div className="emptyDiv">
+                <div className="emptyDiv2">
                   <div className="emptyImg"></div>
                   <h3 className="emptyChat">No messages yet</h3>
                   <p className="emptySubtext">
