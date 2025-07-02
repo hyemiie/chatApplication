@@ -19,6 +19,10 @@ export default function TestimonialsSection() {
       {
       name: "John Kim",
       quote: "We love the file sharing and mentions. Super helpful during our sprints."
+    },
+     {
+      name: "John Kim",
+      quote: "We love the file sharing and mentions. Super helpful during our sprints."
     }
   ];
 

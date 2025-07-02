@@ -1,6 +1,6 @@
 /* MobilePreview.css */
 .mobile-preview-section {
-  min-height: 100vh;
+  min-height: 70vh;
   /* background: linear-gradient(135deg, #581c87 0%, #1e3a8a 50%, #312e81 100%); */
   position: relative;
   overflow: hidden;
@@ -201,6 +201,14 @@
   .buttons-container {
     flex-direction: row;
   }
+
+
+}
+  @media (max-width: 860px) {
+  .buttons-container {
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .btn-primary {
@@ -209,7 +217,7 @@
    background: linear-gradient(135deg, #8cceca 0%, #fed6e3 100%);  */
 background-color: #00C2CB;
   background-color: #59b8b4;
-
+  
   color: rgb(255, 255, 255);
   font-weight: 600;
   border-radius: 9999px;

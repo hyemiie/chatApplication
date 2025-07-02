@@ -56,9 +56,9 @@ const MobilePreview = () => {
               <button className="btn-primary">
                 Start Chatting Now
               </button>
-              <button className="btn-secondary">
+              {/* <button className="btn-secondary">
                 Learn More
-              </button>
+              </button> */}
             </div>
           </div>
 

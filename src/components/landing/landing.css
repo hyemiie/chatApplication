@@ -44,10 +44,16 @@
 .other-screens > * {
   margin-bottom: 2rem;
 }
+@media (min-width: 1000px) {
+  .div-landing{
+  height: 160vh;
+}
+}
 
-/* Responsive adjustments */
 @media only screen and (max-width: 1024px) {
-
+.div-landing{
+  height: 160vh;
+}
 }
 
 @media only screen and (max-width: 768px) {

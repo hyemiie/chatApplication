@@ -51,3 +51,18 @@
   color: #444;
   line-height: 1.5;
 }
+
+
+
+@media screen and (max-width: 880px) {
+
+  .use-cases-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1000px;
+  flex-direction: column ;
+  margin: 0 auto;
+}
+}
