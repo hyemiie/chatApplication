@@ -11,7 +11,7 @@ This frontend connects to a separate Node.js + Socket.IO backend and supports mu
 - 💬 **Real-Time Messaging** – Instant updates using WebSocket events
 - 🧩 **Multiple Chat Rooms** – Organized communication per team or topic
 - 📜 **Message History** – View and scroll through past messages
-- 📎 **File/Image Sharing** – Upload and share files within chat rooms
+- 📎  **File/Image Sharing** – Upload and share files within chat rooms
 
 ---
 
@@ -48,8 +48,9 @@ No need to run any backend locally.
 ### Installation
 
 1. **Clone this repository**:
-   ```bash
-   git clone https://github.com/hyemiie/chatApplication
+```bash
+git clone https://github.com/hyemiie/chatApplication
+```
 
 2. **Install dependencies**:
 
@@ -66,15 +67,6 @@ npm run dev
 4. **View the app**:
 Open your browser and navigate to http://localhost:3000
 
-chatApplication/
-├── public/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── App.jsx
-├── .env
-└── README.md
-
 
 📱 Usage
 
@@ -83,11 +75,6 @@ chatApplication/
 - Start chatting with your team members in real-time
 - Switch between rooms to organize conversations by topic or team
 
-🎯 Future Enhancements
-
-- Direct messaging between users
-- Message reactions and emojis
-- Push notifications
 
 This chat app was built to demonstrate WebSocket integration and frontend architecture. Feel free to reach out if you have any questions or suggestions!
 
