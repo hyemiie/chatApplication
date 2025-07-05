@@ -68,7 +68,7 @@ npm run dev
 Open your browser and navigate to http://localhost:3000
 
 
-📱 Usage
+## 📱 Usage
 
 - Sign up for a new account or log in with existing credentials
 - Create a new room or join an existing room
