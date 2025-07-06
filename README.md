@@ -82,5 +82,5 @@ Open your browser and navigate to http://localhost:3000
 
 This chat app was built to demonstrate WebSocket integration and frontend architecture. Feel free to reach out if you have any questions or suggestions!
 
-GitHub: @hyemiie
-Email: yemiojedapo1@gmail.com
+**GitHub**: [@hyemiie](https://github.com/hyemiie)  
+**Email**: yemiojedapo1@gmail.com
