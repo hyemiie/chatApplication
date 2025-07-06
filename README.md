@@ -1,7 +1,7 @@
 # 💬 Tier Group Chat App (Frontend)
 
-A real-time chat application interface built for company teams to collaborate efficiently.  
-This frontend connects to a separate Node.js + Socket.IO backend and supports multiple chat rooms to keep team discussions organized.
+This is a real-time chat application interface built for company teams to collaborate efficiently.  
+This repository connects to a separate Node.js + Socket.IO backend and supports multiple chat rooms to keep team discussions organized.
 
 ---
 
@@ -12,6 +12,13 @@ This frontend connects to a separate Node.js + Socket.IO backend and supports mu
 - 🧩 **Multiple Chat Rooms** – Organized communication per team or topic
 - 📜 **Message History** – View and scroll through past messages
 - 📎  **File/Image Sharing** – Upload and share files within chat rooms
+
+
+- 🔐 **User Authentication** – Users can sign up and log in securely through the backend API  
+- 💬 **Real-Time Messaging** – Messages show up in real time using WebSocket updates  
+- 🧩 **Multiple Chat Rooms** – Organized communication per team or topic 
+- 📜 **Message History** – View and scroll through past messages  
+- 📎 **File Sharing** – Users can upload and share files within chat rooms
 
 ---
 
@@ -26,13 +33,15 @@ This frontend connects to a separate Node.js + Socket.IO backend and supports mu
 ## 📦 Server
 
 > 👉 The backend sever is located in a separate repository. You can either use the hosted verion or run locally
-### ✅ Option 1: Hosted Backend (Recommended for Demo)
 
-No need to run any backend locally.
-
-### ✅ Option 2: Running Locally
+### ✅ Option 1: Running Locally
 
 > To run the server locally you’ll need to clone and run it alongside this frontend for full functionality.
+
+### ✅ Option 2: Hosted Backend (Recommended for Demo)
+
+No setup is needed to use this option.
+
 
 **Backend repo**: [chat-app-backend](https://github.com/hyemiie/chat_server)
 
