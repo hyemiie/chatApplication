@@ -1,7 +1,9 @@
-# 💬 Tier Group Chat App (Frontend)
+# 💬 Chattr Group Chat App (Frontend)
 
 This is a real-time chat application interface built for company teams to collaborate efficiently.  
 This repository connects to a separate Node.js + Socket.IO backend and supports multiple chat rooms to keep team discussions organized.
+
+🔗 **Live Demo**: [Chattr](https://chat-application-wrtg.vercel.app/)
 
 ---
 
