@@ -7,13 +7,6 @@ This repository connects to a separate Node.js + Socket.IO backend and supports 
 
 ## ✨ Features
 
-- 🔐 **User Authentication** – Secure login and registration (via backend API)
-- 💬 **Real-Time Messaging** – Instant updates using WebSocket events
-- 🧩 **Multiple Chat Rooms** – Organized communication per team or topic
-- 📜 **Message History** – View and scroll through past messages
-- 📎  **File/Image Sharing** – Upload and share files within chat rooms
-
-
 - 🔐 **User Authentication** – Users can sign up and log in securely through the backend API  
 - 💬 **Real-Time Messaging** – Messages show up in real time using WebSocket updates  
 - 🧩 **Multiple Chat Rooms** – Organized communication per team or topic 
