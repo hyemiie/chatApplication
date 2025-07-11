@@ -1,7 +1,6 @@
-/* CompanyLogosSection.css */
 
 .company-section {
-  padding: 8rem 0;
+  padding: 3rem;
   /* background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); */
   position: relative;
   overflow: hidden;
@@ -14,7 +13,6 @@
   text-align: center;
 }
 
-/* Section Title */
 .section-title {
   font-size: 2.5rem;
   font-weight: 700;
@@ -30,7 +28,6 @@
   color: transparent;
 }
 
-/* Trusted By Section */
 .trusted-by {
   margin-bottom: 2rem;
 }
@@ -43,7 +40,6 @@
   letter-spacing: 0.1em;
 }
 
-/* Company Logos Container */
 .company-logos {
   margin-bottom: 3rem;
   overflow: hidden;
@@ -87,7 +83,6 @@
   font-size: 12px;
 }
 
-/* Stats Section */
 .stats-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -133,7 +128,6 @@
   }
 }
 
-/* Pause animation on hover */
 .company-logos:hover .logos-track {
   animation-play-state: paused;
 }
@@ -146,7 +140,6 @@
   }
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .section-title {
     font-size: 2rem;

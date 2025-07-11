@@ -117,14 +117,14 @@
   border-radius: 9999px;
   color: white;
   font-weight: 500;
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   margin-bottom: 1.5rem;
   animation: pulse 2s infinite;
 }
 
 .main-title {
-  font-size: 2.5rem;
-  font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 500;
   color: white;
   margin-bottom: 1.5rem;
   line-height: 1.2;
@@ -132,7 +132,7 @@
 
 @media (min-width: 1024px) {
   .main-title {
-    font-size: 3.75rem;
+    font-size: 1.75rem;
   }
 }
 
@@ -151,7 +151,6 @@
   line-height: 1.6;
 }
 
-/* Features Grid */
 .features-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -190,7 +189,6 @@
   font-weight: 500;
 }
 
-/* Buttons */
 .buttons-container {
   display: flex;
   flex-direction: column;
@@ -202,8 +200,8 @@
     flex-direction: row;
   }
 
-
 }
+
   @media (max-width: 860px) {
   .buttons-container {
     display: flex;

@@ -10,6 +10,7 @@ import Landing2 from "./Landing2.jsx";
 import UseCases from "./usecases/UseCases.jsx";
 import ValueProps from "./appvalue/ValueProp.jsx";
 import MobilePreview from "./mobilesimulation/MobilePreview.jsx";
+import CompanyLogosSection from "./companies/CompanyLogosSection.jsx";
 
 const Landing = () => {
   return (
@@ -20,6 +21,8 @@ const Landing = () => {
       <Landing2 />
       </div>
       <div className="other-screens">
+        <CompanyLogosSection/>
+
         <ValueProps />
         <TestimonialsSection />
         <MobilePreview />

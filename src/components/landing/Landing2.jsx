@@ -24,10 +24,9 @@ const Landing2 = () => {
         </p>
         <button>Get Instant Access</button>
       </div>
+      <Screen/>
 
-      <div className="hero-screen">
-        <Screen />
-      </div>
+    
     </div>
   );
 };

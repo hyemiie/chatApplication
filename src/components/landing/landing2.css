@@ -2,7 +2,6 @@
   position: relative;
   padding: 1rem;
   text-align: center;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,7 +11,6 @@
   /* background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
   background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%); */
     background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%);
-
 }
 
 
@@ -33,27 +31,27 @@
   /* background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); */
     /* background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%); */
 
-  height: 90vh;
+  /* height: 90vh; */
 
 }
 
 .hero-text h3 {
   font-weight: 400;
   margin-bottom: 1rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #666;
 }
 
 .hero-text h2 {
   text-align: center;
-  font-size: 3rem;
+  font-size: 2.1rem;
   margin-bottom: 1.5rem;
   line-height: 1.2;
   color: #333;
 }
 
 .hero-text p {
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.6;
   color: #666;
   margin-bottom: 2rem;
@@ -62,7 +60,7 @@
 .hero-text button {
   background-color: black;
   color: white;
-  padding: 12px 24px;
+  padding: 8px 20px;
   border-radius: 8px;
   border: none;
   font-size: 1rem;
@@ -76,15 +74,6 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.hero-screen {
-  position: absolute;
-  width: 100%;
-  max-width: 900px;
-  top: 65%;
-  z-index: 10;
-  animation: fadeInUp 1s ease-out;
-  /* Remove absolute positioning and negative margins */
-}
 
 @keyframes fadeInUp {
   from {
@@ -97,36 +86,7 @@
   }
 }
 
-@media (min-width: 1000px) {
-  .hero-text h2 {
-    font-size: 2.5rem;
-  }
-  
-  .hero-screen {
-    max-width: 800px;
-  }
 
-  .hero-screen {
-  position: absolute;
-  width: 100%;
-  max-width: 900px;
-  top: 40%;
-  z-index: 10;
-  animation: fadeInUp 1s ease-out;
-  /* Remove absolute positioning and negative margins */
-}
-}
-
-/* Responsive Design */
-@media (max-width: 1200px) {
-  .hero-text h2 {
-    font-size: 2.5rem;
-  }
-  
-  .hero-screen {
-    max-width: 800px;
-  }
-}
 
 @media (max-width: 992px) {
   .hero-section {
@@ -192,7 +152,6 @@
   position: relative;
   width: 100%;
   max-width: 900px;
-  margin-top: -500px !important;
   z-index: 10;
   animation: fadeInUp 1s ease-out;
   /* background-color: blueviolet; */

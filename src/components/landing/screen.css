@@ -20,6 +20,7 @@
   width: 100%;
   max-width: 64rem;
   height: 80vh;
+  max-height: 900px;
   background-color: white;
   border-radius: 0.7rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
@@ -255,7 +256,7 @@
 /* Input Area */
 .input-area {
   border-top: 1px solid #e5e7eb;
-  padding: 1.5rem;
+  padding: 1.2rem;
   flex-shrink: 0;
 }
 
@@ -281,7 +282,7 @@
 .input-content {
   display: flex;
   align-items: center;
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 0.7rem;
 }
 
 .input-action-button {

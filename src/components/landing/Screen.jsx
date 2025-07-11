@@ -155,7 +155,6 @@ export default function TeamChatApp() {
         </div>
       </div>
 
-        <CompanyLogosSection/>
     </div>
   );
 }
