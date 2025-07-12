@@ -9,7 +9,7 @@ const Navbar = () => {
     <nav className="navPage">
       <div className="firstDiv">
         <div className="navLogo">
-          <h3><a href="/">Tier</a></h3>
+          <h3><a href="/">Chattr</a></h3>
         </div>
         <div className="navMenu">
           <Menu onClick={() => setMobileScreen(!mobileScreen)} />

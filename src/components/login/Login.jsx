@@ -6,6 +6,7 @@ import axios from "axios";
 import Navbar from "../Navbar/Navbar";
 import { faL } from "@fortawesome/free-solid-svg-icons";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import logo from '../../Images/logo4.png'
 
 import { useNavigate } from "react-router-dom";
 
@@ -158,42 +159,23 @@ const Login = () => {
     // </div>
 
     <div className="login-page">
-   <div className="navDiv">
-            <Navbar />
-          </div>
-     {/* <svg className="screen-background">
-        <defs>
-          <pattern
-            id="vlines"
-            width="80"
-            height="100"
-            patternUnits="userSpaceOnUse"
-          >
-            <line
-              x1="0"
-              y1="0"
-              x2="0"
-              y2="100%"
-              stroke="#e0e0e0"
-              strokeWidth="1"
-            />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#vlines)" />
-      </svg> */}
+   
     <div className="login">
-{/*  */}
       {loginView ? (
         <div className="item">
-          {/* <div className="loginImg"></div> */}
-          <div className="formDiv">
-            {/* <h2>Welcome back,</h2> */}
-            <form onSubmit={handleLogin}>
-              <div className="loginHeading">
+        <div className="loginHeading">
                 {/* <div></div> */}
+               <a href="/"> <img src={logo} alt="Logo" style={{ width: "40px", height: "auto"}}  /></a>
                 <h2>Log in to your account</h2>
                 <p>Enter your details to join your team</p>
               </div>
+          {/* <div className="loginImg"></div> */}
+          <div className="formDiv">
+
+            {/* <h2>Welcome back,</h2> */}
+            <form onSubmit={handleLogin}>
+
+              
               <label>Email</label>
               <input
                 type="text"
@@ -270,13 +252,15 @@ const Login = () => {
       ) : (
         <>
           <div className="item regItem">
-            {/* <div className="loginImg signUpImg"></div> */}
-            <div className="formDiv">
-             <div className="loginHeading">
+           <div className="loginHeading">
                 {/* <div></div> */}
-                <h2>Create an account</h2>
+               <a href="/"> <img src={logo} alt="Logo" style={{ width: "40px", height: "auto"}}  /></a>
+                <h2>Create a new Account</h2>
                 <p>Enter your details to join your team</p>
               </div>
+            {/* <div className="loginImg signUpImg"></div> */}
+            <div className="formDiv">
+             
               <form onSubmit={handleSignup}>
                 <label>Username</label>
                 <input
@@ -332,7 +316,7 @@ const Login = () => {
                 {loading ? (
                   <div className="progress"></div>
                 ) : (
-                  <button disabled={loading}>
+                  <button disabled={loading} className="signInBtn">
                     {loading ? "Loading" : "Sign Up"}
                   </button>
                 )}
