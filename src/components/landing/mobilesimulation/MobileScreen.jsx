@@ -16,7 +16,7 @@ const MobileScreen = () => {
       <div className="channel-header">
         <div className="header-content">
           <div className="team-indicator"></div>
-          Team Channels 💼
+          Team Channels 
         </div>
       </div>
       
@@ -24,7 +24,7 @@ const MobileScreen = () => {
         {teamChannels.map(channel => (
           <div 
             key={channel.id} 
-            className={`channel-item ${selectedChannel === channel.id ? 'selected' : ''}`}
+            className={`channel-item-div ${selectedChannel === channel.id ? 'selected' : ''}`}
             onClick={() => setSelectedChannel(channel.id)}
           >
             <div className="channel-info">

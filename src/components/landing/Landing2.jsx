@@ -22,7 +22,9 @@ const Landing2 = () => {
 
 
         </p>
-        <button>Get Instant Access</button>
+        <button>
+                <a href="/login" className="accessbtn">Get Instant Access</a>
+</button>
       </div>
       <Screen/>
 

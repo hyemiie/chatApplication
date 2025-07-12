@@ -1,17 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
 
 * {
   box-sizing: border-box;
 }
 
-.chat-app-container {
+.chat-app-container{
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   padding: 1rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif !important;
   /* Remove min-height: 100vh to prevent layout issues */
 }
 
@@ -215,7 +219,7 @@
 }
 
 .sender-name {
-  font-size: 0.75rem;
+  font-size: 0.75rem !important;
   color: #6b7280;
   margin-bottom: 0.25rem;
   padding: 0 0.75rem;
@@ -229,7 +233,7 @@
 }
 
 .message-bubble.own-bubble {
-  background-color: #3b82f6;
+  background-color: #527777;
   color: white;
   border-bottom-right-radius: 0.25rem;
 }
@@ -241,7 +245,7 @@
 }
 
 .message-text {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   line-height: 1.6;
   margin: 0;
 }
@@ -396,7 +400,7 @@
 
 @media (max-width: 480px) {
   .chat-app-container {
-    padding: 0.25rem;
+    padding: 1.8rem;
   }
   
   .chat-container {

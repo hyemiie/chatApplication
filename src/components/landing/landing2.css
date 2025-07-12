@@ -10,7 +10,7 @@
   width: 100%;
   /* background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
   background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%); */
-    background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%);
+    background: linear-gradient(135deg, #fff0f5 0%, #e1f9f9 100%);
 }
 
 
@@ -21,6 +21,11 @@
   justify-content: center;
   top: 0;
 
+}
+
+.accessbtn{
+  color: white;
+  text-decoration: none;
 }
 
 .hero-text {
@@ -155,7 +160,6 @@
   z-index: 10;
   animation: fadeInUp 1s ease-out;
   /* background-color: blueviolet; */
-  /* Remove absolute positioning and negative margins */
 }
 
   

@@ -18,7 +18,7 @@ const Navbar = () => {
 
       <div className={`secDiv ${mobileScreen ? "shown" : "hidden"}`}>
         <a href="/login" className="loginBtn">Log in</a>
-        <a href="/lists" className="getStartedBtn">Get started free</a>
+        <a href="/login" className="getStartedBtn">Get started free</a>
       </div>
     </nav>
   );

@@ -25,6 +25,7 @@ const Action = () => {
         <rect width="100%" height="100%" fill="url(#vlines)" />
       </svg> */}
       <div className="action-div">
+      <h3>Ready to connect globally?</h3>
         <h2>Get Started</h2>
         <p>No extensive techincal expertise required</p>
             <button>Get Started for free</button>

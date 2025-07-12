@@ -1,5 +1,5 @@
 import React from "react";
-import "./features.css";
+import "./testimonial.css";
 
 export default function TestimonialsSection() {
   const testimonials = [
